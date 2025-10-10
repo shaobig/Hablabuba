@@ -9,9 +9,9 @@ public class WeaponFireController : MonoBehaviour, Emitter
     [SerializeField]
     private BulletPrefab bulletPrefab;
 
-    public void Init(Weapon weapon, OnBulletCollideListener onBulletCollideListener)
+    public void Init(Weapon weapon, OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
-        weaponEmitter.Init(weapon, emitPoint, bulletPrefab, onBulletCollideListener);
+        weaponEmitter.Init(weapon, emitPoint, bulletPrefab, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
     }
 
     public void Emit()

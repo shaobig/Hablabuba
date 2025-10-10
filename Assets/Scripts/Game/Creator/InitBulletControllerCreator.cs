@@ -5,26 +5,26 @@ public class InitBulletControllerCreator : MonoBehaviour, Creator<BulletControll
     [SerializeField]
     private BulletControllerCreator bulletControllerCreator;
     private Bullet bullet;
+    private OnAmmoShotListener onAmmoShotListener;
+    private OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener;
     private OnBulletCollideListener onBulletCollideListener;
 
-    public void Init(Bullet bullet, OnBulletCollideListener onBulletCollideListener)
+    public void Init(Bullet bullet, OnAmmoShotListener onAmmoShotListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener, OnBulletCollideListener onBulletCollideListener)
     {
         this.bullet = bullet;
+        this.onAmmoShotListener = onAmmoShotListener;
+        this.onSetOnShotPlayerCameraListener = onSetOnShotPlayerCameraListener;
         this.onBulletCollideListener = onBulletCollideListener;
     }
 
     public BulletController Create(GameObject bulletPrefab, Transform emitPoint)
     {
         var bulletController = bulletControllerCreator.Create(bulletPrefab, emitPoint);
-        bulletController.Init(bullet, onBulletCollideListener);
+        bulletController.Init(bullet, onSetOnShotPlayerCameraListener, onBulletCollideListener);
+
+        onAmmoShotListener.OnAmmoShot(bulletController.transform);
 
         return bulletController;
-    }
-
-    public OnBulletCollideListener OnBulletCollideListener
-    {
-        get => onBulletCollideListener;
-        set => onBulletCollideListener = value;
     }
 
 }

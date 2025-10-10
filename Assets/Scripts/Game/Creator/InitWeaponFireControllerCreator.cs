@@ -5,7 +5,9 @@ public class InitWeaponFireControllerCreator : MonoBehaviour, Creator<WeaponFire
     [SerializeField]
     private WeaponFireControllerCreator weaponFireControllerCreator;
     private Weapon weapon;
+    private OnAmmoShotListener onAmmoShotListener;
     private OnBulletCollideListener onBulletCollideListener;
+    private OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener;
 
     public void Init(Weapon weapon)
     {
@@ -15,7 +17,7 @@ public class InitWeaponFireControllerCreator : MonoBehaviour, Creator<WeaponFire
     public WeaponFireController Create(GameObject gameObject, Transform target)
     {
         var weaponFireController = weaponFireControllerCreator.Create(gameObject, target);
-        weaponFireController.Init(weapon, onBulletCollideListener);
+        weaponFireController.Init(weapon, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
 
         return weaponFireController;
     }
@@ -26,10 +28,22 @@ public class InitWeaponFireControllerCreator : MonoBehaviour, Creator<WeaponFire
         set => weapon = value;
     }
 
+    public OnAmmoShotListener OnAmmoShotListener
+    {
+        get => onAmmoShotListener;
+        set => onAmmoShotListener = value;
+    }
+
     public OnBulletCollideListener OnBulletCollideListener
     {
         get => onBulletCollideListener;
         set => onBulletCollideListener = value;
+    }
+
+    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
+    {
+        get => onSetOnShotPlayerCameraListener;
+        set => onSetOnShotPlayerCameraListener = value;
     }
 
 }

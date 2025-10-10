@@ -8,13 +8,13 @@ public class WeaponEmitter : MonoBehaviour, Emitter
     private Transform emitPoint;
     private BulletPrefab bulletPrefab;
 
-    public void Init(Weapon weapon, Transform emitPoint, BulletPrefab bulletPrefab, OnBulletCollideListener onBulletCollideListener)
+    public void Init(Weapon weapon, Transform emitPoint, BulletPrefab bulletPrefab, OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
         this.weapon = weapon;
         this.emitPoint = emitPoint;
         this.bulletPrefab = bulletPrefab;
 
-        bulletControllerCreator.Init(bulletPrefab.Bullet, onBulletCollideListener);
+        bulletControllerCreator.Init(bulletPrefab.Bullet, onAmmoShotListener, onSetOnShotPlayerCameraListener, onBulletCollideListener);
     }
 
     public void Emit()

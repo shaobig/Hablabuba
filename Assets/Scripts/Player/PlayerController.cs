@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
     private Player player;
     private PlayerController currentPlayer;
     private OnPlayerKilledListener onPlayerKilledListener;
-    private OnBulletCollideListener onBulletCollideListener;
 
     public void Init(Player player, WindowController windowController)
     {
@@ -77,7 +76,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
 
     public void OnBulletCollideOnPlayer(HitBullet bullet)
     {
-        currentPlayer.HideWeapon();
         healthController.OnBulletCollideOnPlayer(bullet);
 
         if (healthController.IsDead)
@@ -192,18 +190,22 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
 
     public OnPlayerKilledListener OnPlayerKilledListener
     {
-        get => onPlayerKilledListener;
         set => onPlayerKilledListener = value;
+    }
+
+    public OnAmmoShotListener OnAmmoShotListener
+    {
+        set => weaponController.OnAmmoShotListener = value;
     }
 
     public OnBulletCollideListener OnBulletCollideListener
     {
-        get => onBulletCollideListener;
-        set
-        {
-            onBulletCollideListener = value;
-            weaponController.OnBulletCollideListener = value;
-        }
+        set => weaponController.OnBulletCollideListener = value;
+    }
+
+    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
+    {
+        set => weaponController.OnSetOnShotPlayerCameraListener = value;
     }
 
 }

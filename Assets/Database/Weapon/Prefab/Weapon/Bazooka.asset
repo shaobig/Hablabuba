@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bazooka
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   name: Bazooka
-  speed: 40
+  speed: 50

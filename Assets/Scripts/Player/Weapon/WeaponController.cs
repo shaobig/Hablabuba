@@ -68,9 +68,19 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         set => weaponItem = value;
     }
 
+    public OnAmmoShotListener OnAmmoShotListener
+    {
+        set => weaponFireControllerCreator.OnAmmoShotListener = value;
+    }
+
     public OnBulletCollideListener OnBulletCollideListener
     {
         set => weaponFireControllerCreator.OnBulletCollideListener = value;
+    }
+
+    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
+    {
+        set => weaponFireControllerCreator.OnSetOnShotPlayerCameraListener = value;
     }
 
 }

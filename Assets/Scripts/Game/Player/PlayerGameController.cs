@@ -12,11 +12,12 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
     [SerializeField]
     private DatabasePlayerRespawner playerRespawner;
     [SerializeField]
-    private PlayerCameraController playerCameraController;
-    [SerializeField]
     private GameObjectRemover gameObjectRemover;
     private List<PlayerController> playerList;
     private PlayerController currentPlayer;
+    private OnAmmoShotListener onAmmoShotListener;
+    private OnBulletCollideListener onBulletCollideListener;
+    private OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener;
     private OnGameFinishedListener onGameFinishedListener;
     private int currentIndex = -1;
 
@@ -60,7 +61,9 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
     {
         playerList.ForEach(player =>
         {
-            player.OnBulletCollideListener = this;
+            player.OnAmmoShotListener = onAmmoShotListener;
+            player.OnBulletCollideListener = onBulletCollideListener;
+            player.OnSetOnShotPlayerCameraListener = onSetOnShotPlayerCameraListener;
             player.OnPlayerKilledListener = this;
         });
     }
@@ -69,7 +72,6 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
     {
         playerList.ForEach(player =>
         {
-            player.OnBulletCollideListener = null;
             player.OnPlayerKilledListener = null;
         });
     }
@@ -80,19 +82,11 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
         currentPlayer = playerList[currentIndex];
 
         currentPlayer.Activate();
-
-        SetPlayerCameraTarget();
-    }
-
-    void SetPlayerCameraTarget()
-    {
-        playerCameraController.Target = currentPlayer.transform;
     }
 
     public void OnBulletCollide()
     {
         currentPlayer.HideWeapon();
-        GoToNextStep();
     }
 
     public void OnPlayerKilled(PlayerController player)
@@ -122,6 +116,29 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
             player.TurnDisplay();
             player.MakeDisplaySize();
         });
+    }
+
+    public PlayerController CurrentPlayer
+    {
+        get => currentPlayer;
+    }
+
+    public OnAmmoShotListener OnAmmoShotListener
+    {
+        get => onAmmoShotListener;
+        set => onAmmoShotListener = value;
+    }
+
+    public OnBulletCollideListener OnBulletCollideListener
+    {
+        get => onBulletCollideListener;
+        set => onBulletCollideListener = value;
+    }
+
+    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
+    {
+        get => onSetOnShotPlayerCameraListener;
+        set => onSetOnShotPlayerCameraListener = value;
     }
 
     public OnGameFinishedListener OnGameFinishedListener
