@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5daf2bf9b811164384acae3c73792fd, type: 3}
+  m_Name: SmithPrefab
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPrefab
+  player: {fileID: 11400000, guid: 157a510f0b0c3cd44bf20724125aa388, type: 2}
+  prefab: {fileID: 3788321445585943614, guid: b10a9cbdee9f6ce45b1553f3cf031397, type: 3}

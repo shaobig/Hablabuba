@@ -1,0 +1,209 @@
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTurner, DisplaySizeMaker,
+    WeaponHolder, WeaponHider, Emitter, InventoryOpener,
+    OnBulletCollideOnPlayerListener, OnPlayerInMotionListener, OnPlayerStoppedListener
+{
+    [SerializeField]
+    private DisplayController displayController;
+    [SerializeField]
+    private MovementController movementController;
+    [SerializeField]
+    private InventoryController inventoryController;
+    [SerializeField]
+    private WeaponController weaponController;
+    [SerializeField]
+    private HealthController healthController;
+    [SerializeField]
+    private BodyController bodyController;
+    private Player player;
+    private PlayerController currentPlayer;
+    private OnPlayerKilledListener onPlayerKilledListener;
+    private OnBulletCollideListener onBulletCollideListener;
+
+    public void Init(Player player, WindowController windowController)
+    {
+        this.player = player;
+
+        InitDisplayController(player);
+        InitMovementController();
+        InitInventoryController(windowController);
+        InitHealthController(player.Health);
+        InitWeaponController();
+
+        movementController.Deactivate();
+    }
+
+    void InitDisplayController(Player player)
+    {
+        displayController.Init(player, bodyController.Renderer.material.color);
+        displayController.Paint();
+    }
+
+    void InitMovementController()
+    {
+        var playerRigidbody = GetComponent<Rigidbody>();
+        playerRigidbody.freezeRotation = true;
+
+        movementController.Init(playerRigidbody);
+    }
+
+    void InitInventoryController(WindowController windowController)
+    {
+        inventoryController.Init(windowController);
+    }
+
+    void InitHealthController(int health)
+    {
+        healthController.Init(health);
+    }
+
+    void InitWeaponController()
+    {
+        weaponController.Init();
+    }
+
+    void FixedUpdate()
+    {
+        if (movementController.IsMoving)
+        {
+            displayController.DisableText();
+        }
+        else
+        {
+            displayController.EnableText();
+        }
+    }
+
+    public void OnBulletCollideOnPlayer(HitBullet bullet)
+    {
+        currentPlayer.HideWeapon();
+        healthController.OnBulletCollideOnPlayer(bullet);
+
+        if (healthController.IsDead)
+        {
+            onPlayerKilledListener.OnPlayerKilled(this);
+        }
+        else
+        {
+            displayController.SetHealthText(healthController.Health);
+        }
+    }
+
+    public void OnPlayerInMotion()
+    {
+        displayController.DisableText();
+    }
+
+    public void OnPlayerStopped()
+    {
+        displayController.EnableText();
+    }
+
+    public void Activate()
+    {
+        enabled = true;
+
+        movementController.Activate();
+        weaponController.Activate();
+        inventoryController.Activate();
+    }
+
+    public void Deactivate()
+    {
+        enabled = false;
+        movementController.Deactivate();
+    }
+
+    public void TurnDisplay()
+    {
+        displayController.TurnDisplay();
+    }
+
+    public void MakeDisplaySize()
+    {
+        displayController.MakeDisplaySize();
+    }
+
+    public void OpenInventory()
+    {
+        if (inventoryController.IsOpened)
+        {
+            inventoryController.CloseInventory();
+            movementController.Activate();
+        }
+        else
+        {
+            inventoryController.OpenInventory();
+            movementController.Deactivate();
+        }
+    }
+
+    public void HoldWeapon()
+    {
+        if (inventoryController.IsOpened)
+        {
+            if (weaponController.IsWeaponHeld)
+            {
+                weaponController.HideWeapon();
+            }
+
+            inventoryController.CloseInventory();
+            movementController.Activate();
+
+            weaponController.Weapon = inventoryController.SelectWeapon();
+            weaponController.HoldWeapon();
+        }
+    }
+
+    public void Emit()
+    {
+        if (weaponController.IsWeaponHeld)
+        {
+            movementController.Deactivate();
+
+            weaponController.Emit();
+            weaponController.Deactivate();
+
+            inventoryController.Deactivate();
+        }
+    }
+
+    public void HideWeapon()
+    {
+        weaponController.HideWeapon();
+    }
+
+    public PlayerController CurrentPlayer
+    {
+        get => currentPlayer;
+        set
+        {
+            currentPlayer = value;
+            displayController.CurrentPlayer = currentPlayer.transform;
+        }
+    }
+
+    public Player Player
+    {
+        get => player;
+        set => player = value;
+    }
+
+    public OnPlayerKilledListener OnPlayerKilledListener
+    {
+        get => onPlayerKilledListener;
+        set => onPlayerKilledListener = value;
+    }
+
+    public OnBulletCollideListener OnBulletCollideListener
+    {
+        get => onBulletCollideListener;
+        set
+        {
+            onBulletCollideListener = value;
+            weaponController.OnBulletCollideListener = value;
+        }
+    }
+
+}
