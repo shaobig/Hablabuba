@@ -1,22 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour, ListenerSubscriber, ListenerUnsubscriber,
-    OnAmmoShotListener, OnBulletCollideListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener, OnGameFinishedListener
+public class GameController : MonoBehaviour,
+    OnAmmoShotListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener, OnPlayerKilledListener, OnBulletCollideListener, OnGameFinishedListener
 {
-    private const float TIMESCALE_FINISH_GAME = 0;
+    private const float GAME_OVER_TIMESCALE = 0;
 
+    [SerializeField]
+    private RespawnGameController respawnGameController;
     [SerializeField]
     private PlayerGameController playerGameController;
     [SerializeField]
     private CameraGameController cameraGameController;
     [SerializeField]
     private float timeScale = 1;
+    private List<PlayerController> playerList;
 
     void Awake()
     {
+        playerList = respawnGameController.Respawn();
+
+        playerGameController.Init(playerList, this, this, this, this, this);
         cameraGameController.Init(this);
-        SubscribeListener();
     }
 
     void Start()
@@ -30,27 +35,6 @@ public class GameController : MonoBehaviour, ListenerSubscriber, ListenerUnsubsc
         Time.timeScale = timeScale;
     }
 
-    void OnDestroy()
-    {
-        UnsubscribeListener();
-    }
-
-    public void SubscribeListener()
-    {
-        playerGameController.OnAmmoShotListener = this;
-        playerGameController.OnBulletCollideListener = this;
-        playerGameController.OnSetOnShotPlayerCameraListener = this;
-        playerGameController.OnGameFinishedListener = this;
-    }
-
-    public void UnsubscribeListener()
-    {
-        playerGameController.OnAmmoShotListener = null;
-        playerGameController.OnBulletCollideListener = null;
-        playerGameController.OnSetOnShotPlayerCameraListener = null;
-        playerGameController.OnGameFinishedListener = null;
-    }
-
     public void OnAmmoShot(Transform ammo)
     {
         cameraGameController.OnAmmoShot(ammo);
@@ -59,15 +43,6 @@ public class GameController : MonoBehaviour, ListenerSubscriber, ListenerUnsubsc
     public void OnSetCameraOnShotPlayer(List<PlayerController> playerList)
     {
         cameraGameController.OnSetCameraOnShotPlayer(playerList);
-    }
-
-    public void OnBulletCollide()
-    {
-        playerGameController.OnBulletCollide();
-        cameraGameController.OnBulletCollide();
-
-        playerGameController.GoToNextStep();
-        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
     }
 
     public void OnSetCameraOnShotPlayerComplete()
@@ -79,10 +54,26 @@ public class GameController : MonoBehaviour, ListenerSubscriber, ListenerUnsubsc
         cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
     }
 
+    public void OnPlayerKilled(PlayerController player)
+    {
+        playerGameController.OnPlayerKilled(player);
+    }
+
+    public void OnBulletCollide()
+    {
+        playerGameController.OnBulletCollide();
+        cameraGameController.OnBulletCollide();
+
+        playerGameController.GoToNextStep();
+        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
+    }
+
     public void OnGameFinished()
     {
         Debug.Log("Game over");
-        Time.timeScale = TIMESCALE_FINISH_GAME;
+        Time.timeScale = GAME_OVER_TIMESCALE;
+
+        enabled = false;
     }
 
 }

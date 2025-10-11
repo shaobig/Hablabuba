@@ -1,39 +1,47 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerUnsubscriber, OnBulletCollideListener, OnPlayerKilledListener
+public class PlayerGameController : MonoBehaviour,
+    OnBulletCollideListener, OnPlayerKilledListener
 {
+    private const int GAME_OVER_PLAYER_COUNT = 0;
+
     private const KeyCode OPEN_INVENTORY_KEY = KeyCode.I;
     private const KeyCode SELECT_WEAPON_KEY = KeyCode.Space;
     private const KeyCode FIRE_WEAPON_KEY = KeyCode.Mouse0;
 
-    private const int GAME_OVER_PLAYER_COUNT = 1;
-
     [SerializeField]
-    private DatabasePlayerRespawner playerRespawner;
-    [SerializeField]
-    private GameObjectRemover gameObjectRemover;
+    private PlayerControllerRemover playerControllerRemover;
     private List<PlayerController> playerList;
     private PlayerController currentPlayer;
     private OnAmmoShotListener onAmmoShotListener;
+    private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
+    private OnPlayerKilledListener onPlayerKilledListener;
     private OnBulletCollideListener onBulletCollideListener;
-    private OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener;
     private OnGameFinishedListener onGameFinishedListener;
     private int currentIndex = -1;
 
-    void Awake()
+    public void Init(List<PlayerController> playerList,
+        OnAmmoShotListener onAmmoShotListener,
+        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
+        OnBulletCollideListener onBulletCollideListener,
+        OnPlayerKilledListener onPlayerKilledListener,
+        OnGameFinishedListener onGameFinishedListener)
     {
-        playerList = playerRespawner.Respawn();
-    }
+        this.playerList = playerList;
+        this.onAmmoShotListener = onAmmoShotListener;
+        this.onSetCameraOnShotPlayerListener = onSetCameraOnShotPlayerListener;
+        this.onPlayerKilledListener = onPlayerKilledListener;
+        this.onGameFinishedListener = onGameFinishedListener;
 
-    void Start()
-    {
-        SubscribeListener();
-    }
-
-    void OnDestroy()
-    {
-        UnsubscribeListener();
+        playerList.ForEach(player =>
+        {
+            player.OnAmmoShotListener = onAmmoShotListener;
+            player.OnSetOnShotPlayerCameraListener = onSetCameraOnShotPlayerListener;
+            player.OnBulletCollideListener = onBulletCollideListener;
+            player.OnPlayerKilledListener = onPlayerKilledListener;
+        });
     }
 
     void Update()
@@ -57,23 +65,9 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
         UpdateDisplay();
     }
 
-    public void SubscribeListener()
+    void OnDestroy()
     {
-        playerList.ForEach(player =>
-        {
-            player.OnAmmoShotListener = onAmmoShotListener;
-            player.OnBulletCollideListener = onBulletCollideListener;
-            player.OnSetOnShotPlayerCameraListener = onSetOnShotPlayerCameraListener;
-            player.OnPlayerKilledListener = this;
-        });
-    }
-
-    public void UnsubscribeListener()
-    {
-        playerList.ForEach(player =>
-        {
-            player.OnPlayerKilledListener = null;
-        });
+        playerControllerRemover.Remove(currentPlayer);
     }
 
     public void GoToNextStep()
@@ -87,6 +81,10 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
     public void OnBulletCollide()
     {
         currentPlayer.HideWeapon();
+
+        playerList.Where(player => player.IsDead)
+            .ToList()
+            .ForEach(player => onPlayerKilledListener.OnPlayerKilled(player));
     }
 
     public void OnPlayerKilled(PlayerController player)
@@ -94,12 +92,13 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
         int killedIndex = playerList.IndexOf(player);
         playerList.RemoveAt(killedIndex);
 
-        gameObjectRemover.Remove(player.gameObject);
-
+        playerControllerRemover.Remove(player);
+        
         if (playerList.Count == GAME_OVER_PLAYER_COUNT)
         {
             onGameFinishedListener.OnGameFinished();
         }
+
         if (currentIndex > killedIndex)
         {
             currentIndex--;
@@ -129,22 +128,22 @@ public class PlayerGameController : MonoBehaviour, ListenerSubscriber, ListenerU
         set => onAmmoShotListener = value;
     }
 
+    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
+    {
+        get => onSetCameraOnShotPlayerListener;
+        set => onSetCameraOnShotPlayerListener = value;
+    }
+
+    public OnPlayerKilledListener OnPlayerKilledListener
+    {
+        get => onPlayerKilledListener;
+        set => onPlayerKilledListener = value;
+    }
+
     public OnBulletCollideListener OnBulletCollideListener
     {
         get => onBulletCollideListener;
         set => onBulletCollideListener = value;
-    }
-
-    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
-    {
-        get => onSetOnShotPlayerCameraListener;
-        set => onSetOnShotPlayerCameraListener = value;
-    }
-
-    public OnGameFinishedListener OnGameFinishedListener
-    {
-        get => onGameFinishedListener;
-        set => onGameFinishedListener = value;
     }
 
 }

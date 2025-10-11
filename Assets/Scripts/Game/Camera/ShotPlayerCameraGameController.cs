@@ -6,18 +6,18 @@ public class ShotPlayerCameraGameController : MonoBehaviour,
     OnSetCameraOnShotPlayerListener
 {
     [SerializeField]
-    private int focusTime = 3;
+    private int focusTime = 5;
     private Camera shotPlayerCamera;
     private CameraController cameraController;
     private OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener;
 
-    public void Init(Camera camera, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
+    public void Init(Camera shotPlayerCamera, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
     {
-        this.shotPlayerCamera = camera;
+        this.shotPlayerCamera = shotPlayerCamera;
         this.onSetCameraOnShotPlayerCompleteListener = onSetCameraOnShotPlayerCompleteListener;
 
-        camera.enabled = false;
-        cameraController = camera.GetComponent<CameraController>();
+        shotPlayerCamera.enabled = false;
+        cameraController = shotPlayerCamera.GetComponent<CameraController>();
         cameraController.Deactivate();
     }
 

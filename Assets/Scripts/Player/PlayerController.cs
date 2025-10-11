@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTurner, DisplaySizeMaker,
     WeaponHolder, WeaponHider, Emitter, InventoryOpener,
-    OnBulletCollideOnPlayerListener, OnPlayerInMotionListener, OnPlayerStoppedListener
+    OnBulletCollideOnPlayerListener, OnBulletCollideListener, OnPlayerInMotionListener, OnPlayerStoppedListener
 {
     [SerializeField]
     private DisplayController displayController;
@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
     [SerializeField]
     private BodyController bodyController;
     private Player player;
-    private PlayerController currentPlayer;
     private OnPlayerKilledListener onPlayerKilledListener;
 
     public void Init(Player player, WindowController windowController)
@@ -29,8 +28,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
         InitInventoryController(windowController);
         InitHealthController(player.Health);
         InitWeaponController();
-
-        movementController.Deactivate();
     }
 
     void InitDisplayController(Player player)
@@ -45,6 +42,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
         playerRigidbody.freezeRotation = true;
 
         movementController.Init(playerRigidbody);
+        movementController.Deactivate();
     }
 
     void InitInventoryController(WindowController windowController)
@@ -77,14 +75,14 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
     public void OnBulletCollideOnPlayer(HitBullet bullet)
     {
         healthController.OnBulletCollideOnPlayer(bullet);
+        displayController.SetHealthText(healthController.Health);
+    }
 
+    public void OnBulletCollide()
+    {
         if (healthController.IsDead)
         {
             onPlayerKilledListener.OnPlayerKilled(this);
-        }
-        else
-        {
-            displayController.SetHealthText(healthController.Health);
         }
     }
 
@@ -174,10 +172,9 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
 
     public PlayerController CurrentPlayer
     {
-        get => currentPlayer;
         set
         {
-            currentPlayer = value;
+            var currentPlayer = value;
             displayController.CurrentPlayer = currentPlayer.transform;
         }
     }
@@ -207,5 +204,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
     {
         set => weaponController.OnSetOnShotPlayerCameraListener = value;
     }
+
+    public bool IsDead => healthController.IsDead;
 
 }
