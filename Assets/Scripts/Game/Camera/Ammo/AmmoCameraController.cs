@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AmmoCameraGameController : MonoBehaviour, Activator, Deactivator,
+public class AmmoCameraController : MonoBehaviour, Activator, Deactivator,
     OnAmmoShotListener
 {
     private Camera ammoCamera;

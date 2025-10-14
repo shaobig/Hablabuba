@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotPlayerCameraGameController : MonoBehaviour, Activator, Deactivator,
+public class ShotPlayerCameraHandler : MonoBehaviour,
     OnSetCameraOnShotPlayerListener
 {
     [SerializeField]
-    private int focusTime = 5;
+    private float minFocusTime = 2f;
+    [SerializeField]
+    private float maxFocusTime = 5f;
     private Camera shotPlayerCamera;
     private CameraController cameraController;
-    private OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener;
     private List<PlayerController> playerList;
+    private OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener;
 
-    public void Init(Camera shotPlayerCamera, List<PlayerController> playerList, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
+    public void Init(Camera shotPlayerCamera, CameraController cameraController, List<PlayerController> playerList, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
     {
-        this.playerList = playerList;
-
         this.shotPlayerCamera = shotPlayerCamera;
+        this.cameraController = cameraController;
+        this.playerList = playerList;
         this.onSetCameraOnShotPlayerCompleteListener = onSetCameraOnShotPlayerCompleteListener;
-
-        shotPlayerCamera.enabled = false;
-        cameraController = shotPlayerCamera.GetComponent<CameraController>();
-        cameraController.Deactivate();
     }
 
     public void Activate()
@@ -38,10 +36,7 @@ public class ShotPlayerCameraGameController : MonoBehaviour, Activator, Deactiva
 
     public void OnSetCameraOnShotPlayer(List<PlayerController> playerList)
     {
-        if (playerList.Count != 0)
-        {
-            StartCoroutine(SetCameraOnPlayerList(playerList));
-        }
+        StartCoroutine(SetCameraOnPlayerList(playerList));
     }
 
     IEnumerator SetCameraOnPlayerList(List<PlayerController> shotPlayerList)
@@ -55,12 +50,12 @@ public class ShotPlayerCameraGameController : MonoBehaviour, Activator, Deactiva
             yield return new WaitForEndOfFrame();
 
             playerList.ForEach(player => player.RefreshDisplay());
-            yield return new WaitForSeconds(focusTime / shotPlayerList.Count);
+            yield return new WaitForSeconds(Mathf.Clamp(maxFocusTime / shotPlayerList.Count, minFocusTime, maxFocusTime));
         }
 
         shotPlayerCamera.enabled = false;
         cameraController.Deactivate();
-        
+
         onSetCameraOnShotPlayerCompleteListener.OnSetCameraOnShotPlayerComplete();
     }
 

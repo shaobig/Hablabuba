@@ -5,11 +5,11 @@ public class CameraGameController : MonoBehaviour, Follower,
     OnAmmoShotListener, OnBulletCollideListener, OnSetCameraOnShotPlayerListener
 {
     [SerializeField]
-    private PlayerCameraGameController playerCameraGameController;
+    private PlayerCameraController playerCameraController;
     [SerializeField]
-    private AmmoCameraGameController ammoCameraGameController;
+    private AmmoCameraController ammoCameraController;
     [SerializeField]
-    private ShotPlayerCameraGameController shotPlayerCameraGameController;
+    private ShotPlayerCameraController shotPlayerCameraController;
     [SerializeField]
     private Camera playerCamera;
     [SerializeField]
@@ -19,36 +19,36 @@ public class CameraGameController : MonoBehaviour, Follower,
 
     public void Init(List<PlayerController> playerList, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
     {
-        playerCameraGameController.Init(playerCamera, playerList);
-        ammoCameraGameController.Init(ammoCamera);
-        shotPlayerCameraGameController.Init(shotPlayerCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
+        playerCameraController.Init(playerCamera, playerList);
+        ammoCameraController.Init(ammoCamera);
+        shotPlayerCameraController.Init(shotPlayerCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
     }
 
     public void Follow(Transform target)
     {
-        playerCameraGameController.Follow(target);
+        playerCameraController.Follow(target);
     }
 
     public void OnAmmoShot(Transform ammo)
     {
-        playerCameraGameController.Deactivate();
-        ammoCameraGameController.Activate();
+        playerCameraController.Deactivate();
+        ammoCameraController.Activate();
 
-        ammoCameraGameController.OnAmmoShot(ammo);
+        ammoCameraController.OnAmmoShot(ammo);
     }
 
     public void OnSetCameraOnShotPlayer(List<PlayerController> playerList)
     {
-        ammoCameraGameController.Deactivate();
-        shotPlayerCameraGameController.Activate();
+        ammoCameraController.Deactivate();
+        shotPlayerCameraController.Activate();
 
-        shotPlayerCameraGameController.OnSetCameraOnShotPlayer(playerList);
+        shotPlayerCameraController.OnSetCameraOnShotPlayer(playerList);
     }
 
     public void OnBulletCollide()
     {
-        playerCameraGameController.Activate();
-        ammoCameraGameController.Deactivate();
+        playerCameraController.Activate();
+        ammoCameraController.Deactivate();
     }
 
 }

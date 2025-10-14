@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCameraGameController : MonoBehaviour, Activator, Deactivator, Follower
+public class PlayerCameraController : MonoBehaviour, Activator, Deactivator, Follower
 {
+    [SerializeField]
+    private PlayerListDisplayRefresher playerListDisplayRefresher;
     private Camera playerCamera;
     private CameraController cameraController;
-    private List<PlayerController> playerList;
 
     public void Init(Camera playerCamera, List<PlayerController> playerList)
     {
@@ -15,18 +16,14 @@ public class PlayerCameraGameController : MonoBehaviour, Activator, Deactivator,
         cameraController = playerCamera.GetComponent<CameraController>();
         cameraController.Activate();
 
-        this.playerList = playerList;
+        playerListDisplayRefresher.Init(playerCamera, playerList);
     }
 
     void LateUpdate()
     {
         if (playerCamera.enabled)
         {
-            playerList.ForEach(player =>
-            {
-                player.Camera = playerCamera.transform;
-                player.RefreshDisplay();
-            });
+            playerListDisplayRefresher.RefreshDisplay();
         }
     }
 
