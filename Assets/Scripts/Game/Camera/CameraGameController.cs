@@ -17,11 +17,11 @@ public class CameraGameController : MonoBehaviour, Follower,
     [SerializeField]
     private Camera shotPlayerCamera;
 
-    public void Init(OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
+    public void Init(List<PlayerController> playerList, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
     {
-        playerCameraGameController.Init(playerCamera);
+        playerCameraGameController.Init(playerCamera, playerList);
         ammoCameraGameController.Init(ammoCamera);
-        shotPlayerCameraGameController.Init(shotPlayerCamera, onSetCameraOnShotPlayerCompleteListener);
+        shotPlayerCameraGameController.Init(shotPlayerCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
     }
 
     public void Follow(Transform target)
@@ -32,19 +32,23 @@ public class CameraGameController : MonoBehaviour, Follower,
     public void OnAmmoShot(Transform ammo)
     {
         playerCameraGameController.Deactivate();
+        ammoCameraGameController.Activate();
+
         ammoCameraGameController.OnAmmoShot(ammo);
     }
 
     public void OnSetCameraOnShotPlayer(List<PlayerController> playerList)
     {
         ammoCameraGameController.Deactivate();
+        shotPlayerCameraGameController.Activate();
+
         shotPlayerCameraGameController.OnSetCameraOnShotPlayer(playerList);
     }
 
     public void OnBulletCollide()
     {
-        ammoCameraGameController.OnBulletCollide();
-        playerCameraGameController.OnBulletCollide();
+        playerCameraGameController.Activate();
+        ammoCameraGameController.Deactivate();
     }
 
 }

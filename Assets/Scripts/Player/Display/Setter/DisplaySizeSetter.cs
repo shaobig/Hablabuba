@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerDisplaySizeMaker : MonoBehaviour, DisplaySizeMaker
+public class DisplaySizeSetter : MonoBehaviour, SizeSetter
 {
     [SerializeField]
     private float baseSize = 1f;
@@ -13,12 +13,17 @@ public class PlayerDisplaySizeMaker : MonoBehaviour, DisplaySizeMaker
     [SerializeField]
     private float growthFactor = 2f;
     private Transform display;
-    private Transform currentPlayer;
+    private new Transform camera;
 
-    public void MakeDisplaySize()
+    public void Init(Transform display)
     {
-        float distance = Vector3.Distance(transform.position, currentPlayer.position);
-        
+        this.display = display;
+    }
+
+    public void SetSize()
+    {
+        float distance = Vector3.Distance(transform.position, camera.position);
+
         float t = Mathf.InverseLerp(transitionStart - transitionOffset, transitionStart + transitionOffset, distance);
         float powerSize = baseSize + growthFactor * Mathf.Pow(distance, curvePower);
         float smoothSIze = Mathf.Lerp(baseSize, powerSize, t);
@@ -32,10 +37,10 @@ public class PlayerDisplaySizeMaker : MonoBehaviour, DisplaySizeMaker
         set => display = value;
     }
 
-    public Transform CurrentPlayer
+    public Transform Camera
     {
-        get => currentPlayer;
-        set => currentPlayer = value;
+        get => camera;
+        set => camera = value;
     }
 
 }

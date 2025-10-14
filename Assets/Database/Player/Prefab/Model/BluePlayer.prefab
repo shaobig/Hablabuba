@@ -777,7 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DisplayController
   displayTurner: {fileID: 1260903579844215711}
-  displaySizeMaker: {fileID: 7481219726143754650}
+  displaySizeSetter: {fileID: 7481219726143754650}
   displayPainter: {fileID: 249970721350463764}
   display: {fileID: 1262968489715484572}
   healthText: {fileID: 626367659480484511}

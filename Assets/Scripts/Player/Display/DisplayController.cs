@@ -1,15 +1,15 @@
 using TMPro;
 using UnityEngine;
 
-public class DisplayController : MonoBehaviour, DisplayTurner, DisplaySizeMaker, Painter
+public class DisplayController : MonoBehaviour, Painter, DisplayRefresher
 {
     private const int DISABLED_TEXT_ALPHA = 0;
     private const int ENABLED_TEXT_ALPHA = 255;
 
     [SerializeField]
-    private PlayerDisplayTurner displayTurner;
+    private DisplayTurner displayTurner;
     [SerializeField]
-    private PlayerDisplaySizeMaker displaySizeMaker;
+    private DisplaySizeSetter displaySizeSetter;
     [SerializeField]
     private DisplayPainter displayPainter;
     [SerializeField]
@@ -18,21 +18,15 @@ public class DisplayController : MonoBehaviour, DisplayTurner, DisplaySizeMaker,
     private TextMeshPro healthText;
     [SerializeField]
     private TextMeshPro nameText;
-    private Transform currentPlayer;
-    private Color colour;
 
     public void Init(Player player, Color colour)
     {
         nameText.SetText(player.Name);
         healthText.SetText(player.Health.ToString());
 
-        displayTurner.Display = display;
-        displaySizeMaker.Display = display;
-
-        displayPainter.NameText = nameText;
-        displayPainter.HealthText = healthText;
-
-        displayPainter.Colour = colour;
+        displayTurner.Init(display);
+        displaySizeSetter.Init(display);
+        displayPainter.Init(nameText, healthText, colour);
     }
 
     public void SetHealthText(int health)
@@ -57,35 +51,24 @@ public class DisplayController : MonoBehaviour, DisplayTurner, DisplaySizeMaker,
         displayPainter.Paint();
     }
 
-    public void MakeDisplaySize()
+    public void RefreshDisplay()
     {
-        displaySizeMaker.MakeDisplaySize();
+        displayTurner.Turn();
+        displaySizeSetter.SetSize();
     }
 
-    public void TurnDisplay()
+    public Transform Camera
     {
-        displayTurner.TurnDisplay();
-    }
-
-    public Transform CurrentPlayer
-    {
-        get => currentPlayer;
         set
         {
-            currentPlayer = value;
-            displayTurner.CurrentPlayerRotation = currentPlayer.rotation;
-            displaySizeMaker.CurrentPlayer = currentPlayer;
+            displayTurner.Camera = value;
+            displaySizeSetter.Camera = value;
         }
     }
 
     public Color Colour
     {
-        get => colour;
-        set
-        {
-            colour = value;
-            displayPainter.Colour = value;
-        }
+        set => displayPainter.Colour = value;
     }
 
 }

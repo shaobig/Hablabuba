@@ -7,6 +7,13 @@ public class DisplayPainter : MonoBehaviour, Painter
     private TextMeshPro healthText;
     private Color colour;
 
+    public void Init(TextMeshPro nameText, TextMeshPro healthText, Color colour)
+    {
+        this.nameText = nameText;
+        this.healthText = healthText;
+        this.colour = colour;
+    }
+
     public void Paint()
     {
         nameText.color = colour;

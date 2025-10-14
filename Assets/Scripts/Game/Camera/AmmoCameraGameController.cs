@@ -1,40 +1,35 @@
 using UnityEngine;
 
-public class AmmoCameraGameController : MonoBehaviour, Deactivator,
-    OnAmmoShotListener, OnBulletCollideListener
+public class AmmoCameraGameController : MonoBehaviour, Activator, Deactivator,
+    OnAmmoShotListener
 {
-    private Camera camera;
+    private Camera ammoCamera;
     private CameraController cameraController;
 
-    public void Init(Camera camera)
+    public void Init(Camera ammoCamera)
     {
-        this.camera = camera;
+        this.ammoCamera = ammoCamera;
 
-        camera.enabled = false;
-        cameraController = camera.GetComponent<CameraController>();
+        ammoCamera.enabled = false;
+        cameraController = ammoCamera.GetComponent<CameraController>();
         cameraController.Deactivate();
+    }
+
+    public void Activate()
+    {
+        ammoCamera.enabled = true;
+        cameraController.Activate();
     }
 
     public void Deactivate()
     {
-        camera.enabled = false;
+        ammoCamera.enabled = false;
         cameraController.Deactivate();
     }
 
-    
     public void OnAmmoShot(Transform ammo)
     {
-        camera.enabled = true;
-        
         cameraController.Target = ammo;
-        cameraController.Activate();
     }
 
-    public void OnBulletCollide()
-    {
-        camera.enabled = false;
-        cameraController.Deactivate();
-    }
-    
-    
 }

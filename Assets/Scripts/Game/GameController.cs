@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour,
         playerList = respawnGameController.Respawn();
 
         playerGameController.Init(playerList, this, this, this, this, this);
-        cameraGameController.Init(this);
+        cameraGameController.Init(playerList, this);
     }
 
     void Start()

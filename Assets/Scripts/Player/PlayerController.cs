@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTurner, DisplaySizeMaker,
+public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRefresher,
     WeaponHolder, WeaponHider, Emitter, InventoryOpener,
-    OnBulletCollideOnPlayerListener, OnBulletCollideListener, OnPlayerInMotionListener, OnPlayerStoppedListener
+    OnBulletCollideOnPlayerListener, OnBulletCollideListener
 {
     [SerializeField]
     private DisplayController displayController;
@@ -86,16 +86,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
         }
     }
 
-    public void OnPlayerInMotion()
-    {
-        displayController.DisableText();
-    }
-
-    public void OnPlayerStopped()
-    {
-        displayController.EnableText();
-    }
-
     public void Activate()
     {
         enabled = true;
@@ -109,16 +99,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
     {
         enabled = false;
         movementController.Deactivate();
-    }
-
-    public void TurnDisplay()
-    {
-        displayController.TurnDisplay();
-    }
-
-    public void MakeDisplaySize()
-    {
-        displayController.MakeDisplaySize();
     }
 
     public void OpenInventory()
@@ -170,13 +150,9 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
         weaponController.HideWeapon();
     }
 
-    public PlayerController CurrentPlayer
+    public void RefreshDisplay()
     {
-        set
-        {
-            var currentPlayer = value;
-            displayController.CurrentPlayer = currentPlayer.transform;
-        }
+        displayController.RefreshDisplay();
     }
 
     public Player Player
@@ -188,6 +164,11 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayTu
     public OnPlayerKilledListener OnPlayerKilledListener
     {
         set => onPlayerKilledListener = value;
+    }
+
+    public Transform Camera
+    {
+        set => displayController.Camera = value;
     }
 
     public OnAmmoShotListener OnAmmoShotListener

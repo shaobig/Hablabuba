@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerGameController : MonoBehaviour,
     OnBulletCollideListener, OnPlayerKilledListener
 {
-    private const int GAME_OVER_PLAYER_COUNT = 0;
+    private const int GAME_OVER_PLAYER_COUNT = 1;
 
     private const KeyCode OPEN_INVENTORY_KEY = KeyCode.I;
     private const KeyCode SELECT_WEAPON_KEY = KeyCode.Space;
@@ -60,11 +60,6 @@ public class PlayerGameController : MonoBehaviour,
         }
     }
 
-    void FixedUpdate()
-    {
-        UpdateDisplay();
-    }
-
     void OnDestroy()
     {
         playerControllerRemover.Remove(currentPlayer);
@@ -94,7 +89,7 @@ public class PlayerGameController : MonoBehaviour,
 
         playerControllerRemover.Remove(player);
         
-        if (playerList.Count == GAME_OVER_PLAYER_COUNT)
+        if (playerList.Count <= GAME_OVER_PLAYER_COUNT)
         {
             onGameFinishedListener.OnGameFinished();
         }
@@ -104,17 +99,6 @@ public class PlayerGameController : MonoBehaviour,
             currentIndex--;
         }
         currentIndex = (currentIndex + playerList.Count) % playerList.Count;
-    }
-
-    void UpdateDisplay()
-    {
-        playerList.ForEach(player =>
-        {
-            player.CurrentPlayer = currentPlayer;
-
-            player.TurnDisplay();
-            player.MakeDisplaySize();
-        });
     }
 
     public PlayerController CurrentPlayer
