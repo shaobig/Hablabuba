@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d34e18e35fa141bb797550b57e3f5, type: 3}
   m_Name: Bazooka
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  weaponType: 1
   name: Bazooka
   speed: 50

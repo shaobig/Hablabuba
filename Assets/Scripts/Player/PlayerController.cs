@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRefresher,
-    WeaponHolder, WeaponHider, Emitter, InventoryOpener,
+    WeaponHolder, WeaponHider, FireController, InventoryOpener,
     OnBulletCollideOnPlayerListener, OnBulletCollideListener
 {
     [SerializeField]
@@ -132,13 +132,13 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         }
     }
 
-    public void Emit()
+    public void Fire()
     {
         if (weaponController.IsWeaponHeld)
         {
             movementController.Deactivate();
 
-            weaponController.Emit();
+            weaponController.Fire();
             weaponController.Deactivate();
 
             inventoryController.Deactivate();

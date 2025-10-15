@@ -590,7 +590,6 @@ GameObject:
   - component: {fileID: 2370846336962900177}
   - component: {fileID: 1142855897192249944}
   - component: {fileID: 5644629379642219300}
-  - component: {fileID: 803609967617761718}
   m_Layer: 0
   m_Name: BluePlayer
   m_TagString: Player
@@ -685,18 +684,6 @@ MonoBehaviour:
   weaponController: {fileID: 5607070181755272649}
   healthController: {fileID: 5598905402118413326}
   bodyController: {fileID: 3423257802102585088}
---- !u!114 &803609967617761718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3788321445585943614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba013a717e21b34da3d2720f1908e53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameObjectRemover
 --- !u!1 &4211973461706066071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,8 +1164,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2163399347679753212}
   - component: {fileID: 5607070181755272649}
-  - component: {fileID: 8012106169106455753}
-  - component: {fileID: 8290611829952870666}
+  - component: {fileID: 3091713814047079218}
+  - component: {fileID: 2070178618307006688}
+  - component: {fileID: 8899724768949354054}
   - component: {fileID: 7683807299782440261}
   - component: {fileID: 9030152361358702234}
   - component: {fileID: 7104335790388757582}
@@ -1217,11 +1205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb19ae69f0cac34ab51a22e0a0c12fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  weaponFireControllerCreator: {fileID: 8012106169106455753}
-  weaponTurner: {fileID: 7104335790388757582}
+  fireControllerCreator: {fileID: 3091713814047079218}
   gameObjectRemover: {fileID: 9030152361358702234}
+  weaponTurner: {fileID: 7104335790388757582}
   holdPoint: {fileID: 4128739498188107601}
---- !u!114 &8012106169106455753
+--- !u!114 &3091713814047079218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1230,11 +1218,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6774864827296888889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddefc58d5221a9d448b2ce30ee87d9c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 73a2b437ea23f4c4e8547d50b573ef31, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InitWeaponFireControllerCreator
-  weaponFireControllerCreator: {fileID: 8290611829952870666}
---- !u!114 &8290611829952870666
+  m_EditorClassIdentifier: Assembly-CSharp::FireControllerCreator
+  bazookaFireControllerCreator: {fileID: 2070178618307006688}
+  riffleFireControllerCreator: {fileID: 8899724768949354054}
+--- !u!114 &2070178618307006688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1243,9 +1232,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6774864827296888889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b13ac2902fa584fa4d2bdbe48626e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a8cf4a0a63d3ea41be2d3b4cfbdac80, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponFireControllerCreator
+  m_EditorClassIdentifier: Assembly-CSharp::BazookaFireControllerCreator
+  parentObjectCreator: {fileID: 7683807299782440261}
+--- !u!114 &8899724768949354054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774864827296888889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57df06dfcfd719e40bb16856ed7d2a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RiffleFireControllerCreator
   parentObjectCreator: {fileID: 7683807299782440261}
 --- !u!114 &7683807299782440261
 MonoBehaviour:

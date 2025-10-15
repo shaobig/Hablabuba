@@ -19,7 +19,6 @@ public class GameController : MonoBehaviour,
     void Awake()
     {
         playerList = respawnGameController.Respawn();
-
         playerGameController.Init(playerList, this, this, this, this, this);
         cameraGameController.Init(playerList, this);
     }

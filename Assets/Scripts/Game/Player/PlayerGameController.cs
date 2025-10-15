@@ -56,7 +56,7 @@ public class PlayerGameController : MonoBehaviour,
         }
         else if (Input.GetKeyDown(FIRE_WEAPON_KEY))
         {
-            currentPlayer.Emit();
+            currentPlayer.Fire();
         }
     }
 

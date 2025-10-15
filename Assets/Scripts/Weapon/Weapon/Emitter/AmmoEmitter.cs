@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class WeaponEmitter : MonoBehaviour, Emitter
+public class AmmoEmitter : MonoBehaviour, Emitter
 {
     [SerializeField]
     private InitBulletControllerCreator bulletControllerCreator;
-    private Weapon weapon;
     private Transform emitPoint;
     private BulletPrefab bulletPrefab;
+    private int speed;
 
-    public void Init(Weapon weapon, Transform emitPoint, BulletPrefab bulletPrefab, OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
+    public void Init(Transform emitPoint, BulletPrefab bulletPrefab, int speed, OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
-        this.weapon = weapon;
         this.emitPoint = emitPoint;
         this.bulletPrefab = bulletPrefab;
+        this.speed = speed;
 
         bulletControllerCreator.Init(bulletPrefab.Bullet, onAmmoShotListener, onSetOnShotPlayerCameraListener, onBulletCollideListener);
     }
@@ -20,7 +20,7 @@ public class WeaponEmitter : MonoBehaviour, Emitter
     public void Emit()
     {
         var bulletRigidbody = bulletControllerCreator.Create(bulletPrefab.Prefab, emitPoint).GetComponent<Rigidbody>();
-        bulletRigidbody.linearVelocity = emitPoint.forward * weapon.Speed;
+        bulletRigidbody.linearVelocity = emitPoint.forward * speed;
     }
     
 }

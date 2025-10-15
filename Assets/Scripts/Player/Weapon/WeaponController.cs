@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, Emitter
+public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, FireController
 {
     [SerializeField]
-    private InitWeaponFireControllerCreator weaponFireControllerCreator;
-    [SerializeField]
-    private WeaponTurner weaponTurner;
+    private FireControllerCreator fireControllerCreator;
     [SerializeField]
     private GameObjectRemover gameObjectRemover;
     [SerializeField]
+    private WeaponTurner weaponTurner;
+    [SerializeField]
     private Transform holdPoint;
-    private WeaponFireController weaponFireController;
+    private FireController fireController;
     private WeaponItem weaponItem;
     private bool isWeaponHeld;
 
@@ -30,23 +30,23 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
 
     public void HoldWeapon()
     {
-        weaponFireControllerCreator.Init(weaponItem.Weapon);
-        weaponFireController = weaponFireControllerCreator.Create(weaponItem.Prefab, holdPoint);
+        fireControllerCreator.WeaponItem = weaponItem;
+        fireController = fireControllerCreator.Create(weaponItem.Prefab, holdPoint);
 
         isWeaponHeld = true;
     }
 
     public void HideWeapon()
     {
-        gameObjectRemover.Remove(weaponFireController.gameObject);
+        gameObjectRemover.Remove(holdPoint.GetChild(0).gameObject);
         isWeaponHeld = false;
     }
 
-    public void Emit()
+    public void Fire()
     {
         if (enabled)
         {
-            weaponFireController.Emit();
+            fireController.Fire();
         }
     }
 
@@ -70,17 +70,17 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
 
     public OnAmmoShotListener OnAmmoShotListener
     {
-        set => weaponFireControllerCreator.OnAmmoShotListener = value;
+        set => fireControllerCreator.OnAmmoShotListener = value;
     }
 
     public OnBulletCollideListener OnBulletCollideListener
     {
-        set => weaponFireControllerCreator.OnBulletCollideListener = value;
+        set => fireControllerCreator.OnBulletCollideListener = value;
     }
 
     public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
     {
-        set => weaponFireControllerCreator.OnSetOnShotPlayerCameraListener = value;
+        set => fireControllerCreator.OnSetCameraOnShotPlayerListener = value;
     }
 
 }
