@@ -2,62 +2,33 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerGameController : MonoBehaviour,
+public class PlayerGameController : MonoBehaviour, Mover,
+    OnPlayerMoveListener, OnPlayerFireListener, OnWeaponChangeAngleListener,
+    OnWeaponSelectListener,
     OnBulletCollideListener, OnPlayerKilledListener
 {
     private const int GAME_OVER_PLAYER_COUNT = 1;
-
-    private const KeyCode OPEN_INVENTORY_KEY = KeyCode.I;
-    private const KeyCode SELECT_WEAPON_KEY = KeyCode.Space;
-    private const KeyCode FIRE_WEAPON_KEY = KeyCode.Mouse0;
 
     [SerializeField]
     private PlayerControllerRemover playerControllerRemover;
     private List<PlayerController> playerList;
     private PlayerController currentPlayer;
-    private OnAmmoShotListener onAmmoShotListener;
-    private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
     private OnPlayerKilledListener onPlayerKilledListener;
-    private OnBulletCollideListener onBulletCollideListener;
     private OnGameFinishedListener onGameFinishedListener;
     private int currentIndex = -1;
 
     public void Init(List<PlayerController> playerList,
+        OnPlayerKilledListener onPlayerKilledListener,
+        OnGameFinishedListener onGameFinishedListener,
         OnAmmoShotListener onAmmoShotListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
-        OnBulletCollideListener onBulletCollideListener,
-        OnPlayerKilledListener onPlayerKilledListener,
-        OnGameFinishedListener onGameFinishedListener)
+        OnBulletCollideListener onBulletCollideListener)
     {
         this.playerList = playerList;
-        this.onAmmoShotListener = onAmmoShotListener;
-        this.onSetCameraOnShotPlayerListener = onSetCameraOnShotPlayerListener;
         this.onPlayerKilledListener = onPlayerKilledListener;
         this.onGameFinishedListener = onGameFinishedListener;
-
-        playerList.ForEach(player =>
-        {
-            player.OnAmmoShotListener = onAmmoShotListener;
-            player.OnSetOnShotPlayerCameraListener = onSetCameraOnShotPlayerListener;
-            player.OnBulletCollideListener = onBulletCollideListener;
-            player.OnPlayerKilledListener = onPlayerKilledListener;
-        });
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(OPEN_INVENTORY_KEY))
-        {
-            currentPlayer.OpenInventory();
-        }
-        else if (Input.GetKeyDown(SELECT_WEAPON_KEY))
-        {
-            currentPlayer.HoldWeapon();
-        }
-        else if (Input.GetKeyDown(FIRE_WEAPON_KEY))
-        {
-            currentPlayer.Fire();
-        }
+        
+        playerList.ForEach(player => player.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener));
     }
 
     void OnDestroy()
@@ -65,7 +36,7 @@ public class PlayerGameController : MonoBehaviour,
         playerControllerRemover.Remove(currentPlayer);
     }
 
-    public void GoToNextStep()
+    public void Move()
     {
         currentIndex = (currentIndex + 1) % playerList.Count;
         currentPlayer = playerList[currentIndex];
@@ -101,33 +72,31 @@ public class PlayerGameController : MonoBehaviour,
         currentIndex = (currentIndex + playerList.Count) % playerList.Count;
     }
 
-    public PlayerController CurrentPlayer
+    public void OnPlayerMove(Vector2 moveInput)
     {
-        get => currentPlayer;
+        currentPlayer.OnPlayerMove(moveInput);
     }
 
-    public OnAmmoShotListener OnAmmoShotListener
+    public void OnWeaponSelect()
     {
-        get => onAmmoShotListener;
-        set => onAmmoShotListener = value;
+        currentPlayer.OnWeaponSelect();
     }
 
-    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
+    public void OnWeaponChangeAngle(float scrollInput)
     {
-        get => onSetCameraOnShotPlayerListener;
-        set => onSetCameraOnShotPlayerListener = value;
+        currentPlayer.OnWeaponChangeAngle(scrollInput);
     }
 
-    public OnPlayerKilledListener OnPlayerKilledListener
+    public void OnPlayerFire()
     {
-        get => onPlayerKilledListener;
-        set => onPlayerKilledListener = value;
+        currentPlayer.Fire();
     }
 
-    public OnBulletCollideListener OnBulletCollideListener
+    public PlayerController CurrentPlayer => currentPlayer;
+
+    public int CurrentWeaponIndex
     {
-        get => onBulletCollideListener;
-        set => onBulletCollideListener = value;
+        set => currentPlayer.CurrentWeaponIndex = value;
     }
 
 }

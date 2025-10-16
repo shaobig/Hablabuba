@@ -8,6 +8,12 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
     private RiffleFireControllerCreator riffleFireControllerCreator;
     private WeaponItem weaponItem;
 
+    public void Init(OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
+    {
+        bazookaFireControllerCreator.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        riffleFireControllerCreator.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+    }
+
     public FireController Create(GameObject weaponPrefab, Transform holdPoint)
     {
         if (WeaponType.BAZOOKA.Equals(weaponItem.Weapon.WeaponType))
@@ -19,7 +25,7 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
             return riffleFireControllerCreator.Create(weaponPrefab, holdPoint);
         }
     }
-    
+
     public WeaponItem WeaponItem
     {
         set
@@ -27,33 +33,6 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
             weaponItem = value;
             bazookaFireControllerCreator.WeaponItem = value;
             riffleFireControllerCreator.WeaponItem = value;
-        }
-    }
-
-    public OnAmmoShotListener OnAmmoShotListener
-    {
-        set
-        {
-            bazookaFireControllerCreator.OnAmmoShotListener = value;
-            riffleFireControllerCreator.OnAmmoShotListener = value;
-        }
-    }
-
-    public OnBulletCollideListener OnBulletCollideListener
-    {
-        set
-        {
-            bazookaFireControllerCreator.OnBulletCollideListener = value;
-            riffleFireControllerCreator.OnBulletCollideListener = value;
-        }
-    }
-
-    public OnSetCameraOnShotPlayerListener OnSetCameraOnShotPlayerListener
-    {
-        set
-        {
-            bazookaFireControllerCreator.OnSetCameraOnShotPlayerListener = value;
-            riffleFireControllerCreator.OnSetCameraOnShotPlayerListener = value;
         }
     }
 

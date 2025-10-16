@@ -5,26 +5,18 @@ public class InitPlayerControllerCreator : MonoBehaviour, Creator<PlayerControll
     [SerializeField]
     private PlayerControllerCreator playerControllerCreator;
     private Player player;
-    private WindowController windowController;
 
-    public PlayerController Create(GameObject gameObject, Transform target)
+    public PlayerController Create(GameObject prefab, Transform target)
     {
-        var playerController = playerControllerCreator.Create(gameObject, target);
-        playerController.Init(player, windowController);
+        var playerController = playerControllerCreator.Create(prefab, target);
+        playerController.Player = player;
 
         return playerController;
     }
 
     public Player Player
     {
-        get => player;
         set => player = value;
-    }
-
-    public WindowController WindowController
-    {
-        get => windowController;
-        set => windowController = value;
     }
 
 }

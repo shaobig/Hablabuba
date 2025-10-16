@@ -963,7 +963,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementController
   playerMover: {fileID: 8255310580635699463}
   playerTurner: {fileID: 6309016454356864787}
-  delay: 0.01
 --- !u!114 &8255310580635699463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,6 +976,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMover
   speed: 5
+  acceleration: 10
+  deadZone: 0.1
 --- !u!114 &6309016454356864787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,7 +990,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182779c31a7059f4b9010f2275a4a7de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTurner
-  angleSpeed: 90
+  angleSpeed: 60
+  deadZone: 0.1
 --- !u!1 &5838136343609508943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,7 +1302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6035c6c1a2b782744b0fd3cfdbc5867a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponTurner
-  angleSpeed: 60
+  speed: 90
 --- !u!1 &7193757518748147730
 GameObject:
   m_ObjectHideFlags: 0

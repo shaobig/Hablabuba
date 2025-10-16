@@ -7,10 +7,10 @@ public class PlayerControllerRemover : MonoBehaviour, Remover<PlayerController>
 
     public void Remove(PlayerController player)
     {
-        player.OnAmmoShotListener = null;
-        player.OnSetOnShotPlayerCameraListener = null;
-        player.OnBulletCollideListener = null;
-        player.OnPlayerKilledListener = null;
+        // player.OnAmmoShotListener = null;
+        // player.OnSetOnShotPlayerCameraListener = null;
+        // player.OnBulletCollideListener = null;
+        // player.OnPlayerKilledListener = null;
 
         gameObjectRemover.Remove(player.gameObject);
     }

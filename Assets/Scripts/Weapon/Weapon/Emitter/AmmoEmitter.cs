@@ -22,5 +22,11 @@ public class AmmoEmitter : MonoBehaviour, Emitter
         var bulletRigidbody = bulletControllerCreator.Create(bulletPrefab.Prefab, emitPoint).GetComponent<Rigidbody>();
         bulletRigidbody.linearVelocity = emitPoint.forward * speed;
     }
+
+    public int Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
     
 }

@@ -1,36 +1,32 @@
-using System;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour, Activator, Deactivator, Mover, Turner
+public class MovementController : MonoBehaviour, Activator, Deactivator,
+    OnPlayerMoveListener
 {
     [SerializeField]
     private PlayerMover playerMover;
     [SerializeField]
     private PlayerTurner playerTurner;
-    [SerializeField]
-    [Range(0, 1)]
-    private float delay = 0.01f;
-    private Rigidbody playerRigidbody;
+    private Vector2 moveInput;
 
     public void Init(Rigidbody rigidbody)
     {
-        playerMover.PlayerRigidbody = rigidbody;
-        playerTurner.PlayerRigidbody = rigidbody;
+        rigidbody.freezeRotation = true;
 
-        playerMover.Delay = delay;
-        playerTurner.Delay = delay;
+        playerMover.Init(rigidbody);
+        playerTurner.Init(rigidbody);
     }
 
     void FixedUpdate()
     {
         if (playerMover.enabled)
         {
-            playerMover.Input = Input.GetAxis("Vertical");
+            playerMover.MoveInput = moveInput.y;
             playerMover.Move();
         }
         if (playerTurner.enabled)
         {
-            playerTurner.Input = Input.GetAxis("Horizontal");
+            playerTurner.MoveInput = moveInput.x;
             playerTurner.Turn();
         }
     }
@@ -51,33 +47,9 @@ public class MovementController : MonoBehaviour, Activator, Deactivator, Mover, 
         playerTurner.Deactivate();
     }
 
-    public void Move()
+    public void OnPlayerMove(Vector2 moveInput)
     {
-        if (playerMover.enabled)
-        {
-            playerMover.Input = Input.GetAxis("Vertical");
-            playerMover.Move();
-        }
-    }
-
-    public void Turn()
-    {
-        if (playerTurner.enabled)
-        {
-            playerTurner.Input = Input.GetAxis("Horizontal");
-            playerTurner.Turn();
-        }
-    }
-
-    public Rigidbody PlayerRigidbody
-    {
-        get => playerRigidbody;
-        set => playerRigidbody = value;
-    }
-
-    public bool IsMoving
-    {
-        get => playerMover.IsMoving || playerTurner.IsMoving;
+        this.moveInput = moveInput;
     }
 
 }

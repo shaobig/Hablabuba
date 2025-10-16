@@ -5,15 +5,9 @@ using UnityEngine;
 public class DatabasePlayerRespawner : MonoBehaviour, Respawner
 {
     [SerializeField]
-    private PlayerPrefabDatabase playerPrefabDatabase;
+    private PlayerPrefabDatabaseReader playerPrefabDatabaseReader;
     [SerializeField]
-    private InitPlayerControllerCreator playerControllerCreator;
-    [SerializeField]
-    private WindowControllerCreator windowControllerCreator;
-    [SerializeField]
-    private GameObject inventoryPrefab;
-    [SerializeField]
-    private Transform canvasTransform;
+    private InitPlayerControllerCreator initPlayerControllerCreator;
     [SerializeField]
     private List<Transform> respawnPointList;
 
@@ -21,15 +15,12 @@ public class DatabasePlayerRespawner : MonoBehaviour, Respawner
     {
         Queue<Transform> respawnQueue = new(respawnPointList);
 
-        WindowController windowController = windowControllerCreator.Create(inventoryPrefab, canvasTransform);
-        playerControllerCreator.WindowController = windowController;
-
-        return playerPrefabDatabase.PlayerPrefabList
+        return playerPrefabDatabaseReader.ReadDatabase()
             .Take(respawnQueue.Count)
-            .Select(prefab =>
+            .Select(playerPrefab =>
             {
-                playerControllerCreator.Player = prefab.Player;
-                return playerControllerCreator.Create(prefab.Prefab, respawnQueue.Dequeue());
+                initPlayerControllerCreator.Player = playerPrefab.Player;
+                return initPlayerControllerCreator.Create(playerPrefab.Prefab, respawnQueue.Dequeue());
             })
             .ToList();
     }

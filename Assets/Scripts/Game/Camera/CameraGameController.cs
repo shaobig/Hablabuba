@@ -47,8 +47,8 @@ public class CameraGameController : MonoBehaviour, Follower,
 
     public void OnBulletCollide()
     {
-        playerCameraController.Activate();
         ammoCameraController.Deactivate();
+        playerCameraController.Activate();
     }
 
 }

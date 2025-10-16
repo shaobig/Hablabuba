@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, FireController
+public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, FireController,
+    OnWeaponChangeAngleListener
 {
     [SerializeField]
     private FireControllerCreator fireControllerCreator;
@@ -14,25 +15,15 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
     private WeaponItem weaponItem;
     private bool isWeaponHeld;
 
-    public void Init()
+    public void Init(OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
+        fireControllerCreator.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
         weaponTurner.Init(holdPoint);
-    }
-
-    void FixedUpdate()
-    {
-        if (isWeaponHeld)
-        {
-            weaponTurner.ScrollDownDelta = Input.GetAxis("Mouse ScrollWheel");
-            weaponTurner.Turn();
-        }
     }
 
     public void HoldWeapon()
     {
-        fireControllerCreator.WeaponItem = weaponItem;
         fireController = fireControllerCreator.Create(weaponItem.Prefab, holdPoint);
-
         isWeaponHeld = true;
     }
 
@@ -60,27 +51,21 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         enabled = false;
     }
 
+    public void OnWeaponChangeAngle(float scrollInput)
+    {
+        weaponTurner.ScrollInput = scrollInput;
+        weaponTurner.Turn();
+    }
+
     public bool IsWeaponHeld => isWeaponHeld;
 
-    public WeaponItem Weapon
+    public WeaponItem WeaponItem
     {
-        get => weaponItem;
-        set => weaponItem = value;
-    }
-
-    public OnAmmoShotListener OnAmmoShotListener
-    {
-        set => fireControllerCreator.OnAmmoShotListener = value;
-    }
-
-    public OnBulletCollideListener OnBulletCollideListener
-    {
-        set => fireControllerCreator.OnBulletCollideListener = value;
-    }
-
-    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
-    {
-        set => fireControllerCreator.OnSetCameraOnShotPlayerListener = value;
+        set
+        {
+            weaponItem = value;
+            fireControllerCreator.WeaponItem = value;
+        }
     }
 
 }

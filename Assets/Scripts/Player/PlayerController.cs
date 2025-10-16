@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRefresher,
-    WeaponHolder, WeaponHider, FireController, InventoryOpener,
-    OnBulletCollideOnPlayerListener, OnBulletCollideListener
+    WeaponHolder, WeaponHider, FireController,
+    OnPlayerMoveListener, OnWeaponChangeAngleListener,
+    OnWeaponSelectListener,
+    OnBulletCollideOnPlayerListener
 {
     [SerializeField]
     private DisplayController displayController;
@@ -17,59 +20,23 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     [SerializeField]
     private BodyController bodyController;
     private Player player;
-    private OnPlayerKilledListener onPlayerKilledListener;
 
-    public void Init(Player player, WindowController windowController)
-    {
-        this.player = player;
-
-        InitDisplayController(player);
-        InitMovementController();
-        InitInventoryController(windowController);
-        InitHealthController(player.Health);
-        InitWeaponController();
-    }
-
-    void InitDisplayController(Player player)
+    public void Init(
+        OnAmmoShotListener onAmmoShotListener,
+        OnBulletCollideListener onBulletCollideListener,
+        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
         displayController.Init(player, bodyController.Renderer.material.color);
         displayController.Paint();
-    }
 
-    void InitMovementController()
-    {
-        var playerRigidbody = GetComponent<Rigidbody>();
-        playerRigidbody.freezeRotation = true;
-
-        movementController.Init(playerRigidbody);
+        movementController.Init(GetComponent<Rigidbody>());
         movementController.Deactivate();
-    }
 
-    void InitInventoryController(WindowController windowController)
-    {
-        inventoryController.Init(windowController);
-    }
+        inventoryController.Init();
 
-    void InitHealthController(int health)
-    {
-        healthController.Init(health);
-    }
+        healthController.Init(player.Health);
 
-    void InitWeaponController()
-    {
-        weaponController.Init();
-    }
-
-    void FixedUpdate()
-    {
-        if (movementController.IsMoving)
-        {
-            displayController.DisableText();
-        }
-        else
-        {
-            displayController.EnableText();
-        }
+        weaponController.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
     }
 
     public void OnBulletCollideOnPlayer(HitBullet bullet)
@@ -78,21 +45,12 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         displayController.SetHealthText(healthController.Health);
     }
 
-    public void OnBulletCollide()
-    {
-        if (healthController.IsDead)
-        {
-            onPlayerKilledListener.OnPlayerKilled(this);
-        }
-    }
-
     public void Activate()
     {
         enabled = true;
 
         movementController.Activate();
         weaponController.Activate();
-        inventoryController.Activate();
     }
 
     public void Deactivate()
@@ -101,47 +59,25 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         movementController.Deactivate();
     }
 
-    public void OpenInventory()
-    {
-        if (inventoryController.IsOpened)
-        {
-            inventoryController.CloseInventory();
-            movementController.Activate();
-        }
-        else
-        {
-            inventoryController.OpenInventory();
-            movementController.Deactivate();
-        }
-    }
-
     public void HoldWeapon()
     {
-        if (inventoryController.IsOpened)
-        {
-            if (weaponController.IsWeaponHeld)
-            {
-                weaponController.HideWeapon();
-            }
+        weaponController.WeaponItem = inventoryController.SelectWeapon();
+        weaponController.HoldWeapon();
+    }
 
-            inventoryController.CloseInventory();
-            movementController.Activate();
-
-            weaponController.Weapon = inventoryController.SelectWeapon();
-            weaponController.HoldWeapon();
-        }
+    public void OnWeaponChangeAngle(float scrollInput)
+    {
+        weaponController.OnWeaponChangeAngle(scrollInput);
     }
 
     public void Fire()
     {
         if (weaponController.IsWeaponHeld)
         {
-            movementController.Deactivate();
-
             weaponController.Fire();
-            weaponController.Deactivate();
 
-            inventoryController.Deactivate();
+            movementController.Deactivate();
+            weaponController.Deactivate();
         }
     }
 
@@ -155,15 +91,29 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         displayController.RefreshDisplay();
     }
 
-    public Player Player
+    public void OnPlayerMove(Vector2 moveInput)
     {
-        get => player;
-        set => player = value;
+        movementController.OnPlayerMove(moveInput);
+
+        if (Vector2.zero.Equals(moveInput))
+        {
+            displayController.EnableText();
+        }
+        else
+        {
+            displayController.DisableText();
+        }
     }
 
-    public OnPlayerKilledListener OnPlayerKilledListener
+    public void OnWeaponSelect()
     {
-        set => onPlayerKilledListener = value;
+        if (weaponController.IsWeaponHeld)
+        {
+            weaponController.HideWeapon();
+        }
+        
+        weaponController.WeaponItem = inventoryController.SelectWeapon();
+        weaponController.HoldWeapon();
     }
 
     public Transform Camera
@@ -171,21 +121,18 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         set => displayController.Camera = value;
     }
 
-    public OnAmmoShotListener OnAmmoShotListener
+    public Player Player
     {
-        set => weaponController.OnAmmoShotListener = value;
-    }
-
-    public OnBulletCollideListener OnBulletCollideListener
-    {
-        set => weaponController.OnBulletCollideListener = value;
-    }
-
-    public OnSetCameraOnShotPlayerListener OnSetOnShotPlayerCameraListener
-    {
-        set => weaponController.OnSetOnShotPlayerCameraListener = value;
+        get => player;
+        set => player = value;
     }
 
     public bool IsDead => healthController.IsDead;
+    public List<WeaponItem> WeaponItemList => inventoryController.WeaponItemList;
+
+    public int CurrentWeaponIndex
+    {
+        set => inventoryController.CurrentWeaponIndex = value;
+    }
 
 }

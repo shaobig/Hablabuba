@@ -1,13 +1,20 @@
 using UnityEngine;
 
-public class PlayerMover : MonoBehaviour, Activator, Deactivator, Mover
+public class PlayerMover : MonoBehaviour, Activator, Deactivator
 {
     [SerializeField]
     private float speed = 5f;
-    private Rigidbody playerRigidbody;
-    private float input;
-    private float delay;
-    private bool isMoving;
+    [SerializeField]
+    private float acceleration = 10f;
+    [SerializeField]
+    private float deadZone = 0.1f;
+    private new Rigidbody rigidbody;
+    private float moveInput;
+
+    public void Init(Rigidbody rigidbody)
+    {
+        this.rigidbody = rigidbody;
+    }
 
     public void Activate()
     {
@@ -21,37 +28,25 @@ public class PlayerMover : MonoBehaviour, Activator, Deactivator, Mover
 
     public void Move()
     {
-        if (Mathf.Abs(input) > delay)
+        if (Mathf.Abs(moveInput) > deadZone)
         {
-            isMoving = true;
-
-            Vector3 moveDirection = transform.forward * input;
-            playerRigidbody.MovePosition(playerRigidbody.position + speed * Time.fixedDeltaTime * moveDirection);
+            Vector3 moveVelocity = moveInput * speed * transform.forward;
+            Vector3 smoothVelocity = Vector3.Lerp(rigidbody.linearVelocity, moveVelocity, acceleration * Time.fixedDeltaTime);
+            smoothVelocity.y = rigidbody.linearVelocity.y;
+            rigidbody.linearVelocity = smoothVelocity;
         }
         else
         {
-            isMoving = false;
+            Vector3 smoothVelocity = Vector3.Lerp(rigidbody.linearVelocity, Vector3.zero, acceleration * Time.fixedDeltaTime);
+            smoothVelocity.y = rigidbody.linearVelocity.y;
+            rigidbody.linearVelocity = smoothVelocity;
         }
     }
 
-    public Rigidbody PlayerRigidbody
+    public float MoveInput
     {
-        get => playerRigidbody;
-        set => playerRigidbody = value;
+        get => moveInput;
+        set => moveInput = value;
     }
-
-    public float Input
-    {
-        get => input;
-        set => input = value;
-    }
-
-    public float Delay
-    {
-        get => delay;
-        set => delay = value;
-    }
-
-    public bool IsMoving => isMoving;
 
 }

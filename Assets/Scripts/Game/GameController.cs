@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour,
+public class GameController : MonoBehaviour, Mover,
+    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener,
+    OnInventoryToggleListener, OnWeaponSwitchListener, OnWeaponSelectListener,
     OnAmmoShotListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener, OnPlayerKilledListener, OnBulletCollideListener, OnGameFinishedListener
 {
-    private const float GAME_OVER_TIMESCALE = 0;
-
     [SerializeField]
     private RespawnGameController respawnGameController;
     [SerializeField]
@@ -13,25 +13,70 @@ public class GameController : MonoBehaviour,
     [SerializeField]
     private CameraGameController cameraGameController;
     [SerializeField]
+    private InputGameController inputGameController;
+    [SerializeField]
+    private InterfaceGameController interfaceGameController;
+    [SerializeField]
     private float timeScale = 1;
-    private List<PlayerController> playerList;
 
     void Awake()
     {
-        playerList = respawnGameController.Respawn();
+        var playerList = respawnGameController.Respawn();
+        
         playerGameController.Init(playerList, this, this, this, this, this);
         cameraGameController.Init(playerList, this);
+        inputGameController.Init(this, this, this, this, this, this);
+        interfaceGameController.Init();
     }
 
     void Start()
     {
-        playerGameController.GoToNextStep();
-        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
+        Move();
     }
 
     void Update()
     {
         Time.timeScale = timeScale;
+    }
+
+    public void Move()
+    {
+        playerGameController.Move();
+        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
+        interfaceGameController.FillWindow(playerGameController.CurrentPlayer.WeaponItemList);
+    }
+
+    public void OnPlayerMove(Vector2 moveInput)
+    {
+        playerGameController.OnPlayerMove(moveInput);
+    }
+
+    public void OnInventoryToggle()
+    {
+        interfaceGameController.OnInventoryToggle();
+    }
+
+    public void OnWeaponSwitch(Vector2 switchInput)
+    {
+        interfaceGameController.OnWeaponSwitch(switchInput);
+        playerGameController.CurrentWeaponIndex = interfaceGameController.CurrentWeaponIndex;
+    }
+
+    public void OnWeaponSelect()
+    {
+        playerGameController.OnWeaponSelect();
+        interfaceGameController.OnInventoryToggle();
+    }
+
+    public void OnWeaponChangeAngle(float scrollInput)
+    {
+        playerGameController.OnWeaponChangeAngle(scrollInput);
+    }
+
+    public void OnPlayerFire()
+    {
+        playerGameController.OnPlayerFire();
+        interfaceGameController.Deactivate();
     }
 
     public void OnAmmoShot(Transform ammo)
@@ -48,9 +93,14 @@ public class GameController : MonoBehaviour,
     {
         playerGameController.OnBulletCollide();
         cameraGameController.OnBulletCollide();
-
-        playerGameController.GoToNextStep();
-        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
+        Move();
+    }
+    
+    public void OnBulletCollide()
+    {
+        playerGameController.OnBulletCollide();
+        cameraGameController.OnBulletCollide();
+        Move();
     }
 
     public void OnPlayerKilled(PlayerController player)
@@ -58,20 +108,9 @@ public class GameController : MonoBehaviour,
         playerGameController.OnPlayerKilled(player);
     }
 
-    public void OnBulletCollide()
-    {
-        playerGameController.OnBulletCollide();
-        cameraGameController.OnBulletCollide();
-
-        playerGameController.GoToNextStep();
-        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
-    }
-
     public void OnGameFinished()
     {
         Debug.Log("Game over");
-        Time.timeScale = GAME_OVER_TIMESCALE;
-
         enabled = false;
     }
 

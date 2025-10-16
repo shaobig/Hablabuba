@@ -14,8 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPrefabDatabase
   playerPrefabList:
   - {fileID: 11400000, guid: 7c302325530c36d4eb36eaece7bea8c0, type: 2}
-  - {fileID: 11400000, guid: 54a7ea64807c3a849acef65f5ffafbe4, type: 2}
   - {fileID: 11400000, guid: af8b939ec494f164ca2b7f77f122e947, type: 2}
-  - {fileID: 11400000, guid: afc60d48473dcf24d833f0fa9532b2fb, type: 2}
   - {fileID: 11400000, guid: f57547af31d9b7647905d1f05c94ff81, type: 2}
-  - {fileID: 11400000, guid: cd28ea1147c62e24fadafa65467beba8, type: 2}

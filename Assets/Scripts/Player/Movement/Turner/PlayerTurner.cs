@@ -3,11 +3,17 @@ using UnityEngine;
 public class PlayerTurner : MonoBehaviour, Activator, Deactivator, Turner
 {
     [SerializeField]
-    private float angleSpeed = 90f;
-    private Rigidbody playerRigidbody;
-    private float input;
+    private float angleSpeed = 60f;
+    [SerializeField]
+    private float deadZone = 0.1f;
+    private new Rigidbody rigidbody;
+    private float moveInput;
     private float delay;
-    private bool isMoving;
+
+    public void Init(Rigidbody rigidbody)
+    {
+        this.rigidbody = rigidbody;
+    }
 
     public void Activate()
     {
@@ -21,36 +27,17 @@ public class PlayerTurner : MonoBehaviour, Activator, Deactivator, Turner
 
     public void Turn()
     {
-        if (Mathf.Abs(input) > delay)
+        if (Mathf.Abs(moveInput) > delay)
         {
-            isMoving = true;
-
-            Quaternion rotationOffset = Quaternion.Euler(0, input * angleSpeed * Time.fixedDeltaTime, 0);
-            playerRigidbody.MoveRotation(playerRigidbody.rotation * rotationOffset);
-        }
-        else
-        {
-            isMoving = false;
+            Quaternion rotationOffset = Quaternion.Euler(0, moveInput * angleSpeed * Time.fixedDeltaTime, 0);
+            rigidbody.MoveRotation(rigidbody.rotation * rotationOffset);
         }
     }
 
-    public Rigidbody PlayerRigidbody
+    public float MoveInput
     {
-        get => playerRigidbody;
-        set => playerRigidbody = value;
+        get => moveInput;
+        set => moveInput = value;
     }
 
-    public float Input
-    {
-        get => input;
-        set => input = value;
-    }
-
-    public float Delay
-    {
-        get => delay;
-        set => delay = value;
-    }
-
-    public bool IsMoving => isMoving;
 }

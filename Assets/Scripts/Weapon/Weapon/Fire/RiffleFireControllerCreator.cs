@@ -9,6 +9,13 @@ public class RiffleFireControllerCreator : MonoBehaviour, Creator<RiffleFireCont
     private OnBulletCollideListener onBulletCollideListener;
     private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
 
+    public void Init(OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
+    {
+        this.onAmmoShotListener = onAmmoShotListener;
+        this.onBulletCollideListener = onBulletCollideListener;
+        this.onSetCameraOnShotPlayerListener = onSetCameraOnShotPlayerListener;
+    }
+
     public RiffleFireController Create(GameObject prefab, Transform target)
     {
         var riffleFireController = parentObjectCreator.Create(prefab, target).GetComponent<RiffleFireController>();
@@ -21,24 +28,6 @@ public class RiffleFireControllerCreator : MonoBehaviour, Creator<RiffleFireCont
     {
         get => weaponItem;
         set => weaponItem = value;
-    }
-
-    public OnAmmoShotListener OnAmmoShotListener
-    {
-        get => onAmmoShotListener;
-        set => onAmmoShotListener = value;
-    }
-
-    public OnBulletCollideListener OnBulletCollideListener
-    {
-        get => onBulletCollideListener;
-        set => onBulletCollideListener = value;
-    }
-
-    public OnSetCameraOnShotPlayerListener OnSetCameraOnShotPlayerListener
-    {
-        get => onSetCameraOnShotPlayerListener;
-        set => onSetCameraOnShotPlayerListener = value;
     }
 
 }

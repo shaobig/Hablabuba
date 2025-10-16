@@ -3,9 +3,9 @@ using UnityEngine;
 public class WeaponTurner : MonoBehaviour, Turner
 {
     [SerializeField]
-    private float angleSpeed = 60f;
+    private float speed = 60f;
     private Transform holdPoint;
-    private float scrollDownDelta;
+    private float scrollInput;
 
     public void Init(Transform holdPoint)
     {
@@ -14,13 +14,13 @@ public class WeaponTurner : MonoBehaviour, Turner
 
     public void Turn()
     {
-        holdPoint.localRotation *= Quaternion.Euler(scrollDownDelta * angleSpeed, 0f, 0f);
+        float angle = scrollInput * speed * Time.fixedDeltaTime;
+        holdPoint.localRotation *= Quaternion.Euler(angle, 0f, 0f);
     }
 
-    public float ScrollDownDelta
+    public float ScrollInput
     {
-        get => scrollDownDelta;
-        set => scrollDownDelta = value;
+        set => scrollInput = value;
     }
 
 }
