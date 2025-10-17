@@ -11,14 +11,15 @@ public class InputGameController : MonoBehaviour
     private InterfaceInputController interfaceInputController;
 
     public void Init(
+        OnPlayerMoveListener onPlayerMoveListener,
+        OnPlayerFireListener onPlayerFireListener,
+        OnPlayerStopFireListener onPlayerStopFireListener,
         OnInventoryToggleListener onInventoryToggleListener,
         OnWeaponSwitchListener onWeaponSwitchListener,
         OnWeaponChangeAngleListener onWeaponChangeAngleListener,
-        OnWeaponSelectListener onWeaponSelectListener,
-        OnPlayerMoveListener onPlayerMoveListener,
-        OnPlayerFireListener onPlayerFireListener)
+        OnWeaponSelectListener onWeaponSelectListener)
     {
-        playerInputGameController.Init(inputActionAsset, onPlayerMoveListener, onWeaponChangeAngleListener, onPlayerFireListener);
+        playerInputGameController.Init(inputActionAsset, onPlayerMoveListener, onWeaponChangeAngleListener, onPlayerFireListener, onPlayerStopFireListener);
         interfaceInputController.Init(inputActionAsset, onInventoryToggleListener, onWeaponSwitchListener, onWeaponSelectListener);
 
     }

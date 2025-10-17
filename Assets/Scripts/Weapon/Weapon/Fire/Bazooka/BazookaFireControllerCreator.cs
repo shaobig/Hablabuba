@@ -23,7 +23,7 @@ public class BazookaFireControllerCreator : MonoBehaviour, Creator<BazookaFireCo
 
         return bazookaFireController;
     }
-    
+
     public WeaponItem WeaponItem
     {
         get => weaponItem;

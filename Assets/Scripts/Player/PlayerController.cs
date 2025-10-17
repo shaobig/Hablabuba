@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRefresher,
-    WeaponHolder, WeaponHider, FireController,
-    OnPlayerMoveListener, OnWeaponChangeAngleListener,
+    WeaponHolder, WeaponHider,
+    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener, OnPlayerStopFireListener,
     OnWeaponSelectListener,
     OnBulletCollideOnPlayerListener
 {
@@ -70,12 +70,20 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         weaponController.OnWeaponChangeAngle(scrollInput);
     }
 
-    public void Fire()
+    public void OnPlayerFire()
     {
         if (weaponController.IsWeaponHeld)
         {
-            weaponController.Fire();
+            weaponController.Fire(FireAction.START);
+        }
+    }
 
+    public void OnPlayerStopFire()
+    {
+        if (weaponController.IsWeaponHeld)
+        {
+            weaponController.Fire(FireAction.RELEASE);
+        
             movementController.Deactivate();
             weaponController.Deactivate();
         }

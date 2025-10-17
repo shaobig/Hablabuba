@@ -1,4 +1,4 @@
 public interface Timer
 {
-    void CountTime();
+    float CountTime();
 }

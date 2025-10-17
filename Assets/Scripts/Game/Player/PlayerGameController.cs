@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class PlayerGameController : MonoBehaviour, Mover,
-    OnPlayerMoveListener, OnPlayerFireListener, OnWeaponChangeAngleListener,
+    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener, OnPlayerStopFireListener,
     OnWeaponSelectListener,
     OnBulletCollideListener, OnPlayerKilledListener
 {
@@ -44,6 +44,31 @@ public class PlayerGameController : MonoBehaviour, Mover,
         currentPlayer.Activate();
     }
 
+    public void OnPlayerMove(Vector2 moveInput)
+    {
+        currentPlayer.OnPlayerMove(moveInput);
+    }
+
+    public void OnWeaponSelect()
+    {
+        currentPlayer.OnWeaponSelect();
+    }
+
+    public void OnWeaponChangeAngle(float scrollInput)
+    {
+        currentPlayer.OnWeaponChangeAngle(scrollInput);
+    }
+
+    public void OnPlayerFire()
+    {
+        currentPlayer.OnPlayerFire();
+    }
+
+    public void OnPlayerStopFire()
+    {
+        currentPlayer.OnPlayerStopFire();
+    }
+
     public void OnBulletCollide()
     {
         currentPlayer.HideWeapon();
@@ -70,26 +95,6 @@ public class PlayerGameController : MonoBehaviour, Mover,
             currentIndex--;
         }
         currentIndex = (currentIndex + playerList.Count) % playerList.Count;
-    }
-
-    public void OnPlayerMove(Vector2 moveInput)
-    {
-        currentPlayer.OnPlayerMove(moveInput);
-    }
-
-    public void OnWeaponSelect()
-    {
-        currentPlayer.OnWeaponSelect();
-    }
-
-    public void OnWeaponChangeAngle(float scrollInput)
-    {
-        currentPlayer.OnWeaponChangeAngle(scrollInput);
-    }
-
-    public void OnPlayerFire()
-    {
-        currentPlayer.Fire();
     }
 
     public PlayerController CurrentPlayer => currentPlayer;

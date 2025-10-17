@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BazookaFireController : MonoBehaviour, FireController,
-    OnTimerFinishedListener
+    OnTimerFinishListener
 {
     [SerializeField]
     private BazookaTimer bazookaTimer;
@@ -12,7 +12,6 @@ public class BazookaFireController : MonoBehaviour, FireController,
     [SerializeField]
     private BulletPrefab bulletPrefab;
     private Weapon weapon;
-    private bool isCharging;
 
     public void Init(WeaponItem weaponItem, OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
@@ -22,33 +21,22 @@ public class BazookaFireController : MonoBehaviour, FireController,
         ammoEmitter.Init(emitPoint, bulletPrefab, weaponItem.Weapon.Speed, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
     }
 
-    void Update()
+    public void Fire(FireAction fireAction)
     {
-        if (isCharging)
+        if (FireAction.START.Equals(fireAction))
         {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                bazookaTimer.Activate();
-            }
-            else if (Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                bazookaTimer.Deactivate();
-            }
+            bazookaTimer.Activate();
+        }
+        else if (FireAction.RELEASE.Equals(fireAction))
+        {
+            bazookaTimer.Deactivate();
         }
     }
 
-    public void Fire()
-    {
-        isCharging = true;
-    }
-
-    public void OnTimerFinished(float elapsedTime)
+    public void OnTimerFinish(float elapsedTime)
     {
         ammoEmitter.Speed = Mathf.RoundToInt(elapsedTime / bazookaTimer.MaxTime * weapon.Speed);
         ammoEmitter.Emit();
-
-        isCharging = false;
-        bazookaTimer.Reset();
     }
 
 }

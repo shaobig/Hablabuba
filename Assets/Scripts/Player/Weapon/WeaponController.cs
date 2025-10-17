@@ -21,6 +21,16 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         weaponTurner.Init(holdPoint);
     }
 
+    public void Activate()
+    {
+        enabled = true;
+    }
+
+    public void Deactivate()
+    {
+        enabled = false;
+    }
+
     public void HoldWeapon()
     {
         fireController = fireControllerCreator.Create(weaponItem.Prefab, holdPoint);
@@ -33,22 +43,12 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         isWeaponHeld = false;
     }
 
-    public void Fire()
+    public void Fire(FireAction fireAction)
     {
         if (enabled)
         {
-            fireController.Fire();
+            fireController.Fire(fireAction);
         }
-    }
-
-    public void Activate()
-    {
-        enabled = true;
-    }
-
-    public void Deactivate()
-    {
-        enabled = false;
     }
 
     public void OnWeaponChangeAngle(float scrollInput)

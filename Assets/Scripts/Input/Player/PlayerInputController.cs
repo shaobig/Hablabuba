@@ -9,7 +9,9 @@ public class PlayerInputGameController : MonoBehaviour
     public void Init(InputActionAsset inputActionAsset,
         OnPlayerMoveListener onPlayerMoveListener,
         OnWeaponChangeAngleListener onChangeWeaponAngleListener,
-        OnPlayerFireListener onPlayerFireListener)
+        OnPlayerFireListener onPlayerFireListener,
+        OnPlayerStopFireListener onPlayerStopFireListener
+        )
     {
         playerInputAction.Init(inputActionAsset);
 
@@ -18,6 +20,7 @@ public class PlayerInputGameController : MonoBehaviour
 
         playerInputAction.FireAction.started += context => onPlayerFireListener.OnPlayerFire();
         playerInputAction.FireAction.performed += context => onPlayerFireListener.OnPlayerFire();
+        playerInputAction.FireAction.canceled += context => onPlayerStopFireListener.OnPlayerStopFire();
 
         playerInputAction.ChangeWeaponAngleAction.performed += context => onChangeWeaponAngleListener.OnWeaponChangeAngle(context.ReadValue<float>());
     }

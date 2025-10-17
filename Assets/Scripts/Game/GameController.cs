@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour, Mover,
-    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener,
+    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener, OnPlayerStopFireListener,
     OnInventoryToggleListener, OnWeaponSwitchListener, OnWeaponSelectListener,
     OnAmmoShotListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener, OnPlayerKilledListener, OnBulletCollideListener, OnGameFinishedListener
 {
@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour, Mover,
         
         playerGameController.Init(playerList, this, this, this, this, this);
         cameraGameController.Init(playerList, this);
-        inputGameController.Init(this, this, this, this, this, this);
+        inputGameController.Init(this, this, this, this, this, this, this);
         interfaceGameController.Init();
     }
 
@@ -77,6 +77,11 @@ public class GameController : MonoBehaviour, Mover,
     {
         playerGameController.OnPlayerFire();
         interfaceGameController.Deactivate();
+    }
+
+    public void OnPlayerStopFire()
+    {
+        playerGameController.OnPlayerStopFire();
     }
 
     public void OnAmmoShot(Transform ammo)

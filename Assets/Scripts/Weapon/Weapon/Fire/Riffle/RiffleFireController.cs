@@ -14,9 +14,12 @@ public class RiffleFireController : MonoBehaviour, FireController
         ammoEmitter.Init(emitPoint, bulletPrefab, weaponItem.Weapon.Speed, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
     }
 
-    public void Fire()
+    public void Fire(FireAction fireAction)
     {
-        ammoEmitter.Emit();
+        if (FireAction.START.Equals(fireAction))
+        {
+            ammoEmitter.Emit();
+        }
     }
     
 }

@@ -1,4 +1,4 @@
 public interface FireController
 {
-    void Fire();
+    void Fire(FireAction fireAction);
 }
