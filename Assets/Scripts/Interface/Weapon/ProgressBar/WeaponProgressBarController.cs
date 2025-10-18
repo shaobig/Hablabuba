@@ -7,11 +7,16 @@ public class WeaponProgressBarController : MonoBehaviour, Activator, Deactivator
     [SerializeField]
     private WeaponProgressBarMover weaponProgressBarMover;
     [SerializeField]
+    private WeaponProgressBarPainter weaponProgressBarPainter;
+    [SerializeField]
     private Slider slider;
+    [SerializeField]
+    private Image handleImage;
 
     public void Init()
     {
         weaponProgressBarMover.Init(slider);
+        weaponProgressBarPainter.Init(handleImage);
     }
 
     public void Activate()
@@ -27,7 +32,10 @@ public class WeaponProgressBarController : MonoBehaviour, Activator, Deactivator
     public void OnWeaponProgressBarChangeValue(float value)
     {
         weaponProgressBarMover.SliderValue = value;
+        weaponProgressBarPainter.SliderValue = value;
+        
         weaponProgressBarMover.Move();
+        weaponProgressBarPainter.Paint();
     }
 
 }

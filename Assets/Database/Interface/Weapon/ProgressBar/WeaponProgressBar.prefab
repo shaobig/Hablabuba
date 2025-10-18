@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 955750847161440884}
   - component: {fileID: 3230954249761480533}
   - component: {fileID: -6716627000285369368}
+  - component: {fileID: 5628215025439675761}
   m_Layer: 5
   m_Name: WeaponProgressBar
   m_TagString: Untagged
@@ -438,7 +439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponProgressBarController
   weaponProgressBarMover: {fileID: -6716627000285369368}
+  weaponProgressBarPainter: {fileID: 5628215025439675761}
   slider: {fileID: 5639781862604222894}
+  handleImage: {fileID: 7762642244751766288}
 --- !u!114 &-6716627000285369368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +454,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7447e8f5f4a66b047ab4a56111347d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponProgressBarMover
+--- !u!114 &5628215025439675761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8229921556233608089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc07c95349e1e44690899658a8f170b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponProgressBarPainter
+  colorList:
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8923096225960901104
 GameObject:
   m_ObjectHideFlags: 0
