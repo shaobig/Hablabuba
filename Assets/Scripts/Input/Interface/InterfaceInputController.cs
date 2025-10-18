@@ -8,16 +8,16 @@ public class InterfaceInputController : MonoBehaviour
 
     public void Init(
         InputActionAsset inputActionAsset,
-        OnInventoryToggleListener onInventoryToggleListener,
-        OnWeaponSwitchListener onWeaponSwitchListener,
-        OnWeaponSelectListener onWeaponSelectListener
+        OnInventoryOpenKeyPressedListener onInventoryOpenKeyPressedListener,
+        OnWeaponSwitchKeyPressedListener onWeaponSwitchKeyPressedListener,
+        OnWeaponSelectKeyPressedListener onWeaponSelectKeyPressedListener
         )
     {
         interfaceInputAction.Init(inputActionAsset);
 
-        interfaceInputAction.OpenInventoryAction.performed += context => onInventoryToggleListener.OnInventoryToggle();
-        interfaceInputAction.SwitchWeaponAction.performed += context => onWeaponSwitchListener.OnWeaponSwitch(context.ReadValue<Vector2>());
-        interfaceInputAction.SelectWeaponAction.performed += context => onWeaponSelectListener.OnWeaponSelect();
+        interfaceInputAction.OpenInventoryAction.performed += context => onInventoryOpenKeyPressedListener.OnInventoryOpenKeyPressed();
+        interfaceInputAction.SwitchWeaponAction.performed += context => onWeaponSwitchKeyPressedListener.OnWeaponSwitchKeyPressed(context.ReadValue<Vector2>());
+        interfaceInputAction.SelectWeaponAction.performed += context => onWeaponSelectKeyPressedListener.OnWeaponSelectKeyPressed();
     }
     
 }

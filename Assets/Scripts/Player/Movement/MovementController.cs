@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class MovementController : MonoBehaviour, Activator, Deactivator,
-    OnPlayerMoveListener
+    OnMoveKeyPressedListener
 {
     [SerializeField]
     private PlayerMover playerMover;
@@ -47,7 +47,7 @@ public class MovementController : MonoBehaviour, Activator, Deactivator,
         playerTurner.Deactivate();
     }
 
-    public void OnPlayerMove(Vector2 moveInput)
+    public void OnMoveKeyPressed(Vector2 moveInput)
     {
         this.moveInput = moveInput;
     }

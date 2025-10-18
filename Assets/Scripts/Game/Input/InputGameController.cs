@@ -11,16 +11,17 @@ public class InputGameController : MonoBehaviour
     private InterfaceInputController interfaceInputController;
 
     public void Init(
-        OnPlayerMoveListener onPlayerMoveListener,
-        OnPlayerFireListener onPlayerFireListener,
-        OnPlayerStopFireListener onPlayerStopFireListener,
-        OnInventoryToggleListener onInventoryToggleListener,
-        OnWeaponSwitchListener onWeaponSwitchListener,
-        OnWeaponChangeAngleListener onWeaponChangeAngleListener,
-        OnWeaponSelectListener onWeaponSelectListener)
+        OnMoveKeyPressedListener onMoveKeyPressedListener,
+        OnFireKeyPressedListener onFireKeyPressedListener,
+        OnLongFireKeyPressedListener onLongFireKeyPressedListener,
+        OnStopFireKeyPressedListener onStopFireKeyPressedListener,
+        OnInventoryOpenKeyPressedListener onInventoryOpenKeyPressedListener,
+        OnWeaponSwitchKeyPressedListener onWeaponSwitchKeyPressedListener,
+        OnWeaponChangeAngleKeyPressedListener onWeaponChangeAngleKeyPressedListener,
+        OnWeaponSelectKeyPressedListener onWeaponSelectKeyPressedListener)
     {
-        playerInputGameController.Init(inputActionAsset, onPlayerMoveListener, onWeaponChangeAngleListener, onPlayerFireListener, onPlayerStopFireListener);
-        interfaceInputController.Init(inputActionAsset, onInventoryToggleListener, onWeaponSwitchListener, onWeaponSelectListener);
+        playerInputGameController.Init(inputActionAsset, onMoveKeyPressedListener, onWeaponChangeAngleKeyPressedListener, onFireKeyPressedListener, onLongFireKeyPressedListener, onStopFireKeyPressedListener);
+        interfaceInputController.Init(inputActionAsset, onInventoryOpenKeyPressedListener, onWeaponSwitchKeyPressedListener, onWeaponSelectKeyPressedListener);
 
     }
 

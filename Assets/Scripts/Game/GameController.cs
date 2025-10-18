@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour, Mover,
-    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener, OnPlayerStopFireListener,
-    OnInventoryToggleListener, OnWeaponSwitchListener, OnWeaponSelectListener,
+    OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
+    OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener, OnWeaponSelectKeyPressedListener,
+    OnSelectWeaponListener, OnStopFireListener, OnWeaponProgressBarChangeValueListener,
     OnAmmoShotListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener, OnPlayerKilledListener, OnBulletCollideListener, OnGameFinishedListener
 {
     [SerializeField]
@@ -23,9 +24,9 @@ public class GameController : MonoBehaviour, Mover,
     {
         var playerList = respawnGameController.Respawn();
         
-        playerGameController.Init(playerList, this, this, this, this, this);
+        playerGameController.Init(playerList, this, this, this, this, this, this, this, this);
         cameraGameController.Init(playerList, this);
-        inputGameController.Init(this, this, this, this, this, this, this);
+        inputGameController.Init(this, this, this, this, this, this, this, this);
         interfaceGameController.Init();
     }
 
@@ -46,42 +47,60 @@ public class GameController : MonoBehaviour, Mover,
         interfaceGameController.FillWindow(playerGameController.CurrentPlayer.WeaponItemList);
     }
 
-    public void OnPlayerMove(Vector2 moveInput)
+    public void OnMoveKeyPressed(Vector2 moveInput)
     {
-        playerGameController.OnPlayerMove(moveInput);
+        playerGameController.OnMoveKeyPressed(moveInput);
     }
 
-    public void OnInventoryToggle()
+    public void OnInventoryOpenKeyPressed()
     {
-        interfaceGameController.OnInventoryToggle();
+        interfaceGameController.OnInventoryOpenKeyPressed();
     }
 
-    public void OnWeaponSwitch(Vector2 switchInput)
+    public void OnWeaponSwitchKeyPressed(Vector2 switchInput)
     {
-        interfaceGameController.OnWeaponSwitch(switchInput);
+        interfaceGameController.OnWeaponSwitchKeyPressed(switchInput);
         playerGameController.CurrentWeaponIndex = interfaceGameController.CurrentWeaponIndex;
     }
 
-    public void OnWeaponSelect()
+    public void OnWeaponSelectKeyPressed()
     {
-        playerGameController.OnWeaponSelect();
-        interfaceGameController.OnInventoryToggle();
+        playerGameController.OnWeaponSelectKeyPressed();
+        interfaceGameController.OnInventoryOpenKeyPressed();
+    }
+    public void OnSelectWeapon(WeaponType weaponType)
+    {
+        interfaceGameController.OnSelectWeapon(weaponType);
     }
 
-    public void OnWeaponChangeAngle(float scrollInput)
+    public void OnWeaponChangeAngleKeyPressed(float scrollInput)
     {
-        playerGameController.OnWeaponChangeAngle(scrollInput);
+        playerGameController.OnWeaponChangeAngleKeyPressed(scrollInput);
     }
 
-    public void OnPlayerFire()
+    public void OnWeaponProgressBarChangeValue(float value)
     {
-        playerGameController.OnPlayerFire();
-        interfaceGameController.Deactivate();
+        interfaceGameController.OnWeaponProgressBarChangeValue(value);
     }
 
-    public void OnPlayerStopFire()
+    public void OnFireKeyPressed()
     {
-        playerGameController.OnPlayerStopFire();
+        playerGameController.OnFireKeyPressed();
+    }
+
+    public void OnLongFireKeyPressed()
+    {
+        playerGameController.OnLongFireKeyPressed();
+    }
+
+    public void OnStopFireKeyPressed()
+    {
+        playerGameController.OnStopFireKeyPressed();
+    }
+
+    public void OnStopFire(WeaponType weaponType)
+    {
+        interfaceGameController.OnStopFire(weaponType);
     }
 
     public void OnAmmoShot(Transform ammo)

@@ -2,21 +2,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
-    OnInventoryToggleListener, OnWeaponSwitchListener
+    OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener,
+    OnSelectWeaponListener, OnStopFireListener, OnWeaponProgressBarChangeValueListener
 {
     [SerializeField]
     private InventoryInterfaceGameController inventoryInterfaceGameController;
+    [SerializeField]
+    private WeaponProgressBarGameController weaponProgressBarGameController;
     [SerializeField]
     private Canvas canvas;
 
     public void Init()
     {
         inventoryInterfaceGameController.Init(canvas.transform);
+        weaponProgressBarGameController.Init(canvas.transform);
     }
 
     public void Deactivate()
     {
         inventoryInterfaceGameController.Deactivate();
+        weaponProgressBarGameController.Deactivate();
     }
 
     public void FillWindow(List<WeaponItem> weaponItemList)
@@ -24,14 +29,37 @@ public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
         inventoryInterfaceGameController.FillWindow(weaponItemList);
     }
 
-    public void OnInventoryToggle()
+    public void OnInventoryOpenKeyPressed()
     {
-        inventoryInterfaceGameController.OnInventoryToggle();
+        inventoryInterfaceGameController.OnInventoryOpenKeyPressed();
     }
 
-    public void OnWeaponSwitch(Vector2 switchInput)
+    public void OnWeaponSwitchKeyPressed(Vector2 switchInput)
     {
-        inventoryInterfaceGameController.OnWeaponSwitch(switchInput);
+        inventoryInterfaceGameController.OnWeaponSwitchKeyPressed(switchInput);
+    }
+
+    public void OnSelectWeapon(WeaponType weaponType)
+    {
+        if (WeaponType.BAZOOKA.Equals(weaponType))
+        {
+            weaponProgressBarGameController.Activate();
+        }
+    }
+
+    public void OnStopFire(WeaponType weaponType)
+    {
+        if (WeaponType.BAZOOKA.Equals(weaponType))
+        {
+            weaponProgressBarGameController.Deactivate();
+        }
+        Debug.Log(weaponType);
+        inventoryInterfaceGameController.Deactivate();
+    }
+
+    public void OnWeaponProgressBarChangeValue(float value)
+    {
+        weaponProgressBarGameController.OnWeaponProgressBarChangeValue(value);
     }
 
     public int CurrentWeaponIndex => inventoryInterfaceGameController.CurrentIndex;

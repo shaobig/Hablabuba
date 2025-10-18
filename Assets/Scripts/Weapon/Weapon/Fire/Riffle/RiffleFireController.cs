@@ -16,7 +16,7 @@ public class RiffleFireController : MonoBehaviour, FireController
 
     public void Fire(FireAction fireAction)
     {
-        if (FireAction.START.Equals(fireAction))
+        if (FireAction.FIRE.Equals(fireAction))
         {
             ammoEmitter.Emit();
         }

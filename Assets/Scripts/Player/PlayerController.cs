@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRefresher,
     WeaponHolder, WeaponHider,
-    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener, OnPlayerStopFireListener,
-    OnWeaponSelectListener,
+    OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
+    OnWeaponSelectKeyPressedListener,
     OnBulletCollideOnPlayerListener
 {
     [SerializeField]
@@ -20,12 +20,18 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     [SerializeField]
     private BodyController bodyController;
     private Player player;
+    private OnSelectWeaponListener onSeleectWeaponListener;
 
     public void Init(
+        OnSelectWeaponListener onSeleectWeaponListener,
+        OnStopFireListener onStopFireListener,
+        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnAmmoShotListener onAmmoShotListener,
         OnBulletCollideListener onBulletCollideListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
+        this.onSeleectWeaponListener = onSeleectWeaponListener;
+
         displayController.Init(player, bodyController.Renderer.material.color);
         displayController.Paint();
 
@@ -36,7 +42,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
         healthController.Init(player.Health);
 
-        weaponController.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        weaponController.Init(onStopFireListener, onWeaponProgressBarChangeValueListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
     }
 
     public void OnBulletCollideOnPlayer(HitBullet bullet)
@@ -65,28 +71,9 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         weaponController.HoldWeapon();
     }
 
-    public void OnWeaponChangeAngle(float scrollInput)
+    public void OnWeaponChangeAngleKeyPressed(float scrollInput)
     {
-        weaponController.OnWeaponChangeAngle(scrollInput);
-    }
-
-    public void OnPlayerFire()
-    {
-        if (weaponController.IsWeaponHeld)
-        {
-            weaponController.Fire(FireAction.START);
-        }
-    }
-
-    public void OnPlayerStopFire()
-    {
-        if (weaponController.IsWeaponHeld)
-        {
-            weaponController.Fire(FireAction.RELEASE);
-        
-            movementController.Deactivate();
-            weaponController.Deactivate();
-        }
+        weaponController.OnWeaponChangeAngleKeyPressed(scrollInput);
     }
 
     public void HideWeapon()
@@ -99,9 +86,9 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         displayController.RefreshDisplay();
     }
 
-    public void OnPlayerMove(Vector2 moveInput)
+    public void OnMoveKeyPressed(Vector2 moveInput)
     {
-        movementController.OnPlayerMove(moveInput);
+        movementController.OnMoveKeyPressed(moveInput);
 
         if (Vector2.zero.Equals(moveInput))
         {
@@ -113,15 +100,47 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         }
     }
 
-    public void OnWeaponSelect()
+    public void OnWeaponSelectKeyPressed()
     {
         if (weaponController.IsWeaponHeld)
         {
             weaponController.HideWeapon();
         }
-        
-        weaponController.WeaponItem = inventoryController.SelectWeapon();
+
+        var selectedWeapon = inventoryController.SelectWeapon();
+        weaponController.WeaponItem = selectedWeapon;
+
         weaponController.HoldWeapon();
+        onSeleectWeaponListener.OnSelectWeapon(selectedWeapon.Weapon.WeaponType);
+    }
+
+    public void OnFireKeyPressed()
+    {
+        if (weaponController.IsWeaponHeld)
+        {
+            weaponController.Fire(FireAction.FIRE);
+        }
+    }
+
+    public void OnLongFireKeyPressed()
+    {
+        if (weaponController.IsWeaponHeld)
+        {
+            weaponController.Fire(FireAction.LONG_FIRE);
+        }
+    }
+
+    public void OnStopFireKeyPressed()
+    {
+        if (weaponController.IsWeaponHeld)
+        {
+            weaponController.Fire(FireAction.STOP);
+            weaponController.OnStopFireKeyPressed();
+
+            movementController.Deactivate();
+            weaponController.Deactivate();
+        }
+
     }
 
     public Transform Camera

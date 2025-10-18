@@ -1,4 +1,4 @@
-public interface OnWeaponChangeAngleListener
+public interface OnWeaponChangeAngleKeyPressedListener
 {
-    void OnWeaponChangeAngle(float scrollInput);
+    void OnWeaponChangeAngleKeyPressed(float scrollInput);
 }

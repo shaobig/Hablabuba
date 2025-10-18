@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryInterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
-    OnInventoryToggleListener, OnWeaponSwitchListener
+    OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener
 {
     [SerializeField]
     private WindowControllerCreator windowControllerCreator;
@@ -30,13 +30,13 @@ public class InventoryInterfaceGameController : MonoBehaviour, Deactivator, Wind
         windowController.Activate();
     }
 
-    public void OnInventoryToggle()
+    public void OnInventoryOpenKeyPressed()
     { 
         isInventoryOpened = !windowController.gameObject.activeSelf;
         windowController.gameObject.SetActive(isInventoryOpened);
     }
 
-    public void OnWeaponSwitch(Vector2 switchInput)
+    public void OnWeaponSwitchKeyPressed(Vector2 switchInput)
     {
         if (Vector2.up.Equals(switchInput))
         {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, FireController,
-    OnWeaponChangeAngleListener
+    OnWeaponChangeAngleKeyPressedListener, OnStopFireKeyPressedListener
 {
     [SerializeField]
     private FireControllerCreator fireControllerCreator;
@@ -13,11 +13,19 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
     private Transform holdPoint;
     private FireController fireController;
     private WeaponItem weaponItem;
+    private OnStopFireListener onStopFireListener;
     private bool isWeaponHeld;
 
-    public void Init(OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
+    public void Init(
+        OnStopFireListener onStopFireListener,
+        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnAmmoShotListener onAmmoShotListener,
+        OnBulletCollideListener onBulletCollideListener,
+        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
-        fireControllerCreator.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        this.onStopFireListener = onStopFireListener;
+        
+        fireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
         weaponTurner.Init(holdPoint);
     }
 
@@ -51,10 +59,18 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         }
     }
 
-    public void OnWeaponChangeAngle(float scrollInput)
+    public void OnWeaponChangeAngleKeyPressed(float scrollInput)
     {
         weaponTurner.ScrollInput = scrollInput;
         weaponTurner.Turn();
+    }
+
+    public void OnStopFireKeyPressed()
+    {
+        if (enabled)
+        {
+            onStopFireListener.OnStopFire(weaponItem.Weapon.WeaponType);
+        }
     }
 
     public bool IsWeaponHeld => isWeaponHeld;

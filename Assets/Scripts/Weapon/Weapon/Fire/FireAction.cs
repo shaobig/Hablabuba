@@ -1,5 +1,6 @@
 public enum FireAction
 {
-    START,
-    RELEASE
+    FIRE,
+    LONG_FIRE,
+    STOP
 }

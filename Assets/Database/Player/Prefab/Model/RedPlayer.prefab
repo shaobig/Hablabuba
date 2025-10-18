@@ -503,8 +503,6 @@ GameObject:
   - component: {fileID: 6889430043505061124}
   - component: {fileID: 1874748652015856248}
   - component: {fileID: 902616866901746633}
-  - component: {fileID: 3059559684520378027}
-  - component: {fileID: 617487272864455284}
   m_Layer: 0
   m_Name: InventoryController
   m_TagString: Untagged
@@ -566,33 +564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDatabaseReader
   weaponPrefabDatabase: {fileID: 11400000, guid: bac0e06b133410141973e776934276a5, type: 2}
---- !u!114 &3059559684520378027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3493541234630000065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9a558e7272a03b4cbe4d45b5ab22f1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryWeaponSelector
-  weaponSlotPainter: {fileID: 617487272864455284}
---- !u!114 &617487272864455284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3493541234630000065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14f2ee72aea5d145907ec0f1964ef8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotPainter
-  defaultColour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  selectedColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &3788321445585943614
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 89441493827721468}
-  - component: {fileID: 2370846336962900177}
+  - component: {fileID: 292322297162780021}
   - component: {fileID: 1142855897192249944}
   - component: {fileID: 5644629379642219300}
   m_Layer: 0
@@ -633,7 +604,7 @@ Transform:
   - {fileID: 6194323269302415630}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2370846336962900177
+--- !u!65 &292322297162780021
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

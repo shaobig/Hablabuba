@@ -8,9 +8,13 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
     private RiffleFireControllerCreator riffleFireControllerCreator;
     private WeaponItem weaponItem;
 
-    public void Init(OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
+    public void Init(
+        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnAmmoShotListener onAmmoShotListener,
+        OnBulletCollideListener onBulletCollideListener,
+        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
-        bazookaFireControllerCreator.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        bazookaFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
         riffleFireControllerCreator.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
     }
 

@@ -3,8 +3,8 @@ using System.Linq;
 using UnityEngine;
 
 public class PlayerGameController : MonoBehaviour, Mover,
-    OnPlayerMoveListener, OnWeaponChangeAngleListener, OnPlayerFireListener, OnPlayerStopFireListener,
-    OnWeaponSelectListener,
+    OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
+    OnWeaponSelectKeyPressedListener,
     OnBulletCollideListener, OnPlayerKilledListener
 {
     private const int GAME_OVER_PLAYER_COUNT = 1;
@@ -17,7 +17,11 @@ public class PlayerGameController : MonoBehaviour, Mover,
     private OnGameFinishedListener onGameFinishedListener;
     private int currentIndex = -1;
 
-    public void Init(List<PlayerController> playerList,
+    public void Init(
+        List<PlayerController> playerList,
+        OnSelectWeaponListener onSeleectWeaponListener,
+        OnStopFireListener onStopFireListener,
+        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnPlayerKilledListener onPlayerKilledListener,
         OnGameFinishedListener onGameFinishedListener,
         OnAmmoShotListener onAmmoShotListener,
@@ -28,7 +32,7 @@ public class PlayerGameController : MonoBehaviour, Mover,
         this.onPlayerKilledListener = onPlayerKilledListener;
         this.onGameFinishedListener = onGameFinishedListener;
         
-        playerList.ForEach(player => player.Init(onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener));
+        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onStopFireListener, onWeaponProgressBarChangeValueListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener));
     }
 
     void OnDestroy()
@@ -44,29 +48,34 @@ public class PlayerGameController : MonoBehaviour, Mover,
         currentPlayer.Activate();
     }
 
-    public void OnPlayerMove(Vector2 moveInput)
+    public void OnMoveKeyPressed(Vector2 moveInput)
     {
-        currentPlayer.OnPlayerMove(moveInput);
+        currentPlayer.OnMoveKeyPressed(moveInput);
     }
 
-    public void OnWeaponSelect()
+    public void OnWeaponSelectKeyPressed()
     {
-        currentPlayer.OnWeaponSelect();
+        currentPlayer.OnWeaponSelectKeyPressed();
     }
 
-    public void OnWeaponChangeAngle(float scrollInput)
+    public void OnWeaponChangeAngleKeyPressed(float scrollInput)
     {
-        currentPlayer.OnWeaponChangeAngle(scrollInput);
+        currentPlayer.OnWeaponChangeAngleKeyPressed(scrollInput);
     }
 
-    public void OnPlayerFire()
+    public void OnFireKeyPressed()
     {
-        currentPlayer.OnPlayerFire();
+        currentPlayer.OnFireKeyPressed();
     }
 
-    public void OnPlayerStopFire()
+    public void OnLongFireKeyPressed()
     {
-        currentPlayer.OnPlayerStopFire();
+        currentPlayer.OnLongFireKeyPressed();
+    }
+
+    public void OnStopFireKeyPressed()
+    {
+        currentPlayer.OnStopFireKeyPressed();
     }
 
     public void OnBulletCollide()

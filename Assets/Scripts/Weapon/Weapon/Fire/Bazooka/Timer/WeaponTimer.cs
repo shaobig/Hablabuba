@@ -1,15 +1,19 @@
 using UnityEngine;
 
-public class BazookaTimer : MonoBehaviour, Activator, Deactivator, Timer
+public class WeaponTimer : MonoBehaviour, Activator, Deactivator, Timer
 {
     [SerializeField]
-    private float maxTime = 5f;
+    private float maxTime = 1f;
     private float elapsedTime;
     private bool isStarted;
+    private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnTimerFinishListener onTimerFinishListener;
 
-    public void Init(OnTimerFinishListener onTimerFinishListener)
+    public void Init(
+        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnTimerFinishListener onTimerFinishListener)
     {
+        this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onTimerFinishListener = onTimerFinishListener;
     }
 
@@ -18,6 +22,7 @@ public class BazookaTimer : MonoBehaviour, Activator, Deactivator, Timer
         if (isStarted)
         {
             elapsedTime += Time.deltaTime;
+            onWeaponProgressBarChangeValueListener.OnWeaponProgressBarChangeValue(elapsedTime / maxTime);
         }
         if (elapsedTime >= maxTime)
         {

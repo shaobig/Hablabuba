@@ -4,7 +4,7 @@ public class BazookaFireController : MonoBehaviour, FireController,
     OnTimerFinishListener
 {
     [SerializeField]
-    private BazookaTimer bazookaTimer;
+    private WeaponTimer weaponTimer;
     [SerializeField]
     private AmmoEmitter ammoEmitter;
     [SerializeField]
@@ -13,29 +13,34 @@ public class BazookaFireController : MonoBehaviour, FireController,
     private BulletPrefab bulletPrefab;
     private Weapon weapon;
 
-    public void Init(WeaponItem weaponItem, OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
+    public void Init(
+        WeaponItem weaponItem,
+        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnAmmoShotListener onAmmoShotListener,
+        OnBulletCollideListener onBulletCollideListener,
+        OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
         weapon = weaponItem.Weapon;
 
-        bazookaTimer.Init(this);
+        weaponTimer.Init(onWeaponProgressBarChangeValueListener, this);
         ammoEmitter.Init(emitPoint, bulletPrefab, weaponItem.Weapon.Speed, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
     }
 
     public void Fire(FireAction fireAction)
     {
-        if (FireAction.START.Equals(fireAction))
+        if (FireAction.LONG_FIRE.Equals(fireAction))
         {
-            bazookaTimer.Activate();
+            weaponTimer.Activate();
         }
-        else if (FireAction.RELEASE.Equals(fireAction))
+        else if (FireAction.STOP.Equals(fireAction))
         {
-            bazookaTimer.Deactivate();
+            weaponTimer.Deactivate();
         }
     }
 
     public void OnTimerFinish(float elapsedTime)
     {
-        ammoEmitter.Speed = Mathf.RoundToInt(elapsedTime / bazookaTimer.MaxTime * weapon.Speed);
+        ammoEmitter.Speed = Mathf.RoundToInt(elapsedTime / weaponTimer.MaxTime * weapon.Speed);
         ammoEmitter.Emit();
     }
 

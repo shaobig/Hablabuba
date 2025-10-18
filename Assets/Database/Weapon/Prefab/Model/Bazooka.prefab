@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4314559576868509606}
   - component: {fileID: 5067765114814395087}
   - component: {fileID: 2977113644061367166}
-  - component: {fileID: 2162754513887500864}
   m_Layer: 0
   m_Name: Left Flap
   m_TagString: Untagged
@@ -90,27 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2162754513887500864
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2148432323755100168}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2288681187581364496
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +231,6 @@ GameObject:
   - component: {fileID: 805610244995354581}
   - component: {fileID: 1475503639710748041}
   - component: {fileID: 6792928986997381974}
-  - component: {fileID: 1334478223580839427}
   m_Layer: 0
   m_Name: Right Flap
   m_TagString: Untagged
@@ -332,27 +309,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1334478223580839427
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4613544926346573687}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5213194585775340486
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf2d992ef5562a4da11ac1007962395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BazookaFireController
-  bazookaTimer: {fileID: 9101769342928826762}
+  weaponTimer: {fileID: 9101769342928826762}
   ammoEmitter: {fileID: 9183700054460924182}
   emitPoint: {fileID: 1773387438002868143}
   bulletPrefab: {fileID: 11400000, guid: a7d367b385f202045bb62a92ecb604c7, type: 2}
@@ -420,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6b0ee7af5338e4f9c248fda4f7f4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BazookaTimer
-  time: 5
+  maxTime: 1
 --- !u!114 &9183700054460924182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +439,6 @@ GameObject:
   - component: {fileID: 7202354022180689241}
   - component: {fileID: 4392788714156551797}
   - component: {fileID: 4367583190926989906}
-  - component: {fileID: 19078392561190665}
   m_Layer: 0
   m_Name: Down Flap
   m_TagString: Untagged
@@ -562,27 +517,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &19078392561190665
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8070526906363544800}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8511961175018359543
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +528,6 @@ GameObject:
   - component: {fileID: 9122494251543322760}
   - component: {fileID: 2478669957410837240}
   - component: {fileID: 2606920114522704933}
-  - component: {fileID: 2670542645487983144}
   m_Layer: 0
   m_Name: Up Flap
   m_TagString: Untagged
@@ -673,27 +606,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2670542645487983144
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8511961175018359543}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8792177695624895557
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +617,6 @@ GameObject:
   - component: {fileID: 6035756802015945674}
   - component: {fileID: 8982557256458365023}
   - component: {fileID: 7260436792938282794}
-  - component: {fileID: 789691334995939588}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -784,26 +695,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &789691334995939588
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8792177695624895557}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
