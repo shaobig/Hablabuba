@@ -12,14 +12,18 @@ public class BazookaFireController : MonoBehaviour, FireController,
     [SerializeField]
     private BulletPrefab bulletPrefab;
     private Weapon weapon;
+    private OnFireListener onFireListener;
 
     public void Init(
         WeaponItem weaponItem,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnBulletCollideListener onBulletCollideListener,
         OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
+        this.onFireListener = onFireListener;
+        
         weapon = weaponItem.Weapon;
 
         weaponTimer.Init(onWeaponProgressBarChangeValueListener, this);
@@ -42,6 +46,8 @@ public class BazookaFireController : MonoBehaviour, FireController,
     {
         ammoEmitter.Speed = Mathf.RoundToInt(elapsedTime / weaponTimer.MaxTime * weapon.Speed);
         ammoEmitter.Emit();
+
+        onFireListener.OnFire(weapon.WeaponType);
     }
 
 }

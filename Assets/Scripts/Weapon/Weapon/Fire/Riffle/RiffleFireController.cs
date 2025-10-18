@@ -8,9 +8,19 @@ public class RiffleFireController : MonoBehaviour, FireController
     private Transform emitPoint;
     [SerializeField]
     private BulletPrefab bulletPrefab;
+    private WeaponItem weaponItem;
+    private OnFireListener onFireListener;
 
-    public void Init(WeaponItem weaponItem, OnAmmoShotListener onAmmoShotListener, OnBulletCollideListener onBulletCollideListener, OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
+    public void Init(
+        WeaponItem weaponItem,
+        OnFireListener onFireListener,
+        OnAmmoShotListener onAmmoShotListener,
+        OnBulletCollideListener onBulletCollideListener,
+        OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
+        this.weaponItem = weaponItem;
+        this.onFireListener = onFireListener;
+
         ammoEmitter.Init(emitPoint, bulletPrefab, weaponItem.Weapon.Speed, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
     }
 
@@ -19,6 +29,7 @@ public class RiffleFireController : MonoBehaviour, FireController
         if (FireAction.FIRE.Equals(fireAction))
         {
             ammoEmitter.Emit();
+            onFireListener.OnFire(weaponItem.Weapon.WeaponType);
         }
     }
     

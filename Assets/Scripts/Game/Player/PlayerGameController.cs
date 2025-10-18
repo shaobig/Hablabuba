@@ -20,7 +20,7 @@ public class PlayerGameController : MonoBehaviour, Mover,
     public void Init(
         List<PlayerController> playerList,
         OnSelectWeaponListener onSeleectWeaponListener,
-        OnStopFireListener onStopFireListener,
+        OnFireListener onFireListener,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnPlayerKilledListener onPlayerKilledListener,
         OnGameFinishedListener onGameFinishedListener,
@@ -32,7 +32,7 @@ public class PlayerGameController : MonoBehaviour, Mover,
         this.onPlayerKilledListener = onPlayerKilledListener;
         this.onGameFinishedListener = onGameFinishedListener;
         
-        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onStopFireListener, onWeaponProgressBarChangeValueListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener));
+        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener));
     }
 
     void OnDestroy()

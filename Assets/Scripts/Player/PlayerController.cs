@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
     public void Init(
         OnSelectWeaponListener onSeleectWeaponListener,
-        OnStopFireListener onStopFireListener,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnBulletCollideListener onBulletCollideListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
         healthController.Init(player.Health);
 
-        weaponController.Init(onStopFireListener, onWeaponProgressBarChangeValueListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        weaponController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
     }
 
     public void OnBulletCollideOnPlayer(HitBullet bullet)
@@ -135,7 +135,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         if (weaponController.IsWeaponHeld)
         {
             weaponController.Fire(FireAction.STOP);
-            weaponController.OnStopFireKeyPressed();
 
             movementController.Deactivate();
             weaponController.Deactivate();

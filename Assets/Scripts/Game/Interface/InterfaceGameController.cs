@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener,
-    OnSelectWeaponListener, OnStopFireListener, OnWeaponProgressBarChangeValueListener
+    OnSelectWeaponListener, OnFireListener, OnWeaponProgressBarChangeValueListener
 {
     [SerializeField]
     private InventoryInterfaceGameController inventoryInterfaceGameController;
@@ -47,13 +47,13 @@ public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
         }
     }
 
-    public void OnStopFire(WeaponType weaponType)
+    public void OnFire(WeaponType weaponType)
     {
         if (WeaponType.BAZOOKA.Equals(weaponType))
         {
             weaponProgressBarGameController.Deactivate();
         }
-        Debug.Log(weaponType);
+
         inventoryInterfaceGameController.Deactivate();
     }
 

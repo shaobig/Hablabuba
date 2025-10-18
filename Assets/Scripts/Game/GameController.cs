@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour, Mover,
     OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener, OnWeaponSelectKeyPressedListener,
-    OnSelectWeaponListener, OnStopFireListener, OnWeaponProgressBarChangeValueListener,
+    OnSelectWeaponListener, OnFireListener, OnWeaponProgressBarChangeValueListener,
     OnAmmoShotListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener, OnPlayerKilledListener, OnBulletCollideListener, OnGameFinishedListener
 {
     [SerializeField]
@@ -98,9 +98,9 @@ public class GameController : MonoBehaviour, Mover,
         playerGameController.OnStopFireKeyPressed();
     }
 
-    public void OnStopFire(WeaponType weaponType)
+    public void OnFire(WeaponType weaponType)
     {
-        interfaceGameController.OnStopFire(weaponType);
+        interfaceGameController.OnFire(weaponType);
     }
 
     public void OnAmmoShot(Transform ammo)
