@@ -6,6 +6,8 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
     private BazookaFireControllerCreator bazookaFireControllerCreator;
     [SerializeField]
     private RiffleFireControllerCreator riffleFireControllerCreator;
+    [SerializeField]
+    private InitGrenadeFireControllerCreator initGrenadeFireControllerCreator;
     private WeaponItem weaponItem;
 
     public void Init(
@@ -15,20 +17,20 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
         OnBulletCollideListener onBulletCollideListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
-        bazookaFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
         riffleFireControllerCreator.Init(onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        bazookaFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        initGrenadeFireControllerCreator.Init(onAmmoShotListener);
     }
 
     public FireController Create(GameObject weaponPrefab, Transform holdPoint)
     {
-        if (WeaponType.BAZOOKA.Equals(weaponItem.Weapon.WeaponType))
+        return weaponItem.Weapon.Type switch
         {
-            return bazookaFireControllerCreator.Create(weaponPrefab, holdPoint);
-        }
-        else
-        {
-            return riffleFireControllerCreator.Create(weaponPrefab, holdPoint);
-        }
+            WeaponType.RIFFLE => riffleFireControllerCreator.Create(weaponPrefab, holdPoint),
+            WeaponType.BAZOOKA => bazookaFireControllerCreator.Create(weaponPrefab, holdPoint),
+            WeaponType.GRENADE => initGrenadeFireControllerCreator.Create(weaponPrefab, holdPoint),
+            _ => throw new System.NotImplementedException($"The fire controller for the {weaponItem.Weapon.Type} type is not supported!"),
+        };
     }
 
     public WeaponItem WeaponItem
@@ -36,8 +38,9 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
         set
         {
             weaponItem = value;
-            bazookaFireControllerCreator.WeaponItem = value;
             riffleFireControllerCreator.WeaponItem = value;
+            bazookaFireControllerCreator.WeaponItem = value;
+            initGrenadeFireControllerCreator.WeaponItem = value;
         }
     }
 

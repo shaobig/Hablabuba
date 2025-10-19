@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPrefabDatabase
   weaponPrefabList:
   - {fileID: 11400000, guid: 5225c25026154e345a40528325f605f5, type: 2}
+  - {fileID: 11400000, guid: 6e1e205651b1add43ba6ad12366ce27e, type: 2}
   - {fileID: 11400000, guid: 17d5ad643588ccb42bf272b08884110a, type: 2}

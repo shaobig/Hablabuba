@@ -4,13 +4,10 @@ using UnityEngine;
 public class Weapon : ScriptableObject
 {
     [SerializeField]
-    private WeaponType weaponType;
+    private WeaponType type;
     [SerializeField]
     private new string name = "Weapon";
-    [SerializeField]
-    private int speed = 40;
 
-    public WeaponType WeaponType => weaponType;
-    public string Name => name;
-    public int Speed => speed;    
+    public WeaponType Type => type;
+    public string Name => name;  
 }

@@ -1153,8 +1153,10 @@ GameObject:
   - component: {fileID: 2163399347679753212}
   - component: {fileID: 5607070181755272649}
   - component: {fileID: 3409582631830142148}
-  - component: {fileID: 6290155396030539117}
   - component: {fileID: 1274697667053776952}
+  - component: {fileID: 6290155396030539117}
+  - component: {fileID: 5742446776927128338}
+  - component: {fileID: 3262557725529474328}
   - component: {fileID: 7683807299782440261}
   - component: {fileID: 9030152361358702234}
   - component: {fileID: 7104335790388757582}
@@ -1211,6 +1213,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireControllerCreator
   bazookaFireControllerCreator: {fileID: 6290155396030539117}
   riffleFireControllerCreator: {fileID: 1274697667053776952}
+  initGrenadeFireControllerCreator: {fileID: 5742446776927128338}
+--- !u!114 &1274697667053776952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774864827296888889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57df06dfcfd719e40bb16856ed7d2a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RiffleFireControllerCreator
+  parentObjectCreator: {fileID: 7683807299782440261}
 --- !u!114 &6290155396030539117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1224,7 +1240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BazookaFireControllerCreator
   parentObjectCreator: {fileID: 7683807299782440261}
---- !u!114 &1274697667053776952
+--- !u!114 &5742446776927128338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1233,9 +1249,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6774864827296888889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57df06dfcfd719e40bb16856ed7d2a68, type: 3}
+  m_Script: {fileID: 11500000, guid: cbb0478b007d9d042b462d229f8bb069, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RiffleFireControllerCreator
+  m_EditorClassIdentifier: Assembly-CSharp::InitGrenadeFireControllerCreator
+  grenadeFireControllerCreator: {fileID: 3262557725529474328}
+--- !u!114 &3262557725529474328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774864827296888889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bcb4743c3e2d04a9286e4f71c2d284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrenadeFireControllerCreator
   parentObjectCreator: {fileID: 7683807299782440261}
 --- !u!114 &7683807299782440261
 MonoBehaviour:

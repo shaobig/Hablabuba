@@ -16,6 +16,7 @@ public class BulletController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.name);
         damageHandlerFactory.GetDamageHandler(bullet.Type).HandleDamage(collision, bullet);
         gameObjectRemover.Remove(gameObject);
     }

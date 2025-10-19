@@ -9,7 +9,7 @@ public class CameraFollower : MonoBehaviour, Follower, Activator, Deactivator
 
     public void Follow(Transform target)
     {
-        transform.position = target.position + Vector3.up * height - target.forward * distance;
+        transform.position = target.position + height * Vector3.up - target.forward * distance;
     }
 
     public void Activate()

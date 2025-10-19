@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         weaponController.WeaponItem = selectedWeapon;
 
         weaponController.HoldWeapon();
-        onSeleectWeaponListener.OnSelectWeapon(selectedWeapon.Weapon.WeaponType);
+        onSeleectWeaponListener.OnSelectWeapon(selectedWeapon.Weapon.Type);
     }
 
     public void OnFireKeyPressed()

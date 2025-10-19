@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9cbd02266f3634f96185d10fe8f441, type: 3}
+  m_Name: GrenadePrefab
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponPrefab
+  weapon: {fileID: 11400000, guid: c8dfd6eb42542094bacc04544443068e, type: 2}
+  sprite: {fileID: 21300000, guid: 09d907ebe0a025b429e2878da6355065, type: 3}
+  prefab: {fileID: 4205325610735467096, guid: d2ef020cb65277841864faa3f79ec196, type: 3}
