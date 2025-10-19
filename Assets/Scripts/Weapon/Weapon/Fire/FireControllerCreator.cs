@@ -19,7 +19,7 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
     {
         riffleFireControllerCreator.Init(onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
         bazookaFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
-        initGrenadeFireControllerCreator.Init(onAmmoShotListener);
+        initGrenadeFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
     }
 
     public FireController Create(GameObject weaponPrefab, Transform holdPoint)

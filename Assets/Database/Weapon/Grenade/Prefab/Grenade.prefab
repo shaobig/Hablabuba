@@ -102,6 +102,8 @@ GameObject:
   - component: {fileID: 1276019711258978631}
   - component: {fileID: 2418185529695174179}
   - component: {fileID: 6784816243314485443}
+  - component: {fileID: 2146064159048741168}
+  - component: {fileID: 3458028080135459132}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Untagged
@@ -185,7 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d9aa87b1f106f41af94dd9faa939db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeFireController
+  weaponTimer: {fileID: 2146064159048741168}
   grenadeThrower: {fileID: 6784816243314485443}
+  force: 10
 --- !u!114 &6784816243314485443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +202,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071d26ec82c1c544099e24a644dbf6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeThrower
-  force: 15
+  weaponTimer: {fileID: 3458028080135459132}
+--- !u!114 &2146064159048741168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205325610735467096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6b0ee7af5338e4f9c248fda4f7f4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponTimer
+  maxTime: 1
+--- !u!114 &3458028080135459132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205325610735467096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6b0ee7af5338e4f9c248fda4f7f4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponTimer
+  maxTime: 5
 --- !u!1 &8304278741446909082
 GameObject:
   m_ObjectHideFlags: 0

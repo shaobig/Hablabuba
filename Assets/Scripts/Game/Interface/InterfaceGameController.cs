@@ -41,7 +41,7 @@ public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
 
     public void OnSelectWeapon(WeaponType weaponType)
     {
-        if (WeaponType.BAZOOKA.Equals(weaponType))
+        if (WeaponType.BAZOOKA.Equals(weaponType) || WeaponType.GRENADE.Equals(weaponType))
         {
             weaponProgressBarGameController.Activate();
         }
@@ -49,7 +49,7 @@ public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
 
     public void OnFire(WeaponType weaponType)
     {
-        if (WeaponType.BAZOOKA.Equals(weaponType))
+        if (WeaponType.BAZOOKA.Equals(weaponType) || WeaponType.GRENADE.Equals(weaponType))
         {
             weaponProgressBarGameController.Deactivate();
         }

@@ -5,17 +5,24 @@ public class InitGrenadeFireControllerCreator : MonoBehaviour, Creator<GrenadeFi
     [SerializeField]
     private GrenadeFireControllerCreator grenadeFireControllerCreator;
     private WeaponItem weaponItem;
+    private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
+    private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
 
-    public void Init(OnAmmoShotListener onAmmoShotListener)
+    public void Init(
+        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnFireListener onFireListener,
+        OnAmmoShotListener onAmmoShotListener)
     {
+        this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
+        this.onFireListener = onFireListener;
         this.onAmmoShotListener = onAmmoShotListener;
     }
 
     public GrenadeFireController Create(GameObject prefab, Transform target)
     {
         var grenadeFireController = grenadeFireControllerCreator.Create(prefab, target);
-        grenadeFireController.Init(weaponItem, onAmmoShotListener);
+        grenadeFireController.Init(weaponItem, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
 
         return grenadeFireController;
     }
