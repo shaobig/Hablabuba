@@ -6,14 +6,14 @@ public class WeaponTimer : MonoBehaviour, Activator, Deactivator, Timer
     private float maxTime = 1f;
     private float elapsedTime;
     private bool isStarted;
-    private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
+    private OnTimerCountListener onTimerCountListener;
     private OnTimerFinishListener onTimerFinishListener;
 
     public void Init(
-        OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnTimerCountListener onTimerCountListener,
         OnTimerFinishListener onTimerFinishListener)
     {
-        this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
+        this.onTimerCountListener = onTimerCountListener;
         this.onTimerFinishListener = onTimerFinishListener;
     }
 
@@ -21,10 +21,10 @@ public class WeaponTimer : MonoBehaviour, Activator, Deactivator, Timer
     {
         if (isStarted)
         {
-            elapsedTime += Time.deltaTime;
-            onWeaponProgressBarChangeValueListener.OnWeaponProgressBarChangeValue(elapsedTime / maxTime);
+            elapsedTime -= Time.deltaTime;
+            onTimerCountListener.OnTimerCount(elapsedTime);
         }
-        if (elapsedTime >= maxTime)
+        if (elapsedTime < 0f)
         {
             OnTimerFinish();
         }
@@ -33,7 +33,7 @@ public class WeaponTimer : MonoBehaviour, Activator, Deactivator, Timer
     public void Activate()
     {
         isStarted = true;
-        elapsedTime = 0f;
+        elapsedTime = maxTime;
     }
 
     public void Deactivate()
@@ -51,9 +51,10 @@ public class WeaponTimer : MonoBehaviour, Activator, Deactivator, Timer
 
     void OnTimerFinish()
     {
-        isStarted = false;
         onTimerFinishListener.OnTimerFinish(elapsedTime);
-        elapsedTime = 0f;
+
+        isStarted = false;
+        elapsedTime = maxTime;
     }
 
     public float MaxTime => maxTime;

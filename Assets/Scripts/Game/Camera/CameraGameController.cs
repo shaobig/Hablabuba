@@ -15,7 +15,7 @@ public class CameraGameController : MonoBehaviour,
     [SerializeField]
     private ShotPlayerCameraController shotPlayerCameraController;
     [SerializeField]
-    private CinemachineBrain cameraController;
+    private CinemachineBrain mainCamera;
     [SerializeField]
     private CinemachineCamera playerCamera;
     [SerializeField]
@@ -34,11 +34,6 @@ public class CameraGameController : MonoBehaviour,
         playerCameraController.Init(playerCamera, playerList);
         ammoCameraController.Init(ammoCamera);
         shotPlayerCameraController.Init(shotPlayerCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
-    }
-
-    void Update()
-    {
-        Debug.Log(cameraController.ActiveVirtualCamera);
     }
 
     public void Follow(Transform target)

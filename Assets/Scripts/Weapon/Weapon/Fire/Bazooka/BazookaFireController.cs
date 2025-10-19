@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BazookaFireController : MonoBehaviour, FireController,
-    OnTimerFinishListener
+    OnTimerCountListener, OnTimerFinishListener
 {
     [SerializeField]
     private WeaponTimer weaponTimer;
@@ -12,8 +12,9 @@ public class BazookaFireController : MonoBehaviour, FireController,
     [SerializeField]
     private BulletPrefab bulletPrefab;
     [SerializeField]
-    private int velocity;
-    private Weapon weapon;
+    private int velocity = 30;
+    private WeaponItem weaponItem;
+    private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
 
     public void Init(
@@ -24,11 +25,11 @@ public class BazookaFireController : MonoBehaviour, FireController,
         OnBulletCollideListener onBulletCollideListener,
         OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
     {
+        this.weaponItem = weaponItem;
+        this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
-        
-        weapon = weaponItem.Weapon;
 
-        weaponTimer.Init(onWeaponProgressBarChangeValueListener, this);
+        weaponTimer.Init(this, this);
         ammoEmitter.Init(emitPoint, bulletPrefab, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
     }
 
@@ -44,12 +45,17 @@ public class BazookaFireController : MonoBehaviour, FireController,
         }
     }
 
+    public void OnTimerCount(float elapsedTime)
+    {
+        onWeaponProgressBarChangeValueListener.OnWeaponProgressBarChangeValue(1 - (elapsedTime / weaponTimer.MaxTime));
+    }
+
     public void OnTimerFinish(float elapsedTime)
     {
-        ammoEmitter.Velocity = Mathf.RoundToInt(elapsedTime / weaponTimer.MaxTime * velocity);
+        ammoEmitter.Velocity = Mathf.RoundToInt((1 - (elapsedTime / weaponTimer.MaxTime)) * velocity);
         ammoEmitter.Emit();
 
-        onFireListener.OnFire(weapon.Type);
+        onFireListener.OnFire(weaponItem.Weapon.Type);
     }
 
 }

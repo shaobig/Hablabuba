@@ -928,7 +928,6 @@ GameObject:
   - component: {fileID: 1237609713}
   - component: {fileID: 1237609710}
   - component: {fileID: 1237609712}
-  - component: {fileID: 1237609714}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -970,7 +969,7 @@ MonoBehaviour:
   playerCameraController: {fileID: 1237609711}
   ammoCameraController: {fileID: 1237609710}
   shotPlayerCameraController: {fileID: 1237609712}
-  cameraController: {fileID: 747359455}
+  mainCamera: {fileID: 747359455}
   playerCamera: {fileID: 1341475450}
   ammoCamera: {fileID: 1381164004}
   shotPlayerCamera: {fileID: 705817488}
@@ -998,6 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8600759d53d6f41af39b75c3a79ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCameraGameController
+  playerListDisplayRefresher: {fileID: 1237609713}
 --- !u!114 &1237609712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,20 +1024,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074cba309332795419c6a5184d4aab8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerListDisplayRefresher
---- !u!114 &1237609714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1237609707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de0521b3bc932f2408f3f02f76ff74f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShotPlayerCameraHandler
-  minFocusTime: 2
-  maxFocusTime: 5
 --- !u!1 &1330872485
 GameObject:
   m_ObjectHideFlags: 0

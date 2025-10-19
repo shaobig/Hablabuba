@@ -161,4 +161,9 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         set => inventoryController.CurrentWeaponIndex = value;
     }
 
+    public OnSelectWeaponListener OnSeleectWeaponListener
+    {
+        set => onSeleectWeaponListener = value;
+    }
+
 }
