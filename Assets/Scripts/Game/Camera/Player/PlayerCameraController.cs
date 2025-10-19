@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
 {
-   private CinemachineCamera playerCamera;
+    [SerializeField]
+    private PlayerListDisplayRefresher playerListDisplayRefresher;
+    private CinemachineCamera playerCamera;
 
     public void Init(CinemachineCamera playerCamera, List<PlayerController> playerList)
     {
         this.playerCamera = playerCamera;
+
+        playerListDisplayRefresher.Init(playerCamera.transform, playerList);
     }
 
-    // void LateUpdate()
-    // {
-    //     if (playerCamera.enabled)
-    //     {
-    //         playerListDisplayRefresher.RefreshDisplay();
-    //     }
-    // }
+    void LateUpdate()
+    {
+        if (playerCamera.enabled)
+        {
+            playerListDisplayRefresher.RefreshDisplay();
+        }
+    }
 
     public void Follow(Transform target)
     {

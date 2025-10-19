@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -13,7 +14,10 @@ public class ShotPlayerCameraHandler : MonoBehaviour,
     private List<PlayerController> playerList;
     private OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener;
 
-    public void Init(CinemachineCamera shotPlayerCamera, List<PlayerController> playerList, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
+    public void Init(
+        CinemachineCamera shotPlayerCamera,
+        List<PlayerController> playerList,
+        OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
     {
         this.shotPlayerCamera = shotPlayerCamera;
         this.playerList = playerList;
@@ -22,27 +26,24 @@ public class ShotPlayerCameraHandler : MonoBehaviour,
 
     public void OnSetCameraOnShotPlayer(List<PlayerController> playerList)
     {
-        // StartCoroutine(SetCameraOnPlayerList(playerList));
+        StartCoroutine(SetCameraOnPlayerList(playerList));
     }
 
-    // IEnumerator SetCameraOnPlayerList(List<PlayerController> shotPlayerList)
-    // {
-    //     playerList.ForEach(player => player.Camera = shotPlayerCamera.transform);
+    IEnumerator SetCameraOnPlayerList(List<PlayerController> shotPlayerList)
+    {
+        playerList.ForEach(player => player.Camera = shotPlayerCamera.transform);
 
-    //     foreach (var shotPlayer in shotPlayerList)
-    //     {
-    //         cameraController.Target = shotPlayer.transform;
+        foreach (var shotPlayer in shotPlayerList)
+        {
+            shotPlayerCamera.Follow = shotPlayer.transform;
 
-    //         yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
 
-    //         playerList.ForEach(player => player.RefreshDisplay());
-    //         yield return new WaitForSeconds(Mathf.Clamp(maxFocusTime / shotPlayerList.Count, minFocusTime, maxFocusTime));
-    //     }
-
-    //     shotPlayerCamera.enabled = false;
-    //     cameraController.Deactivate();
-
-    //     onSetCameraOnShotPlayerCompleteListener.OnSetCameraOnShotPlayerComplete();
-    // }
+            playerList.ForEach(player => player.RefreshDisplay());
+            yield return new WaitForSeconds(Mathf.Clamp(maxFocusTime / shotPlayerList.Count, minFocusTime, maxFocusTime));
+        }
+        
+        onSetCameraOnShotPlayerCompleteListener.OnSetCameraOnShotPlayerComplete();
+    }
 
 }
