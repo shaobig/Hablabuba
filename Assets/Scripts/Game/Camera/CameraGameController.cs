@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
-public class CameraGameController : MonoBehaviour, Follower,
+public class CameraGameController : MonoBehaviour,
     OnAmmoShotListener, OnBulletCollideListener, OnSetCameraOnShotPlayerListener
 {
+    private const int INACTIVE_CAMERA_PRIORITY = 0;
+    private const int ACTIVE_CAMERA_PRIORITY = 1;
+
     [SerializeField]
     private PlayerCameraController playerCameraController;
     [SerializeField]
@@ -11,14 +15,22 @@ public class CameraGameController : MonoBehaviour, Follower,
     [SerializeField]
     private ShotPlayerCameraController shotPlayerCameraController;
     [SerializeField]
-    private Camera playerCamera;
+    private CinemachineBrain cameraController;
     [SerializeField]
-    private Camera ammoCamera;
+    private CinemachineCamera playerCamera;
     [SerializeField]
-    private Camera shotPlayerCamera;
+    private CinemachineCamera ammoCamera;
+    [SerializeField]
+    private CinemachineCamera shotPlayerCamera;
 
-    public void Init(List<PlayerController> playerList, OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
+    public void Init(
+        List<PlayerController> playerList,
+        OnSetCameraOnShotPlayerCompleteListener onSetCameraOnShotPlayerCompleteListener)
     {
+        playerCamera.Priority = ACTIVE_CAMERA_PRIORITY;
+        ammoCamera.Priority = INACTIVE_CAMERA_PRIORITY;
+        shotPlayerCamera.Priority = INACTIVE_CAMERA_PRIORITY;
+
         playerCameraController.Init(playerCamera, playerList);
         ammoCameraController.Init(ammoCamera);
         shotPlayerCameraController.Init(shotPlayerCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
@@ -26,29 +38,26 @@ public class CameraGameController : MonoBehaviour, Follower,
 
     public void Follow(Transform target)
     {
+        playerCamera.Priority = ACTIVE_CAMERA_PRIORITY;
         playerCameraController.Follow(target);
     }
 
     public void OnAmmoShot(Transform ammo)
     {
-        playerCameraController.Deactivate();
-        ammoCameraController.Activate();
-
+        ammoCamera.Priority = ACTIVE_CAMERA_PRIORITY;
         ammoCameraController.OnAmmoShot(ammo);
     }
 
     public void OnSetCameraOnShotPlayer(List<PlayerController> playerList)
     {
-        ammoCameraController.Deactivate();
-        shotPlayerCameraController.Activate();
-
+        shotPlayerCamera.Priority = ACTIVE_CAMERA_PRIORITY;
         shotPlayerCameraController.OnSetCameraOnShotPlayer(playerList);
     }
 
     public void OnBulletCollide()
     {
-        ammoCameraController.Deactivate();
-        playerCameraController.Activate();
+        ammoCamera.Priority = INACTIVE_CAMERA_PRIORITY;
+        playerCamera.Priority = ACTIVE_CAMERA_PRIORITY;
     }
 
 }

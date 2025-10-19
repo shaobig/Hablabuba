@@ -1,35 +1,18 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
-public class AmmoCameraController : MonoBehaviour, Activator, Deactivator,
-    OnAmmoShotListener
+public class AmmoCameraController : MonoBehaviour, OnAmmoShotListener
 {
-    private Camera ammoCamera;
-    private CameraController cameraController;
+    private CinemachineCamera ammoCamera;
 
-    public void Init(Camera ammoCamera)
+    public void Init(CinemachineCamera ammoCamera)
     {
         this.ammoCamera = ammoCamera;
-
-        ammoCamera.enabled = false;
-        cameraController = ammoCamera.GetComponent<CameraController>();
-        cameraController.Deactivate();
-    }
-
-    public void Activate()
-    {
-        ammoCamera.enabled = true;
-        cameraController.Activate();
-    }
-
-    public void Deactivate()
-    {
-        ammoCamera.enabled = false;
-        cameraController.Deactivate();
     }
 
     public void OnAmmoShot(Transform ammo)
     {
-        cameraController.Target = ammo;
+        ammoCamera.Follow = ammo;
     }
 
 }

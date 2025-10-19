@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1da378c0923366e4795a2362919b5603, type: 3}
-  m_Name: PistolBullet
+  m_Name: PistolAmmo
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   damage: 40

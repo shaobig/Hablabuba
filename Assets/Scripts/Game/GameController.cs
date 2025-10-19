@@ -116,7 +116,6 @@ public class GameController : MonoBehaviour, Mover,
     public void OnSetCameraOnShotPlayerComplete()
     {
         playerGameController.OnBulletCollide();
-        cameraGameController.OnBulletCollide();
         Move();
     }
     
