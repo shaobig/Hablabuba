@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerGameController : MonoBehaviour, Mover,
     OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnWeaponSelectKeyPressedListener,
-    OnBulletCollideListener, OnPlayerKilledListener
+    OnAmmoCollideListener, OnPlayerKilledListener
 {
     private const int GAME_OVER_PLAYER_COUNT = 1;
 
@@ -26,18 +26,13 @@ public class PlayerGameController : MonoBehaviour, Mover,
         OnGameFinishedListener onGameFinishedListener,
         OnAmmoShotListener onAmmoShotListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
-        OnBulletCollideListener onBulletCollideListener)
+        OnAmmoCollideListener onAmmoCollideListener)
     {
         this.playerList = playerList;
         this.onPlayerKilledListener = onPlayerKilledListener;
         this.onGameFinishedListener = onGameFinishedListener;
-        
-        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener));
-    }
 
-    void OnDestroy()
-    {
-        playerControllerRemover.Remove(currentPlayer);
+        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener));
     }
 
     public void Move()
@@ -78,7 +73,7 @@ public class PlayerGameController : MonoBehaviour, Mover,
         currentPlayer.OnStopFireKeyPressed();
     }
 
-    public void OnBulletCollide()
+    public void OnAmmoCollide()
     {
         currentPlayer.HideWeapon();
 

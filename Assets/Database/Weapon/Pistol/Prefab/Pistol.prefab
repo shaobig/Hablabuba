@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RiffleFireController
   ammoEmitter: {fileID: 9183700054460924182}
   emitPoint: {fileID: 1773387438002868143}
-  bulletPrefab: {fileID: 11400000, guid: 9df7e39c6c4880048b82e3007355c961, type: 2}
+  ammoPrefab: {fileID: 11400000, guid: 9df7e39c6c4880048b82e3007355c961, type: 2}
   velocity: 30
 --- !u!114 &9183700054460924182
 MonoBehaviour:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064c0afbbc00c2f41bab19d422027e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponEmitter
-  bulletControllerCreator: {fileID: 8900493666282795854}
+  initAmmoControllerCreator: {fileID: 8900493666282795854}
 --- !u!114 &8900493666282795854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce8e2f314d91404f86cd1b93966fb2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InitBulletControllerCreator
-  bulletControllerCreator: {fileID: 6608844150881406065}
+  ammoControllerCreator: {fileID: 6608844150881406065}
 --- !u!114 &6608844150881406065
 MonoBehaviour:
   m_ObjectHideFlags: 0

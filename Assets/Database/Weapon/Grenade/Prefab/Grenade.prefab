@@ -190,6 +190,8 @@ MonoBehaviour:
   weaponTimer: {fileID: 2146064159048741168}
   grenadeThrower: {fileID: 6784816243314485443}
   force: 10
+  radius: 30
+  damage: 60
 --- !u!114 &6784816243314485443
 MonoBehaviour:
   m_ObjectHideFlags: 0

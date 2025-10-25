@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface OnGrenadeDestroyListener
 {
-    void OnGrenadeDestroy();
+    void OnGrenadeDestroy(Vector3 explosionPoint);
 }

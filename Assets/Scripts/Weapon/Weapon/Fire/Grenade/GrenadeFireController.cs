@@ -8,7 +8,12 @@ public class GrenadeFireController : MonoBehaviour, FireController,
     [SerializeField]
     private GrenadeThrower grenadeThrower;
     [SerializeField]
-    private float force = 5f;
+    private float force = 10f;
+    [SerializeField]
+    private int radius = 30;
+    [SerializeField]
+    private int damage = 60;
+    private CollisionHandler<ExplosionCollisionContext> collisionHandler;
     private WeaponItem weaponItem;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
@@ -18,13 +23,17 @@ public class GrenadeFireController : MonoBehaviour, FireController,
         WeaponItem weaponItem,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
-        OnAmmoShotListener onAmmoShotListener
+        OnAmmoShotListener onAmmoShotListener,
+        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
+        OnAmmoCollideListener onAmmoCollideListener
         )
     {
         this.weaponItem = weaponItem;
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
         this.onAmmoShotListener = onAmmoShotListener;
+
+        collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener);
 
         weaponTimer.Init(this, this);
         grenadeThrower.Init(GetComponent<Rigidbody>(), this);
@@ -56,9 +65,10 @@ public class GrenadeFireController : MonoBehaviour, FireController,
         onAmmoShotListener.OnAmmoShot(transform);
     }
 
-    public void OnGrenadeDestroy()
+    public void OnGrenadeDestroy(Vector3 explosionPoint)
     {
-        Destroy(gameObject);
+        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(explosionPoint, radius, damage));
+        gameObject.SetActive(false);
     }
 
 }

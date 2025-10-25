@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     WeaponHolder, WeaponHider,
     OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnWeaponSelectKeyPressedListener,
-    OnBulletCollideOnPlayerListener
+    OnDamagePlayerListener
 {
     [SerializeField]
     private DisplayController displayController;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnBulletCollideListener onBulletCollideListener,
+        OnAmmoCollideListener onAmmoCollideListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
         this.onSeleectWeaponListener = onSeleectWeaponListener;
@@ -42,12 +42,12 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
         healthController.Init(player.Health);
 
-        weaponController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        weaponController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener);
     }
 
-    public void OnBulletCollideOnPlayer(HitBullet bullet)
+    public void OnDamagePlayer(int damage)
     {
-        healthController.OnBulletCollideOnPlayer(bullet);
+        healthController.OnDamagePlayer(damage);
         displayController.SetHealthText(healthController.Health);
     }
 

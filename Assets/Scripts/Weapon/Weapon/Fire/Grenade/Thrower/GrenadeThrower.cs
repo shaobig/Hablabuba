@@ -36,7 +36,7 @@ public class GrenadeThrower : MonoBehaviour, Thrower,
 
     public void OnTimerFinish(float elapsedTime)
     {
-        onGrenadeDestroyListener.OnGrenadeDestroy();
+        onGrenadeDestroyListener.OnGrenadeDestroy(rb.transform.position);
     }
 
     public float Force

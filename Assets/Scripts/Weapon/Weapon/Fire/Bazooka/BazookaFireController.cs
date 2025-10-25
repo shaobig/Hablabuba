@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BazookaFireController : MonoBehaviour, FireController,
-    OnTimerCountListener, OnTimerFinishListener
+    OnTimerCountListener, OnTimerFinishListener, OnAmmoCollideWithTerrainListener
 {
     [SerializeField]
     private WeaponTimer weaponTimer;
@@ -10,9 +10,10 @@ public class BazookaFireController : MonoBehaviour, FireController,
     [SerializeField]
     private Transform emitPoint;
     [SerializeField]
-    private BulletPrefab bulletPrefab;
+    private AmmoPrefab ammoPrefab;
     [SerializeField]
     private int velocity = 30;
+    private CollisionHandler<ExplosionCollisionContext> collisionHandler;
     private WeaponItem weaponItem;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
@@ -22,15 +23,17 @@ public class BazookaFireController : MonoBehaviour, FireController,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnBulletCollideListener onBulletCollideListener,
-        OnSetCameraOnShotPlayerListener onSetOnShotPlayerCameraListener)
+        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
+        OnAmmoCollideListener onAmmoCollideListener)
     {
         this.weaponItem = weaponItem;
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
 
+        collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+
         weaponTimer.Init(this, this);
-        ammoEmitter.Init(emitPoint, bulletPrefab, onAmmoShotListener, onBulletCollideListener, onSetOnShotPlayerCameraListener);
+        ammoEmitter.Init(emitPoint, ammoPrefab, onAmmoShotListener, this);
     }
 
     public void Fire(FireAction fireAction)
@@ -56,6 +59,11 @@ public class BazookaFireController : MonoBehaviour, FireController,
         ammoEmitter.Emit();
 
         onFireListener.OnFire(weaponItem.Weapon.Type);
+    }
+
+    public void OnAmmoCollideWithTerrain(Collision collision)
+    {
+        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(collision.GetContact(0).point, ammoPrefab.Ammo.Radius, ammoPrefab.Ammo.Damage));
     }
 
 }

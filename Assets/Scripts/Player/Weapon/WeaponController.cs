@@ -19,10 +19,10 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnBulletCollideListener onBulletCollideListener,
+        OnAmmoCollideListener onAmmoCollideListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
-        fireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
+        fireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener);
         weaponTurner.Init(holdPoint);
     }
 

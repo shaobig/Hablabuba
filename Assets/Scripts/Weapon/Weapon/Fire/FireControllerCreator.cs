@@ -5,7 +5,7 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
     [SerializeField]
     private BazookaFireControllerCreator bazookaFireControllerCreator;
     [SerializeField]
-    private RiffleFireControllerCreator riffleFireControllerCreator;
+    private RifleFireControllerCreator rifleFireControllerCreator;
     [SerializeField]
     private InitGrenadeFireControllerCreator initGrenadeFireControllerCreator;
     private WeaponItem weaponItem;
@@ -14,19 +14,19 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnBulletCollideListener onBulletCollideListener,
+        OnAmmoCollideListener onAmmoCollideListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
-        riffleFireControllerCreator.Init(onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
-        bazookaFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onBulletCollideListener, onSetCameraOnShotPlayerListener);
-        initGrenadeFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
+        rifleFireControllerCreator.Init(onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        bazookaFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        initGrenadeFireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
     }
 
     public FireController Create(GameObject weaponPrefab, Transform holdPoint)
     {
         return weaponItem.Weapon.Type switch
         {
-            WeaponType.RIFFLE => riffleFireControllerCreator.Create(weaponPrefab, holdPoint),
+            WeaponType.RIFFLE => rifleFireControllerCreator.Create(weaponPrefab, holdPoint),
             WeaponType.BAZOOKA => bazookaFireControllerCreator.Create(weaponPrefab, holdPoint),
             WeaponType.GRENADE => initGrenadeFireControllerCreator.Create(weaponPrefab, holdPoint),
             _ => throw new System.NotImplementedException($"The fire controller for the {weaponItem.Weapon.Type} type is not supported!"),
@@ -38,7 +38,7 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
         set
         {
             weaponItem = value;
-            riffleFireControllerCreator.WeaponItem = value;
+            rifleFireControllerCreator.WeaponItem = value;
             bazookaFireControllerCreator.WeaponItem = value;
             initGrenadeFireControllerCreator.WeaponItem = value;
         }

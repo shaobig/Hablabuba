@@ -3,7 +3,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 
 public class CameraGameController : MonoBehaviour,
-    OnAmmoShotListener, OnBulletCollideListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener
+    OnAmmoShotListener, OnAmmoCollideListener, OnSetCameraOnShotPlayerListener, OnSetCameraOnShotPlayerCompleteListener
 {
     private const int INACTIVE_CAMERA_PRIORITY = 0;
     private const int ACTIVE_CAMERA_PRIORITY = 1;
@@ -63,7 +63,7 @@ public class CameraGameController : MonoBehaviour,
         playerCamera.Priority = ACTIVE_CAMERA_PRIORITY;
     }
 
-    public void OnBulletCollide()
+    public void OnAmmoCollide()
     {
         ammoCamera.Priority = INACTIVE_CAMERA_PRIORITY;
         playerCamera.Priority = ACTIVE_CAMERA_PRIORITY;
