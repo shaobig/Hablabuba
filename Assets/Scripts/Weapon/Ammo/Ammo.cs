@@ -7,10 +7,7 @@ public class Ammo : ScriptableObject
     private AmmoType type = AmmoType.RIFLE;
     [SerializeField]
     private int damage = 20;
-    [SerializeField]
-    private int radius = 0;
 
     public AmmoType Type => type;
     public int Damage => damage;
-    public int Radius => radius;
 }

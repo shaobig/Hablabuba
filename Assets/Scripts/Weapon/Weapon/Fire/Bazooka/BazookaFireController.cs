@@ -12,6 +12,8 @@ public class BazookaFireController : MonoBehaviour, FireController,
     [SerializeField]
     private AmmoPrefab ammoPrefab;
     [SerializeField]
+    private int radius = 40;
+    [SerializeField]
     private int velocity = 30;
     private CollisionHandler<ExplosionCollisionContext> collisionHandler;
     private WeaponItem weaponItem;
@@ -63,7 +65,7 @@ public class BazookaFireController : MonoBehaviour, FireController,
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(collision.GetContact(0).point, ammoPrefab.Ammo.Radius, ammoPrefab.Ammo.Damage));
+        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(collision.GetContact(0).point, radius, ammoPrefab.Ammo.Damage));
     }
 
 }

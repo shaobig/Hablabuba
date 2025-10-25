@@ -65,9 +65,9 @@ public class GrenadeFireController : MonoBehaviour, FireController,
         onAmmoShotListener.OnAmmoShot(transform);
     }
 
-    public void OnGrenadeDestroy(Vector3 explosionPoint)
+    public void OnGrenadeDestroy()
     {
-        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(explosionPoint, radius, damage));
+        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(transform.position, radius, damage));
         gameObject.SetActive(false);
     }
 
