@@ -1,4 +1,4 @@
-public class ExplosionForceCalculatorFactory : Factory<Calculator>
+public class ExplosionForceCalculatorFactory : Factory<Calculator<float>>
 {
     private const float FORCE_AMPLIFIER = 0.25f;
 
@@ -11,7 +11,7 @@ public class ExplosionForceCalculatorFactory : Factory<Calculator>
         this.damage = damage;
     }
 
-    public Calculator Get()
+    public Calculator<float> Get()
     {
         return new ExplosionForceCalculator(mass, damage, FORCE_AMPLIFIER);
     }

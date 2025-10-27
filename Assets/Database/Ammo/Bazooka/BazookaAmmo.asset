@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   type: 1
   damage: 80
-  radius: 20

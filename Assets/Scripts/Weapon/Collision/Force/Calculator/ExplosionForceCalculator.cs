@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExplosionForceCalculator : Calculator
+public class ExplosionForceCalculator : Calculator<float>
 {
     private float mass;
     private float damage;

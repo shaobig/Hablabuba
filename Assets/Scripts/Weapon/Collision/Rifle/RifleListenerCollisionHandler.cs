@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class RifleListenerCollisionHandler : ListenerCollisionHandler<RifleCollisionContext>
 {
@@ -7,9 +8,9 @@ public class RifleListenerCollisionHandler : ListenerCollisionHandler<RifleColli
     private DamageCalculator damageCalculator;
 
     public RifleListenerCollisionHandler(
-        DamageCalculator damageCalculator,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
-        OnAmmoCollideListener onAmmoCollideListener) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
+        OnAmmoCollideListener onAmmoCollideListener,
+        DamageCalculator damageCalculator) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
     {
         this.damageCalculator = damageCalculator;
     }
@@ -18,9 +19,11 @@ public class RifleListenerCollisionHandler : ListenerCollisionHandler<RifleColli
     {
         if (context.HitObject.CompareTag(PLAYER_TAG))
         {
+            var rigidbody = context.HitObject.GetComponent<Rigidbody>();
+            new ContextRifleForceApplierFactory(context, rigidbody.mass).Get().ApplyForce(rigidbody);
+            
             var player = context.HitObject.GetComponent<PlayerController>();
             player.OnDamagePlayer(damageCalculator.CalculateDamage());
-            
             OnSetCameraOnShotPlayerListener.OnSetCameraOnShotPlayer(new List<PlayerController> { player });
         }
         else

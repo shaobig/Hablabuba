@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RifleCollisionContextFactory : CollisionContextFactory<RifleCollisionContext>
+public class RifleCollisionContextFactory : Factory<RifleCollisionContext>
 {
     private Collision collision;
     private int damage;
@@ -11,6 +11,6 @@ public class RifleCollisionContextFactory : CollisionContextFactory<RifleCollisi
         this.damage = damage;
     }
 
-    public RifleCollisionContext CollisionContext => new RifleCollisionContextImpl(collision.gameObject, damage);
+    public RifleCollisionContext Get() => new RifleCollisionContextImpl(collision.gameObject, collision.GetContact(0).point, damage);
 
 }

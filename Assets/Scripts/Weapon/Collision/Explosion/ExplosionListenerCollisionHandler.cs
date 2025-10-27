@@ -23,7 +23,7 @@ public class ExplosionListenerCollisionHandler : ListenerCollisionHandler<Explos
             hitPlayerList.ForEach(player => player.OnDamagePlayer(new RadiusDamageCalculator(collisionContext.ExplosionPoint, player.transform.position, collisionContext.Damage, collisionContext.Radius).CalculateDamage()));
             hitPlayerList.Select(player => player.GetComponent<Rigidbody>())
                 .ToList()
-                .ForEach(rigidbody => new ExplosionForceApplierFactory(collisionContext.ExplosionPoint, new ExplosionForceCalculatorFactory(rigidbody.mass, collisionContext.Damage), collisionContext.Radius).Get().ApplyForce(rigidbody));
+                .ForEach(rigidbody => new CollisionContextExplosionForceApplierFactory(collisionContext, rigidbody.mass).Get().ApplyForce(rigidbody));
             OnSetCameraOnShotPlayerListener.OnSetCameraOnShotPlayer(hitPlayerList);
         }
         else

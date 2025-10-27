@@ -25,7 +25,7 @@ public class RifleFireController : MonoBehaviour, FireController,
         this.weaponItem = weaponItem;
         this.onFireListener = onFireListener;
 
-        collisionHandler = new RifleListenerCollisionHandler(new RifleDamageCalculator(ammoPrefab.Ammo.Damage), onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        collisionHandler = new RifleListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new RifleDamageCalculator(ammoPrefab.Ammo.Damage));
 
         ammoEmitter.Init(emitPoint, ammoPrefab, onAmmoShotListener, this);
     }
@@ -43,7 +43,7 @@ public class RifleFireController : MonoBehaviour, FireController,
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new RifleCollisionContextImpl(collision.gameObject, ammoPrefab.Ammo.Damage));
+        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoPrefab.Ammo.Damage).Get());
     }
 
 }

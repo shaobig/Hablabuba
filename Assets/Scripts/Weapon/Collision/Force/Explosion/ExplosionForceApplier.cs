@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class ExplosionForceApplier : ForceApplier
 {
-    private Calculator forceCalculator;
+    private Calculator<float> forceCalculator;
     private Vector3 explosionPosition;
     private float radius;
     private float verticalAmplifier;
 
-    public ExplosionForceApplier(Vector3 explosionPosition, Calculator forceCalculator, float radius, float verticalAmplifier)
+    public ExplosionForceApplier(Vector3 explosionPosition, Calculator<float> forceCalculator, float radius, float verticalAmplifier)
     {
         this.forceCalculator = forceCalculator;
         this.explosionPosition = explosionPosition;

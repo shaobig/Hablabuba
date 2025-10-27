@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExplosionCollisionContextFactory : CollisionContextFactory<ExplosionCollisionContext>
+public class ExplosionCollisionContextFactory : Factory<ExplosionCollisionContext>
 {
     private Vector3 explosionPoint;
     private int radius;
@@ -13,6 +13,6 @@ public class ExplosionCollisionContextFactory : CollisionContextFactory<Explosio
         this.damage = damage;
     }
 
-    public ExplosionCollisionContext CollisionContext => new ExplosionCollisionContextImpl(explosionPoint, radius, damage);
+    public ExplosionCollisionContext Get() => new ExplosionCollisionContextImpl(explosionPoint, radius, damage);
 
 }

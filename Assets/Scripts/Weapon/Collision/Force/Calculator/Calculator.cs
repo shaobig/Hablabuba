@@ -1,4 +1,4 @@
-public interface Calculator
+public interface Calculator<T>
 {
-    float Calculate();
+    T Calculate();
 }

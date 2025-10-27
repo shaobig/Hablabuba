@@ -364,6 +364,7 @@ MonoBehaviour:
   ammoEmitter: {fileID: 9183700054460924182}
   emitPoint: {fileID: 1773387438002868143}
   ammoPrefab: {fileID: 11400000, guid: a7d367b385f202045bb62a92ecb604c7, type: 2}
+  radius: 20
   velocity: 50
 --- !u!114 &9101769342928826762
 MonoBehaviour:
