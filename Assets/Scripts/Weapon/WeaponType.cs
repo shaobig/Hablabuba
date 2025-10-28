@@ -1,6 +1,6 @@
 public enum WeaponType
 {
-    RIFFLE,
+    RIFLE,
     BAZOOKA,
     GRENADE
 }

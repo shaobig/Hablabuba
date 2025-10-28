@@ -4,7 +4,6 @@ public class BazookaFireControllerCreator : MonoBehaviour, Creator<BazookaFireCo
 {
     [SerializeField]
     private ParentObjectCreator parentObjectCreator;
-    private WeaponItem weaponItem;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
@@ -28,15 +27,9 @@ public class BazookaFireControllerCreator : MonoBehaviour, Creator<BazookaFireCo
     public BazookaFireController Create(GameObject prefab, Transform target)
     {
         var bazookaFireController = parentObjectCreator.Create(prefab, target).GetComponent<BazookaFireController>();
-        bazookaFireController.Init(weaponItem, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
 
         return bazookaFireController;
-    }
-
-    public WeaponItem WeaponItem
-    {
-        get => weaponItem;
-        set => weaponItem = value;
     }
 
 }

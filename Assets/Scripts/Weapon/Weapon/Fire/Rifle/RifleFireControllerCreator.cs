@@ -4,7 +4,6 @@ public class RifleFireControllerCreator : MonoBehaviour, Creator<RifleFireContro
 {
     [SerializeField]
     private ParentObjectCreator parentObjectCreator;
-    private WeaponItem weaponItem;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
     private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
@@ -25,15 +24,9 @@ public class RifleFireControllerCreator : MonoBehaviour, Creator<RifleFireContro
     public RifleFireController Create(GameObject prefab, Transform target)
     {
         var rifleFireController = parentObjectCreator.Create(prefab, target).GetComponent<RifleFireController>();
-        rifleFireController.Init(weaponItem, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        rifleFireController.Init(onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
 
         return rifleFireController;
-    }
-    
-    public WeaponItem WeaponItem
-    {
-        get => weaponItem;
-        set => weaponItem = value;
     }
 
 }

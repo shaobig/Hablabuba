@@ -297,10 +297,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6498271308781538140}
   - component: {fileID: 61913103308512114}
+  - component: {fileID: -1199934117859508375}
   - component: {fileID: 9183700054460924182}
   - component: {fileID: 8900493666282795854}
   - component: {fileID: 6608844150881406065}
   - component: {fileID: 516182628410112943}
+  - component: {fileID: -759808687286738783}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -336,10 +338,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc30a96dde769bf42b63fdafddaf6de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiffleFireController
+  ammoFireController: {fileID: -1199934117859508375}
+  fireControllerAmmoLoader: {fileID: -759808687286738783}
+  velocity: 25
+--- !u!114 &-1199934117859508375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213194585775340486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2deaa8cd89e2c69479ce772885b226e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmmoFireController
   ammoEmitter: {fileID: 9183700054460924182}
   emitPoint: {fileID: 1773387438002868143}
-  ammoPrefab: {fileID: 11400000, guid: 9df7e39c6c4880048b82e3007355c961, type: 2}
-  velocity: 30
 --- !u!114 &9183700054460924182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,3 +406,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6509e82090c45b4fbcd3cff2350e3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneObjectCreator
+--- !u!114 &-759808687286738783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213194585775340486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0da005327d6d04b968c4aec27a6d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireControllerAmmoLoader
+  ammoPrefab: {fileID: 11400000, guid: 9df7e39c6c4880048b82e3007355c961, type: 2}

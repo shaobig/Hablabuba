@@ -320,11 +320,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6498271308781538140}
   - component: {fileID: 6797038089486358240}
-  - component: {fileID: 9101769342928826762}
+  - component: {fileID: 460953725988698378}
   - component: {fileID: 9183700054460924182}
   - component: {fileID: 8900493666282795854}
   - component: {fileID: 6608844150881406065}
   - component: {fileID: 516182628410112943}
+  - component: {fileID: 3184832266000961248}
+  - component: {fileID: 9101769342928826762}
   m_Layer: 0
   m_Name: Bazooka
   m_TagString: Untagged
@@ -360,13 +362,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf2d992ef5562a4da11ac1007962395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BazookaFireController
+  ammoFireController: {fileID: 460953725988698378}
+  fireControllerAmmoLoader: {fileID: 3184832266000961248}
   weaponTimer: {fileID: 9101769342928826762}
-  ammoEmitter: {fileID: 9183700054460924182}
-  emitPoint: {fileID: 1773387438002868143}
-  ammoPrefab: {fileID: 11400000, guid: a7d367b385f202045bb62a92ecb604c7, type: 2}
-  radius: 20
   velocity: 50
---- !u!114 &9101769342928826762
+  radius: 20
+--- !u!114 &460953725988698378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -375,10 +376,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5213194585775340486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6b0ee7af5338e4f9c248fda4f7f4d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2deaa8cd89e2c69479ce772885b226e9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BazookaTimer
-  maxTime: 1
+  m_EditorClassIdentifier: Assembly-CSharp::AmmoFireController
+  ammoEmitter: {fileID: 9183700054460924182}
+  emitPoint: {fileID: 1773387438002868143}
 --- !u!114 &9183700054460924182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +432,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6509e82090c45b4fbcd3cff2350e3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneObjectCreator
+--- !u!114 &3184832266000961248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213194585775340486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0da005327d6d04b968c4aec27a6d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireControllerAmmoLoader
+  ammoPrefab: {fileID: 11400000, guid: a7d367b385f202045bb62a92ecb604c7, type: 2}
+--- !u!114 &9101769342928826762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213194585775340486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6b0ee7af5338e4f9c248fda4f7f4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BazookaTimer
+  maxTime: 1
 --- !u!1 &8070526906363544800
 GameObject:
   m_ObjectHideFlags: 0

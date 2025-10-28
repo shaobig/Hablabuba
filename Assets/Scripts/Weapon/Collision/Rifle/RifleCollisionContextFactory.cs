@@ -3,14 +3,14 @@ using UnityEngine;
 public class RifleCollisionContextFactory : Factory<RifleCollisionContext>
 {
     private Collision collision;
-    private int damage;
+    private AmmoPrefab ammoPrefab;
 
-    public RifleCollisionContextFactory(Collision collision, int damage)
+    public RifleCollisionContextFactory(Collision collision, AmmoPrefab ammoPrefab)
     {
         this.collision = collision;
-        this.damage = damage;
+        this.ammoPrefab = ammoPrefab;
     }
 
-    public RifleCollisionContext Get() => new RifleCollisionContextImpl(collision.gameObject, collision.GetContact(0).point, damage);
+    public RifleCollisionContext Get() => new RifleCollisionContextImpl(collision.gameObject, collision.GetContact(0).point, ammoPrefab.Ammo.Damage);
 
 }

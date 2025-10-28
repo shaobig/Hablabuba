@@ -4,46 +4,42 @@ public class RifleFireController : MonoBehaviour, FireController,
     OnAmmoCollideWithTerrainListener
 {
     [SerializeField]
-    private AmmoEmitter ammoEmitter;
+    private FireControllerEmitter ammoFireController;
     [SerializeField]
-    private Transform emitPoint;
-    [SerializeField]
-    private AmmoPrefab ammoPrefab;
+    private FireControllerAmmoLoader fireControllerAmmoLoader;
     [SerializeField]
     private int velocity = 50;
     private CollisionHandler<RifleCollisionContext> collisionHandler;
-    private WeaponItem weaponItem;
+    private AmmoPrefab ammoPrefab;
     private OnFireListener onFireListener;
 
     public void Init(
-        WeaponItem weaponItem,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
         OnAmmoCollideListener onAmmoCollideListener)
     {
-        this.weaponItem = weaponItem;
         this.onFireListener = onFireListener;
 
+        ammoPrefab = fireControllerAmmoLoader.LoadAmmo();
         collisionHandler = new RifleListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new RifleDamageCalculator(ammoPrefab.Ammo.Damage));
 
-        ammoEmitter.Init(emitPoint, ammoPrefab, onAmmoShotListener, this);
+        ammoFireController.Init(ammoPrefab, onAmmoShotListener, this);
+        ammoFireController.Velocity = velocity;
     }
 
     public void Fire(FireAction fireAction)
     {
         if (FireAction.FIRE.Equals(fireAction))
         {
-            ammoEmitter.Velocity = velocity;
-            ammoEmitter.Emit();
-            
-            onFireListener.OnFire(weaponItem.Weapon.Type);
+            ammoFireController.Emit();
+            onFireListener.OnFire(WeaponType.RIFLE);
         }
     }
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoPrefab.Ammo.Damage).Get());
+        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoPrefab).Get());
     }
 
 }

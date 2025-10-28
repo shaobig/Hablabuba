@@ -26,7 +26,7 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
     {
         return weaponItem.Weapon.Type switch
         {
-            WeaponType.RIFFLE => rifleFireControllerCreator.Create(weaponPrefab, holdPoint),
+            WeaponType.RIFLE => rifleFireControllerCreator.Create(weaponPrefab, holdPoint),
             WeaponType.BAZOOKA => bazookaFireControllerCreator.Create(weaponPrefab, holdPoint),
             WeaponType.GRENADE => initGrenadeFireControllerCreator.Create(weaponPrefab, holdPoint),
             _ => throw new System.NotImplementedException($"The fire controller for the {weaponItem.Weapon.Type} type is not supported!"),
@@ -38,8 +38,6 @@ public class FireControllerCreator : MonoBehaviour, Creator<FireController>
         set
         {
             weaponItem = value;
-            rifleFireControllerCreator.WeaponItem = value;
-            bazookaFireControllerCreator.WeaponItem = value;
             initGrenadeFireControllerCreator.WeaponItem = value;
         }
     }

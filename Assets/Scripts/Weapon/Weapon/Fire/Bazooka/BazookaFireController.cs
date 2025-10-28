@@ -4,38 +4,35 @@ public class BazookaFireController : MonoBehaviour, FireController,
     OnTimerCountListener, OnTimerFinishListener, OnAmmoCollideWithTerrainListener
 {
     [SerializeField]
+    private FireControllerEmitter ammoFireController;
+    [SerializeField]
+    private FireControllerAmmoLoader fireControllerAmmoLoader;
+    [SerializeField]
     private WeaponTimer weaponTimer;
     [SerializeField]
-    private AmmoEmitter ammoEmitter;
-    [SerializeField]
-    private Transform emitPoint;
-    [SerializeField]
-    private AmmoPrefab ammoPrefab;
+    private float velocity = 50;
     [SerializeField]
     private int radius = 40;
-    [SerializeField]
-    private int velocity = 30;
+    private AmmoPrefab ammoPrefab;
     private CollisionHandler<ExplosionCollisionContext> collisionHandler;
-    private WeaponItem weaponItem;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
 
     public void Init(
-        WeaponItem weaponItem,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
         OnAmmoCollideListener onAmmoCollideListener)
     {
-        this.weaponItem = weaponItem;
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
 
         collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        ammoPrefab = fireControllerAmmoLoader.LoadAmmo();
 
         weaponTimer.Init(this, this);
-        ammoEmitter.Init(emitPoint, ammoPrefab, onAmmoShotListener, this);
+        ammoFireController.Init(ammoPrefab, onAmmoShotListener, this);
     }
 
     public void Fire(FireAction fireAction)
@@ -57,15 +54,15 @@ public class BazookaFireController : MonoBehaviour, FireController,
 
     public void OnTimerFinish(float elapsedTime)
     {
-        ammoEmitter.Velocity = Mathf.RoundToInt((1 - (elapsedTime / weaponTimer.MaxTime)) * velocity);
-        ammoEmitter.Emit();
+        ammoFireController.Velocity = Mathf.RoundToInt((1 - (elapsedTime / weaponTimer.MaxTime)) * velocity);
+        ammoFireController.Emit();
 
-        onFireListener.OnFire(weaponItem.Weapon.Type);
+        onFireListener.OnFire(WeaponType.BAZOOKA);
     }
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(collision.GetContact(0).point, radius, ammoPrefab.Ammo.Damage));
+        collisionHandler.HandleCollision(new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, ammoPrefab.Ammo.Damage).Get());
     }
 
 }
