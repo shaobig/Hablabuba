@@ -1,8 +1,8 @@
-public class RifleDamageCalculator : DamageCalculator
+public class CollisionHandlerRifleDamageCalculator : DamageCalculator
 {
     private int damage;
 
-    public RifleDamageCalculator(int damage)
+    public CollisionHandlerRifleDamageCalculator(int damage)
     {
         this.damage = damage;
     }

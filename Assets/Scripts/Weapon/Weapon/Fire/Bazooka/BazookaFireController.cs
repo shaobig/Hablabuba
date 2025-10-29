@@ -22,13 +22,12 @@ public class BazookaFireController : MonoBehaviour, FireController,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
-        OnAmmoCollideListener onAmmoCollideListener)
+        CollisionHandler<ExplosionCollisionContext> collisionHandler)
     {
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
-
-        collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        this.collisionHandler = collisionHandler;
+        
         ammoPrefab = fireControllerAmmoLoader.LoadAmmo();
 
         weaponTimer.Init(this, this);

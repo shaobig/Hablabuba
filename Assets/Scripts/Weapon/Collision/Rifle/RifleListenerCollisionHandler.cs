@@ -6,13 +6,13 @@ public class RifleListenerCollisionHandler : ListenerCollisionHandler<RifleColli
     private const string PLAYER_TAG = "Player";
 
     private ForceApplierFactory<RifleCollisionContext> forceApplierFactory;
-    private DamageCalculatorFactory damageCalculatorFactory;
+    private RifleDamageCalculatorFactory damageCalculatorFactory;
 
     public RifleListenerCollisionHandler(
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
         OnAmmoCollideListener onAmmoCollideListener,
         ForceApplierFactory<RifleCollisionContext> forceApplierFactory,
-        DamageCalculatorFactory damageCalculatorFactory) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
+        RifleDamageCalculatorFactory damageCalculatorFactory) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
     {
         this.forceApplierFactory = forceApplierFactory;
         this.damageCalculatorFactory = damageCalculatorFactory;

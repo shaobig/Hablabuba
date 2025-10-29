@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class ExplosionListenerCollisionHandler : ListenerCollisionHandler<ExplosionCollisionContext>
 {
+    private ForceApplierFactory<ExplosionCollisionContext> forceApplierFactory;
+    private RadiusDamageCalculatorFactory damageCalculatorFactory;
+
     public ExplosionListenerCollisionHandler(
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
-        OnAmmoCollideListener onAmmoCollideListener) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
+        OnAmmoCollideListener onAmmoCollideListener,
+        ForceApplierFactory<ExplosionCollisionContext> forceApplierFactory,
+        RadiusDamageCalculatorFactory damageCalculatorFactory) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
     {
+        this.forceApplierFactory = forceApplierFactory;
+        this.damageCalculatorFactory = damageCalculatorFactory;
     }
 
-    public override void HandleCollision(ExplosionCollisionContext collisionContext)
+    public override void HandleCollision(ExplosionCollisionContext context)
     {
-        List<PlayerController> hitPlayerList = Physics.OverlapSphere(collisionContext.ExplosionPoint, collisionContext.Radius)
+        List<PlayerController> hitPlayerList = Physics.OverlapSphere(context.ExplosionPoint, context.Radius)
             .Select(collider => collider.gameObject)
             .Select(gameObject => gameObject.GetComponent<PlayerController>())
             .Where(playerController => playerController != null)
@@ -20,10 +27,10 @@ public class ExplosionListenerCollisionHandler : ListenerCollisionHandler<Explos
 
         if (hitPlayerList.Count > 0)
         {
-            hitPlayerList.ForEach(player => player.OnDamagePlayer(new RadiusDamageCalculator(collisionContext.ExplosionPoint, player.transform.position, collisionContext.Damage, collisionContext.Radius).CalculateDamage()));
+            hitPlayerList.ForEach(player => player.OnDamagePlayer(damageCalculatorFactory.Create(context, player.transform.position).CalculateDamage()));
             hitPlayerList.Select(player => player.GetComponent<Rigidbody>())
                 .ToList()
-                .ForEach(rigidbody => new CollisionContextExplosionForceApplierFactory(collisionContext, rigidbody.mass).Create().ApplyForce(rigidbody));
+                .ForEach(rigidbody => forceApplierFactory.Create(context, rigidbody.mass).ApplyForce(rigidbody));
             OnSetCameraOnShotPlayerListener.OnSetCameraOnShotPlayer(hitPlayerList);
         }
         else

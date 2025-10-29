@@ -33,7 +33,7 @@ public class GrenadeFireController : MonoBehaviour, FireController,
         this.onFireListener = onFireListener;
         this.onAmmoShotListener = onAmmoShotListener;
 
-        collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new ContextExplosionForceApplierFactory(), new ExplosionRadiusDamageCalculatorFactory());
 
         weaponTimer.Init(this, this);
         grenadeThrower.Init(GetComponent<Rigidbody>(), this);
@@ -67,7 +67,7 @@ public class GrenadeFireController : MonoBehaviour, FireController,
 
     public void OnGrenadeDestroy()
     {
-        collisionHandler.HandleCollision(new ExplosionCollisionContextImpl(transform.position, radius, damage));
+        collisionHandler.HandleCollision(new ExplosionCollisionContextFactory(transform.position, radius, damage).Create());
         gameObject.SetActive(false);
     }
 
