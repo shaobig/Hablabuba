@@ -62,7 +62,7 @@ public class BazookaFireController : MonoBehaviour, FireController,
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, ammoPrefab.Ammo.Damage).Get());
+        collisionHandler.HandleCollision(new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, ammoPrefab.Ammo.Damage).Create());
     }
 
 }

@@ -9,9 +9,9 @@ public class RifleForceApplierFactory : Factory<ForceApplier>
         this.calculatorFactory = calculatorFactory;
     }
 
-    public ForceApplier Get()
+    public ForceApplier Create()
     {
-        return new RifleForceApplier(calculatorFactory.Get());
+        return new RifleForceApplier(calculatorFactory.Create());
     }
 
 }

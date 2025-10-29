@@ -15,9 +15,9 @@ public class ExplosionForceApplierFactory : Factory<ForceApplier>
         this.radius = radius;
     }
 
-    public ForceApplier Get()
+    public ForceApplier Create()
     {
-        return new ExplosionForceApplier(explosionPoint, forceCalculatorFactory.Get(), radius, VERTICAL_AMPLIFIER);
+        return new ExplosionForceApplier(explosionPoint, forceCalculatorFactory.Create(), radius, VERTICAL_AMPLIFIER);
     }
 
 }

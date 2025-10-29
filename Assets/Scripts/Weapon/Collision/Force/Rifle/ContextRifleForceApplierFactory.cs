@@ -1,17 +1,7 @@
-public class ContextRifleForceApplierFactory : Factory<ForceApplier>
-{
-    private RifleCollisionContext context;
-    private float mass;
-
-    public ContextRifleForceApplierFactory(RifleCollisionContext context, float mass)
+public class ContextRifleForceApplierFactory : ForceApplierFactory<RifleCollisionContext>
+{ 
+    public ForceApplier Create(RifleCollisionContext context, float mass)
     {
-        this.context = context;
-        this.mass = mass;
+        return new RifleForceApplierFactory(new ContextNormalizedForceVectorRifleForceCalculatorFactory(context, mass)).Create();
     }
-
-    public ForceApplier Get()
-    {
-        return new RifleForceApplierFactory(new ContextNormalizedForceVectorRifleForceCalculatorFactory(context, mass)).Get();
-    }
-
 }

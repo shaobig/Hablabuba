@@ -24,7 +24,9 @@ public class RifleFireControllerCreator : MonoBehaviour, Creator<RifleFireContro
     public RifleFireController Create(GameObject prefab, Transform target)
     {
         var rifleFireController = parentObjectCreator.Create(prefab, target).GetComponent<RifleFireController>();
-        rifleFireController.Init(onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        var collisionHandler = new RifleListenerCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new ContextRifleForceApplierFactory(), new RifleDamageCalculatorFactory()).Create();
+        
+        rifleFireController.Init(collisionHandler, onFireListener, onAmmoShotListener);
 
         return rifleFireController;
     }

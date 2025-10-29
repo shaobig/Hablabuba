@@ -11,7 +11,7 @@ public class ExplosionForceCalculatorFactory : Factory<Calculator<float>>
         this.damage = damage;
     }
 
-    public Calculator<float> Get()
+    public Calculator<float> Create()
     {
         return new ExplosionForceCalculator(mass, damage, FORCE_AMPLIFIER);
     }

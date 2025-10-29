@@ -11,13 +11,13 @@ public class ContextNormalizedForceVectorRifleForceCalculatorFactory : Factory<C
         this.mass = mass;
     }
 
-    public Calculator<Vector3> Get()
+    public Calculator<Vector3> Create()
     {
         return new NormalizedForceVectorRifleForceCalculatorFactory(
             new ForceVectorRifleForceCalculatorFactory(
                 new VectorRifleForceCalculatorFactory(context.HitObject.transform.position, context.HitPoint),
                 new ExplosionForceCalculatorFactory(mass, context.Damage)))
-                .Get();
+                .Create();
     }
 
 }

@@ -11,9 +11,9 @@ public class ForceVectorRifleForceCalculatorFactory : Factory<Calculator<Vector3
         this.forceCalculatorFactory = forceCalculatorFactory;
     }
 
-    public Calculator<Vector3> Get()
+    public Calculator<Vector3> Create()
     {
-        return new ForceVectorRifleForceCalculator(vectorCalculatorFactory.Get(), forceCalculatorFactory.Get());
+        return new ForceVectorRifleForceCalculator(vectorCalculatorFactory.Create(), forceCalculatorFactory.Create());
     }
 
 }

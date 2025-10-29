@@ -5,14 +5,17 @@ public class RifleListenerCollisionHandler : ListenerCollisionHandler<RifleColli
 {
     private const string PLAYER_TAG = "Player";
 
-    private DamageCalculator damageCalculator;
+    private ForceApplierFactory<RifleCollisionContext> forceApplierFactory;
+    private DamageCalculatorFactory damageCalculatorFactory;
 
     public RifleListenerCollisionHandler(
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
         OnAmmoCollideListener onAmmoCollideListener,
-        DamageCalculator damageCalculator) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
+        ForceApplierFactory<RifleCollisionContext> forceApplierFactory,
+        DamageCalculatorFactory damageCalculatorFactory) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
     {
-        this.damageCalculator = damageCalculator;
+        this.forceApplierFactory = forceApplierFactory;
+        this.damageCalculatorFactory = damageCalculatorFactory;
     }
 
     public override void HandleCollision(RifleCollisionContext context)
@@ -20,10 +23,10 @@ public class RifleListenerCollisionHandler : ListenerCollisionHandler<RifleColli
         if (context.HitObject.CompareTag(PLAYER_TAG))
         {
             var rigidbody = context.HitObject.GetComponent<Rigidbody>();
-            new ContextRifleForceApplierFactory(context, rigidbody.mass).Get().ApplyForce(rigidbody);
+            forceApplierFactory.Create(context, rigidbody.mass).ApplyForce(rigidbody);
             
             var player = context.HitObject.GetComponent<PlayerController>();
-            player.OnDamagePlayer(damageCalculator.CalculateDamage());
+            player.OnDamagePlayer(damageCalculatorFactory.Create(context.Damage).CalculateDamage());
             OnSetCameraOnShotPlayerListener.OnSetCameraOnShotPlayer(new List<PlayerController> { player });
         }
         else

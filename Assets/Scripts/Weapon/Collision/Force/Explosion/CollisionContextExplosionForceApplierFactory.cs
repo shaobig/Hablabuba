@@ -11,9 +11,9 @@ public class CollisionContextExplosionForceApplierFactory : Factory<ForceApplier
         this.mass = mass;
     }
 
-    public ForceApplier Get()
+    public ForceApplier Create()
     {
-        return new ExplosionForceApplierFactory(collisionContext.ExplosionPoint, new ExplosionForceCalculatorFactory(mass, collisionContext.Damage), collisionContext.Radius).Get();
+        return new ExplosionForceApplierFactory(collisionContext.ExplosionPoint, new ExplosionForceCalculatorFactory(mass, collisionContext.Damage), collisionContext.Radius).Create();
     }
 
 }

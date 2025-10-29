@@ -13,6 +13,6 @@ public class ExplosionCollisionContextFactory : Factory<ExplosionCollisionContex
         this.damage = damage;
     }
 
-    public ExplosionCollisionContext Get() => new ExplosionCollisionContextImpl(explosionPoint, radius, damage);
+    public ExplosionCollisionContext Create() => new ExplosionCollisionContextImpl(explosionPoint, radius, damage);
 
 }

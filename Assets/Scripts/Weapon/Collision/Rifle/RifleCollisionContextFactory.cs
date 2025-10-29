@@ -11,6 +11,6 @@ public class RifleCollisionContextFactory : Factory<RifleCollisionContext>
         this.ammoPrefab = ammoPrefab;
     }
 
-    public RifleCollisionContext Get() => new RifleCollisionContextImpl(collision.gameObject, collision.GetContact(0).point, ammoPrefab.Ammo.Damage);
+    public RifleCollisionContext Create() => new RifleCollisionContextImpl(collision.gameObject, collision.GetContact(0).point, ammoPrefab.Ammo.Damage);
 
 }

@@ -9,9 +9,9 @@ public class NormalizedForceVectorRifleForceCalculatorFactory : Factory<Calculat
         this.vectorCalculatorFactory = vectorCalculatorFactory;
     }
 
-    public Calculator<Vector3> Get()
+    public Calculator<Vector3> Create()
     {
-        return new NormalizedForceVectorRifleForceCalculator(vectorCalculatorFactory.Get());
+        return new NormalizedForceVectorRifleForceCalculator(vectorCalculatorFactory.Create());
     }
 
 }

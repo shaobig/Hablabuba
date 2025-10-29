@@ -11,7 +11,7 @@ public class VectorRifleForceCalculatorFactory : Factory<Calculator<Vector3>>
         this.hitPoint = hitPoint;
     }
 
-    public Calculator<Vector3> Get()
+    public Calculator<Vector3> Create()
     {
         return new VectorRifleForceCalculator(hitObject, hitPoint);
     }

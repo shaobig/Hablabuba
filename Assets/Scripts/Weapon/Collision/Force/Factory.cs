@@ -1,6 +1,4 @@
-using UnityEngine;
-
 public interface Factory<E>
 {
-    E Get();
+    E Create();
 }

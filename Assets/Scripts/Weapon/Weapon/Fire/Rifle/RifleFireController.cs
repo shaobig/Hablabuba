@@ -14,17 +14,16 @@ public class RifleFireController : MonoBehaviour, FireController,
     private OnFireListener onFireListener;
 
     public void Init(
+        CollisionHandler<RifleCollisionContext> collisionHandler,
         OnFireListener onFireListener,
-        OnAmmoShotListener onAmmoShotListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
-        OnAmmoCollideListener onAmmoCollideListener)
+        OnAmmoShotListener onAmmoShotListener)
     {
+        this.collisionHandler = collisionHandler;
         this.onFireListener = onFireListener;
 
         ammoPrefab = fireControllerAmmoLoader.LoadAmmo();
-        collisionHandler = new RifleListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new RifleDamageCalculator(ammoPrefab.Ammo.Damage));
 
-        ammoFireController.Init(ammoPrefab, onAmmoShotListener, this);
+        ammoFireController.Init(fireControllerAmmoLoader.LoadAmmo(), onAmmoShotListener, this);
         ammoFireController.Velocity = velocity;
     }
 
@@ -39,7 +38,7 @@ public class RifleFireController : MonoBehaviour, FireController,
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoPrefab).Get());
+        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoPrefab).Create());
     }
 
 }
