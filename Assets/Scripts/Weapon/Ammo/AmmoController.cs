@@ -3,6 +3,8 @@ using UnityEngine;
 public class AmmoController : MonoBehaviour
 {
     [SerializeField]
+    private LookRotationRigidbodyRotator ammoRigidbodyRotator;
+    [SerializeField]
     private GameObjectRemover gameObjectRemover;
     private new Rigidbody rigidbody;
     private OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener;
@@ -15,7 +17,7 @@ public class AmmoController : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(rigidbody.linearVelocity);
+        transform.rotation = ammoRigidbodyRotator.Rotate(rigidbody);
     }
 
     void OnCollisionEnter(Collision collision)

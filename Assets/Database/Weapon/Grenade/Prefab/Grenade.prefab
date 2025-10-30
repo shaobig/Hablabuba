@@ -102,6 +102,8 @@ GameObject:
   - component: {fileID: 1276019711258978631}
   - component: {fileID: 2418185529695174179}
   - component: {fileID: 6784816243314485443}
+  - component: {fileID: 1832150599467104724}
+  - component: {fileID: 4068192996281532835}
   - component: {fileID: 2146064159048741168}
   - component: {fileID: 3458028080135459132}
   m_Layer: 0
@@ -187,8 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d9aa87b1f106f41af94dd9faa939db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeFireController
-  weaponTimer: {fileID: 2146064159048741168}
   grenadeThrower: {fileID: 6784816243314485443}
+  grenadeRigidbodyRotator: {fileID: 1832150599467104724}
+  weaponTimer: {fileID: 2146064159048741168}
   force: 10
   radius: 15
   damage: 60
@@ -205,6 +208,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeThrower
   weaponTimer: {fileID: 3458028080135459132}
+--- !u!114 &1832150599467104724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205325610735467096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5eba2c92f882114dbc9283cced0599f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrenadeRigidbodyRotator
+  lookRotationRigidbodyRotator: {fileID: 4068192996281532835}
+--- !u!114 &4068192996281532835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205325610735467096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3aad1ecccf52df46aff83144459fc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LookRotationRigidbodyRotator
 --- !u!114 &2146064159048741168
 MonoBehaviour:
   m_ObjectHideFlags: 0

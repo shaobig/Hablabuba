@@ -8,7 +8,7 @@ public class FireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<
     private RifleFireControllerGameObjectFactory rifleFireControllerGameObjectFactory;
     [SerializeField]
     private InitGrenadeFireControllerGameObjectFactory initGrenadeFireControllerGameObjectFactory;
-    private WeaponItem weaponItem;
+    private WeaponType weaponType;
 
     public void Init(
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
@@ -24,22 +24,18 @@ public class FireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<
 
     public FireController Create(GameObject weaponPrefab, Transform holdPoint)
     {
-        return weaponItem.Weapon.Type switch
+        return weaponType switch
         {
             WeaponType.RIFLE => rifleFireControllerGameObjectFactory.Create(weaponPrefab, holdPoint),
             WeaponType.BAZOOKA => bazookaFireControllerGameObjectFactory.Create(weaponPrefab, holdPoint),
             WeaponType.GRENADE => initGrenadeFireControllerGameObjectFactory.Create(weaponPrefab, holdPoint),
-            _ => throw new System.NotImplementedException($"The fire controller for the {weaponItem.Weapon.Type} type is not supported!"),
+            _ => throw new System.NotImplementedException($"The fire controller for the {weaponType} type is not supported!"),
         };
     }
 
-    public WeaponItem WeaponItem
+    public WeaponType WeaponType
     {
-        set
-        {
-            weaponItem = value;
-            initGrenadeFireControllerGameObjectFactory.WeaponItem = value;
-        }
+        set => weaponType = value;
     }
 
 }

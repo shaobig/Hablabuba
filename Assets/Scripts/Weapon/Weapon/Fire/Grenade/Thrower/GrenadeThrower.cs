@@ -5,16 +5,16 @@ public class GrenadeThrower : MonoBehaviour, Thrower,
 {
     [SerializeField]
     private WeaponTimer weaponTimer;
-    private Rigidbody rb;
+    private new Rigidbody rigidbody;
     private OnGrenadeDestroyListener onGrenadeDestroyListener;
     private float force;
 
     public void Init(
-        Rigidbody rb,
+        Rigidbody rigidbody,
         OnGrenadeDestroyListener onGrenadeDestroyListener)
     {
-        this.rb = rb;
-        this.rb.isKinematic = true;
+        this.rigidbody = rigidbody;
+        this.rigidbody.isKinematic = true;
 
         this.onGrenadeDestroyListener = onGrenadeDestroyListener;
 
@@ -23,8 +23,8 @@ public class GrenadeThrower : MonoBehaviour, Thrower,
 
     public void Throw()
     {
-        rb.isKinematic = false;
-        rb.AddForce(force * transform.forward, ForceMode.Impulse);
+        rigidbody.isKinematic = false;
+        rigidbody.AddForce(force * transform.forward, ForceMode.Impulse);
 
         weaponTimer.Activate();
     }

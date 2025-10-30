@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1273709174199804597}
   - component: {fileID: 8019753421199623908}
   - component: {fileID: 8053848032250481542}
+  - component: {fileID: 6006352060187576177}
   - component: {fileID: -1206130738390759012}
   m_Layer: 0
   m_Name: BazookaAmmo
@@ -98,7 +99,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fdba8e0c63ca84d90d5bdd9989e8ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletController
+  ammoRigidbodyRotator: {fileID: 6006352060187576177}
   gameObjectRemover: {fileID: -1206130738390759012}
+--- !u!114 &6006352060187576177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119375219372136179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3aad1ecccf52df46aff83144459fc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmmoWeaponRotator
 --- !u!114 &-1206130738390759012
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ public class InitGrenadeFireControllerGameObjectFactory : MonoBehaviour, GameObj
 {
     [SerializeField]
     private GrenadeFireControllerGameObjectFactory grenadeFireControllerGameObjectFactory;
-    private WeaponItem weaponItem;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
@@ -28,14 +27,9 @@ public class InitGrenadeFireControllerGameObjectFactory : MonoBehaviour, GameObj
     public GrenadeFireController Create(GameObject prefab, Transform target)
     {
         var grenadeFireController = grenadeFireControllerGameObjectFactory.Create(prefab, target);
-        grenadeFireController.Init(weaponItem, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        grenadeFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
 
         return grenadeFireController;
     }
-
-    public WeaponItem WeaponItem
-    {
-        set => weaponItem = value;
-    }
-
+    
 }

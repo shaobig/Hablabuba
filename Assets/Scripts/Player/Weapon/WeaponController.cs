@@ -68,7 +68,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         set
         {
             weaponItem = value;
-            fireControllerGameObjectFactory.WeaponItem = value;
+            fireControllerGameObjectFactory.WeaponType = value.Weapon.Type;
             weaponInputTurner.WeaponType = value.Weapon.Type;
         }
     }
