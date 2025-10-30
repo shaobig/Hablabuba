@@ -36,7 +36,7 @@ public class WeaponProgressBarGameController : MonoBehaviour,
 
     public void OnFire(WeaponType weaponType)
     {
-        if (weaponProgressBarController != null && (WeaponType.BAZOOKA.Equals(weaponType) || WeaponType.GRENADE.Equals(weaponType)))
+        if (weaponProgressBarController != null && SUPPORT_WEAPON_TYPES.Contains(weaponType))
         {
             gameObjectRemover.Remove(weaponProgressBarController.gameObject);
         }
