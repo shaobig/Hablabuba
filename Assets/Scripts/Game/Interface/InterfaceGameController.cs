@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
+public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller, IndexReseter,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener,
     OnSelectWeaponListener, OnFireListener, OnWeaponProgressBarChangeValueListener
 {
@@ -27,6 +27,11 @@ public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
     public void FillWindow(List<WeaponItem> weaponItemList)
     {
         inventoryInterfaceGameController.FillWindow(weaponItemList);
+    }
+
+    public int ResetIndex()
+    {
+        return inventoryInterfaceGameController.ResetIndex();
     }
 
     public void OnInventoryOpenKeyPressed()

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRefresher,
-    WeaponHolder, WeaponHider,
+    WeaponHolder, WeaponHider, IndexSetter,
     OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnWeaponSelectKeyPressedListener,
     OnDamagePlayerListener
@@ -86,6 +86,11 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         displayController.RefreshDisplay();
     }
 
+    public void SetIndex(int index)
+    {
+        inventoryController.SetIndex(index);
+    }
+
     public void OnMoveKeyPressed(Vector2 moveInput)
     {
         movementController.OnMoveKeyPressed(moveInput);
@@ -155,11 +160,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
     public bool IsDead => healthController.IsDead;
     public List<WeaponItem> WeaponItemList => inventoryController.WeaponItemList;
-
-    public int CurrentWeaponIndex
-    {
-        set => inventoryController.CurrentWeaponIndex = value;
-    }
 
     public OnSelectWeaponListener OnSeleectWeaponListener
     {

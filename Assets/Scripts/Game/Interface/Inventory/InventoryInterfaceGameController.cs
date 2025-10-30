@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryInterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
+public class InventoryInterfaceGameController : MonoBehaviour, Deactivator, WindowFiller, IndexReseter,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener
 {
     [SerializeField]
@@ -21,13 +21,18 @@ public class InventoryInterfaceGameController : MonoBehaviour, Deactivator, Wind
     public void Deactivate()
     {
         windowController.Deactivate();
-        currentIndex = windowController.ResetIndex();
     }
 
     public void FillWindow(List<WeaponItem> weaponItemList)
     {
         windowController.Init(weaponItemList);
         windowController.Activate();
+    }
+
+    public int ResetIndex()
+    {
+        currentIndex = windowController.ResetIndex();
+        return currentIndex;
     }
 
     public void OnInventoryOpenKeyPressed()

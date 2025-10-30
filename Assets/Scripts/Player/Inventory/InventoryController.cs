@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour, WeaponSelector
+public class InventoryController : MonoBehaviour, WeaponSelector, IndexSetter
 {
     [SerializeField]
     private AllWeaponInventoryFiller allWeaponInventoryFiller;
     private List<WeaponItem> weaponItemList;
-    private int currentWeaponIndex;
+    private int currentIndex;
 
     public void Init()
     {
@@ -15,14 +15,14 @@ public class InventoryController : MonoBehaviour, WeaponSelector
 
     public WeaponItem SelectWeapon()
     {
-        return weaponItemList[currentWeaponIndex];
+        return weaponItemList[currentIndex];
+    }
+
+    public void SetIndex(int index)
+    {
+        currentIndex = index;
     }
 
     public List<WeaponItem> WeaponItemList => weaponItemList;
-
-    public int CurrentWeaponIndex
-    {
-        set => currentWeaponIndex = value;
-    }
     
 }

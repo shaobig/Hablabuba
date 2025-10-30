@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour, Mover,
     public void OnWeaponSwitchKeyPressed(Vector2 switchInput)
     {
         interfaceGameController.OnWeaponSwitchKeyPressed(switchInput);
-        playerGameController.CurrentWeaponIndex = interfaceGameController.CurrentWeaponIndex;
+        playerGameController.SetIndex(interfaceGameController.CurrentWeaponIndex);
     }
 
     public void OnWeaponSelectKeyPressed()
@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour, Mover,
         playerGameController.OnWeaponSelectKeyPressed();
         interfaceGameController.OnInventoryOpenKeyPressed();
     }
+    
     public void OnSelectWeapon(WeaponType weaponType)
     {
         interfaceGameController.OnSelectWeapon(weaponType);
@@ -101,6 +102,7 @@ public class GameController : MonoBehaviour, Mover,
     public void OnFire(WeaponType weaponType)
     {
         interfaceGameController.OnFire(weaponType);
+        playerGameController.SetIndex(interfaceGameController.ResetIndex());
     }
 
     public void OnAmmoShot(Transform ammo)

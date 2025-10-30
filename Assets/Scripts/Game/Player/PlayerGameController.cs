@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerGameController : MonoBehaviour, Mover,
+public class PlayerGameController : MonoBehaviour, Mover, IndexSetter,
     OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnWeaponSelectKeyPressedListener,
     OnAmmoCollideListener, OnPlayerKilledListener
@@ -101,11 +101,11 @@ public class PlayerGameController : MonoBehaviour, Mover,
         currentIndex = (currentIndex + playerList.Count) % playerList.Count;
     }
 
-    public PlayerController CurrentPlayer => currentPlayer;
-
-    public int CurrentWeaponIndex
+    public void SetIndex(int index)
     {
-        set => currentPlayer.CurrentWeaponIndex = value;
+        currentPlayer.SetIndex(index);
     }
+
+    public PlayerController CurrentPlayer => currentPlayer;
 
 }
