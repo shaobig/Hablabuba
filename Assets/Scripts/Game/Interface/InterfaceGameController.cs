@@ -21,7 +21,6 @@ public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
     public void Deactivate()
     {
         inventoryInterfaceGameController.Deactivate();
-        weaponProgressBarGameController.Deactivate();
     }
 
     public void FillWindow(List<WeaponItem> weaponItemList)
@@ -46,19 +45,12 @@ public class InterfaceGameController : MonoBehaviour, Deactivator, WindowFiller,
 
     public void OnSelectWeapon(WeaponType weaponType)
     {
-        if (WeaponType.BAZOOKA.Equals(weaponType) || WeaponType.GRENADE.Equals(weaponType))
-        {
-            weaponProgressBarGameController.Activate();
-        }
+        weaponProgressBarGameController.OnSelectWeapon(weaponType);
     }
 
     public void OnFire(WeaponType weaponType)
     {
-        if (WeaponType.BAZOOKA.Equals(weaponType) || WeaponType.GRENADE.Equals(weaponType))
-        {
-            weaponProgressBarGameController.Deactivate();
-        }
-
+        weaponProgressBarGameController.OnFire(weaponType);
         inventoryInterfaceGameController.Deactivate();
     }
 
