@@ -13,8 +13,7 @@ public class WeaponInputTurner : MonoBehaviour, InputTurner
 
     public void Turn(float input)
     {
-        float angle = input * speed * Time.fixedDeltaTime;
-        holdPoint.localRotation *= Quaternion.Euler(angle, 0f, 0f);
+        holdPoint.localRotation *= Quaternion.Euler(Vector3.right * input * speed * Time.fixedDeltaTime);
     }
 
 }
