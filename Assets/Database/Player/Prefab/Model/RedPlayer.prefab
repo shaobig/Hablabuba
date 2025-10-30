@@ -1142,6 +1142,79 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 9157737073638847496}
   m_maskType: 0
+--- !u!1 &6190904070457218131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 581870097241456803}
+  - component: {fileID: 5255589755435938239}
+  - component: {fileID: 8022169650277830788}
+  - component: {fileID: 6341166183853346727}
+  m_Layer: 0
+  m_Name: WeaponTurner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &581870097241456803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6190904070457218131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2163399347679753212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5255589755435938239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6190904070457218131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3618d56424c6e314eadc301443e365c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AngleDefinerWeaponInputTurner
+  weaponTurner: {fileID: 8022169650277830788}
+  weaponTypeDictionaryAngleDefiner: {fileID: 6341166183853346727}
+--- !u!114 &8022169650277830788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6190904070457218131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6035c6c1a2b782744b0fd3cfdbc5867a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponInputTurner
+  speed: 60
+--- !u!114 &6341166183853346727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6190904070457218131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae70f8bc90cb0af4b8483e74446150bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponTypeDictionaryAngleDefiner
 --- !u!1 &6774864827296888889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,7 +1226,6 @@ GameObject:
   - component: {fileID: 2163399347679753212}
   - component: {fileID: 5607070181755272649}
   - component: {fileID: 9030152361358702234}
-  - component: {fileID: 7104335790388757582}
   m_Layer: 0
   m_Name: WeaponController
   m_TagString: GameController
@@ -1175,6 +1247,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8400172153807138564}
+  - {fileID: 581870097241456803}
   - {fileID: 2934795375268465257}
   m_Father: {fileID: 89441493827721468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1192,7 +1265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
   fireControllerGameObjectFactory: {fileID: 8047581216649888302}
   gameObjectRemover: {fileID: 9030152361358702234}
-  weaponTurner: {fileID: 7104335790388757582}
+  weaponInputTurner: {fileID: 5255589755435938239}
   holdPoint: {fileID: 4128739498188107601}
 --- !u!114 &9030152361358702234
 MonoBehaviour:
@@ -1206,19 +1279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba013a717e21b34da3d2720f1908e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameObjectRemover
---- !u!114 &7104335790388757582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774864827296888889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6035c6c1a2b782744b0fd3cfdbc5867a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponTurner
-  speed: 90
 --- !u!1 &7015506961155450284
 GameObject:
   m_ObjectHideFlags: 0

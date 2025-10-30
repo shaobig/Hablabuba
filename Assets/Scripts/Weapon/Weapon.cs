@@ -9,5 +9,6 @@ public class Weapon : ScriptableObject
     private new string name = "Weapon";
 
     public WeaponType Type => type;
-    public string Name => name;  
+    public string Name => name;
+    
 }

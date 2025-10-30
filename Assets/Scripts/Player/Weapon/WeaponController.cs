@@ -8,7 +8,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
     [SerializeField]
     private GameObjectRemover gameObjectRemover;
     [SerializeField]
-    private WeaponTurner weaponTurner;
+    private AngleDefinerWeaponInputTurner weaponInputTurner;
     [SerializeField]
     private Transform holdPoint;
     private FireController fireController;
@@ -23,7 +23,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
         fireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener);
-        weaponTurner.Init(holdPoint);
+        weaponInputTurner.Init(holdPoint);
     }
 
     public void Activate()
@@ -39,6 +39,8 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
     public void HoldWeapon()
     {
         fireController = fireControllerGameObjectFactory.Create(weaponItem.Prefab, holdPoint);
+        weaponInputTurner.Activate();
+
         isWeaponHeld = true;
     }
 
@@ -58,11 +60,8 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
 
     public void OnWeaponChangeAngleKeyPressed(float scrollInput)
     {
-        weaponTurner.ScrollInput = scrollInput;
-        weaponTurner.Turn();
+        weaponInputTurner.Turn(scrollInput);
     }
-
-    public bool IsWeaponHeld => isWeaponHeld;
 
     public WeaponItem WeaponItem
     {
@@ -70,7 +69,10 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         {
             weaponItem = value;
             fireControllerGameObjectFactory.WeaponItem = value;
+            weaponInputTurner.WeaponType = value.Weapon.Type;
         }
     }
+
+    public bool IsWeaponHeld => isWeaponHeld;
 
 }
