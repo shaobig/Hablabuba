@@ -4,13 +4,10 @@ public class RifleFireController : MonoBehaviour, FireController,
     OnAmmoCollideWithTerrainListener
 {
     [SerializeField]
-    private FireControllerEmitter ammoFireController;
+    private LoaderAmmoEmitter loaderAmmoEmitter;
     [SerializeField]
-    private FireControllerAmmoLoader fireControllerAmmoLoader;
-    [SerializeField]
-    private int velocity = 50;
+    private int velocity = 25;
     private CollisionHandler<RifleCollisionContext> collisionHandler;
-    private AmmoPrefab ammoPrefab;
     private OnFireListener onFireListener;
 
     public void Init(
@@ -21,24 +18,22 @@ public class RifleFireController : MonoBehaviour, FireController,
         this.collisionHandler = collisionHandler;
         this.onFireListener = onFireListener;
 
-        ammoPrefab = fireControllerAmmoLoader.LoadAmmo();
-
-        ammoFireController.Init(fireControllerAmmoLoader.LoadAmmo(), onAmmoShotListener, this);
-        ammoFireController.Velocity = velocity;
+        loaderAmmoEmitter.Init(onAmmoShotListener, this);
+        loaderAmmoEmitter.Velocity = velocity;
     }
 
     public void Fire(FireAction fireAction)
     {
         if (FireAction.FIRE.Equals(fireAction))
         {
-            ammoFireController.Emit();
+            loaderAmmoEmitter.Emit();
             onFireListener.OnFire(WeaponType.RIFLE);
         }
     }
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoPrefab).Create());
+        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, loaderAmmoEmitter.AmmoPrefab).Create());
     }
 
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireControllerEmitter : MonoBehaviour, Emitter
+public class VelocityAmmoEmitter : MonoBehaviour, Emitter
 {
     [SerializeField]
     private AmmoEmitter ammoEmitter;

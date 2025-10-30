@@ -25,12 +25,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732822192705393458}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6498271308781538140}
+  m_Father: {fileID: 4218801476004468296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6530144236077237301
 MonoBehaviour:
@@ -277,6 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4218801476004468296}
+  - component: {fileID: 5687639821049614236}
   - component: {fileID: 6060366332988776505}
   - component: {fileID: 2428331647996426213}
   - component: {fileID: 6782768434344932153}
@@ -302,9 +303,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4576212009615677150}
   m_Father: {fileID: 6498271308781538140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5687639821049614236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231988747840505982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c47e7079512144cb086b0e7f9b1328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoaderAmmoEmitter
+  velocityAmmoEmitter: {fileID: 6060366332988776505}
+  fireControllerAmmoLoader: {fileID: 6530144236077237301}
 --- !u!114 &6060366332988776505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +494,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4218801476004468296}
-  - {fileID: 4576212009615677150}
   - {fileID: 8115398067672595915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -494,6 +509,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc30a96dde769bf42b63fdafddaf6de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiffleFireController
-  ammoFireController: {fileID: 6060366332988776505}
-  fireControllerAmmoLoader: {fileID: 6530144236077237301}
+  loaderAmmoEmitter: {fileID: 5687639821049614236}
   velocity: 25

@@ -4,16 +4,13 @@ public class BazookaFireController : MonoBehaviour, FireController,
     OnTimerCountListener, OnTimerFinishListener, OnAmmoCollideWithTerrainListener
 {
     [SerializeField]
-    private FireControllerEmitter ammoFireController;
-    [SerializeField]
-    private FireControllerAmmoLoader fireControllerAmmoLoader;
+    private LoaderAmmoEmitter loaderAmmoEmitter;
     [SerializeField]
     private WeaponTimer weaponTimer;
     [SerializeField]
-    private float velocity = 50;
+    private int velocity = 50;
     [SerializeField]
     private int radius = 40;
-    private AmmoPrefab ammoPrefab;
     private CollisionHandler<ExplosionCollisionContext> collisionHandler;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
@@ -27,11 +24,9 @@ public class BazookaFireController : MonoBehaviour, FireController,
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
         this.collisionHandler = collisionHandler;
-        
-        ammoPrefab = fireControllerAmmoLoader.LoadAmmo();
 
         weaponTimer.Init(this, this);
-        ammoFireController.Init(ammoPrefab, onAmmoShotListener, this);
+        loaderAmmoEmitter.Init(onAmmoShotListener, this);
     }
 
     public void Fire(FireAction fireAction)
@@ -53,15 +48,15 @@ public class BazookaFireController : MonoBehaviour, FireController,
 
     public void OnTimerFinish(float elapsedTime)
     {
-        ammoFireController.Velocity = Mathf.RoundToInt((1 - (elapsedTime / weaponTimer.MaxTime)) * velocity);
-        ammoFireController.Emit();
+        loaderAmmoEmitter.Velocity = Mathf.RoundToInt((1 - (elapsedTime / weaponTimer.MaxTime)) * velocity);
+        loaderAmmoEmitter.Emit();
 
         onFireListener.OnFire(WeaponType.BAZOOKA);
     }
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, ammoPrefab.Ammo.Damage).Create());
+        collisionHandler.HandleCollision(new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, loaderAmmoEmitter.AmmoPrefab.Ammo.Damage).Create());
     }
 
 }

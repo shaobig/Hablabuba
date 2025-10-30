@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7931065473574439409}
+  - component: {fileID: 862728208878325327}
   - component: {fileID: 6980005667793897534}
   - component: {fileID: 4165726833075005008}
   - component: {fileID: 6712436161956896998}
@@ -34,9 +35,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7285902123169097243}
   m_Father: {fileID: 6498271308781538140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &862728208878325327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669289299679819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c47e7079512144cb086b0e7f9b1328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoaderAmmoEmitter
+  velocityAmmoEmitter: {fileID: 6980005667793897534}
+  fireControllerAmmoLoader: {fileID: 1573979213720656871}
 --- !u!114 &6980005667793897534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,12 +466,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4969716032335031333}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6498271308781538140}
+  m_Father: {fileID: 7931065473574439409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1573979213720656871
 MonoBehaviour:
@@ -502,7 +518,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7931065473574439409}
-  - {fileID: 7285902123169097243}
   - {fileID: 8115398067672595915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -518,8 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf2d992ef5562a4da11ac1007962395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BazookaFireController
-  ammoFireController: {fileID: 6980005667793897534}
-  fireControllerAmmoLoader: {fileID: 1573979213720656871}
+  loaderAmmoEmitter: {fileID: 862728208878325327}
   weaponTimer: {fileID: 9101769342928826762}
   velocity: 50
   radius: 20
