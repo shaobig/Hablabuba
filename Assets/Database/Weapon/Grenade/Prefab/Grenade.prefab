@@ -192,7 +192,7 @@ MonoBehaviour:
   grenadeThrower: {fileID: 6784816243314485443}
   grenadeRigidbodyRotator: {fileID: 1832150599467104724}
   weaponTimer: {fileID: 2146064159048741168}
-  force: 10
+  force: 15
   radius: 15
   damage: 60
 --- !u!114 &6784816243314485443
