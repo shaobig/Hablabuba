@@ -5,7 +5,7 @@ public class InventoryInterfaceGameController : MonoBehaviour, Deactivator, Wind
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener
 {
     [SerializeField]
-    private WindowControllerCreator windowControllerCreator;
+    private WindowControllerGameObjectFactory windowControllerGameObjectFactory;
     [SerializeField]
     private GameObject inventoryPrefab;
     private WindowController windowController;
@@ -14,7 +14,7 @@ public class InventoryInterfaceGameController : MonoBehaviour, Deactivator, Wind
 
     public void Init(Transform canvas)
     {
-        windowController = windowControllerCreator.Create(inventoryPrefab, canvas);
+        windowController = windowControllerGameObjectFactory.Create(inventoryPrefab, canvas);
         windowController.gameObject.SetActive(false);
     }
 

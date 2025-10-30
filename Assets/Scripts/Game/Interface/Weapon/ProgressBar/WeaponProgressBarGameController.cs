@@ -4,7 +4,7 @@ public class WeaponProgressBarGameController : MonoBehaviour, Activator, Deactiv
     OnWeaponProgressBarChangeValueListener
 {
     [SerializeField]
-    private WeaponProgressBarControllerCreator weaponProgressBarControllerCreator;
+    private WeaponProgressBarControllerGameObjectFactory weaponProgressBarControllerGameObjectFactory;
     [SerializeField]
     private GameObjectRemover gameObjectRemover;
     [SerializeField]
@@ -14,7 +14,7 @@ public class WeaponProgressBarGameController : MonoBehaviour, Activator, Deactiv
 
     public void Activate()
     {
-        weaponProgressBarController = weaponProgressBarControllerCreator.Create(progressBarPrefab, canvas);
+        weaponProgressBarController = weaponProgressBarControllerGameObjectFactory.Create(progressBarPrefab, canvas);
         weaponProgressBarController.Init();
     }
 

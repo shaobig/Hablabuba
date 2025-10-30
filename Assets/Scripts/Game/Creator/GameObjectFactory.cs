@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface Creator<E>
+public interface GameObjectFactory<E>
 {
     E Create(GameObject prefab, Transform target);
 }

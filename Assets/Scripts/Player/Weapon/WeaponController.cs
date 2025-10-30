@@ -4,7 +4,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
     OnWeaponChangeAngleKeyPressedListener
 {
     [SerializeField]
-    private FireControllerCreator fireControllerCreator;
+    private FireControllerGameObjectFactory fireControllerGameObjectFactory;
     [SerializeField]
     private GameObjectRemover gameObjectRemover;
     [SerializeField]
@@ -22,7 +22,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         OnAmmoCollideListener onAmmoCollideListener,
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
     {
-        fireControllerCreator.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener);
+        fireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener);
         weaponTurner.Init(holdPoint);
     }
 
@@ -38,7 +38,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
 
     public void HoldWeapon()
     {
-        fireController = fireControllerCreator.Create(weaponItem.Prefab, holdPoint);
+        fireController = fireControllerGameObjectFactory.Create(weaponItem.Prefab, holdPoint);
         isWeaponHeld = true;
     }
 
@@ -69,7 +69,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         set
         {
             weaponItem = value;
-            fireControllerCreator.WeaponItem = value;
+            fireControllerGameObjectFactory.WeaponItem = value;
         }
     }
 

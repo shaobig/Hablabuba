@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class InitWeaponSlotControllerCreator : MonoBehaviour, Creator<WeaponSlotController>
+public class InitWeaponSlotControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<WeaponSlotController>
 {
     [SerializeField]
-    private WeaponSlotControllerCreator weaponSlotControllerCreator;
+    private WeaponSlotControllerGameObjectFactory weaponSlotControllerGameObjectFactory;
     private WeaponItem weaponItem;
 
     public WeaponSlotController Create(GameObject prefab, Transform target)
     {
-        var weaponSlotCreator = weaponSlotControllerCreator.Create(prefab, target);
+        var weaponSlotCreator = weaponSlotControllerGameObjectFactory.Create(prefab, target);
         weaponSlotCreator.Init(weaponItem.Sprite, weaponItem.Amount.ToString());
 
         return weaponSlotCreator;
@@ -16,7 +16,6 @@ public class InitWeaponSlotControllerCreator : MonoBehaviour, Creator<WeaponSlot
 
     public WeaponItem WeaponItem
     {
-        get => weaponItem;
         set => weaponItem = value;
     }
 

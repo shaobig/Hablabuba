@@ -152,6 +152,309 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &2546984452257080626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3102823782926292560}
+  - component: {fileID: 5677625250211467038}
+  - component: {fileID: 8228956396581750845}
+  - component: {fileID: 8967798031517587817}
+  m_Layer: 5
+  m_Name: GridController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3102823782926292560
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546984452257080626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5462393556924515974}
+  - {fileID: 8008151601014899983}
+  - {fileID: 9181494352970099781}
+  m_Father: {fileID: 911244898289097904}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5677625250211467038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546984452257080626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a6bf7b6d8c534f87ba63d3660a2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridController
+  inventoryGridFiller: {fileID: 3812475174537266760}
+  weaponSlotRemover: {fileID: 8228956396581750845}
+  inventoryGridSizeMaker: {fileID: 5514513490106633654}
+  gridWeaponSelector: {fileID: 6394113822803160201}
+  columnSize: 5
+--- !u!114 &8228956396581750845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546984452257080626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cb12a7af0de7d408fe61b3186ba33d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotRemover
+  gameObjectRemover: {fileID: 8967798031517587817}
+--- !u!114 &8967798031517587817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546984452257080626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba013a717e21b34da3d2720f1908e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameObjectRemover
+--- !u!1 &3312145970978442129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9181494352970099781}
+  - component: {fileID: 6394113822803160201}
+  - component: {fileID: 993613708754950359}
+  m_Layer: 5
+  m_Name: GridWeaponSelector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9181494352970099781
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312145970978442129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3102823782926292560}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6394113822803160201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312145970978442129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a558e7272a03b4cbe4d45b5ab22f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridWeaponSelector
+  weaponSlotPainter: {fileID: 993613708754950359}
+--- !u!114 &993613708754950359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312145970978442129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14f2ee72aea5d145907ec0f1964ef8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotPainter
+  defaultColour: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+  selectedColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!1 &4196731621950913469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5462393556924515974}
+  - component: {fileID: 3812475174537266760}
+  - component: {fileID: 4391260407473815645}
+  - component: {fileID: 7260559937694954087}
+  - component: {fileID: 3969111670156030771}
+  - component: {fileID: 1721388254346058426}
+  m_Layer: 5
+  m_Name: InventoryGridFiller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5462393556924515974
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196731621950913469}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3102823782926292560}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3812475174537266760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196731621950913469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5379418d2b4674ba4400f5e0c3aaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryGridFiller
+  weaponSlotControllerGameObjectFactory: {fileID: 4391260407473815645}
+  slotPrefab: {fileID: 6764199976054687600, guid: 094041f46442e8e4c8b17fecf5119110, type: 3}
+--- !u!114 &4391260407473815645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196731621950913469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40a6f45be7f8164fb77b053ae67c0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InitWeaponSlotControllerCreator
+  weaponSlotControllerGameObjectFactory: {fileID: 7260559937694954087}
+--- !u!114 &7260559937694954087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196731621950913469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b4b5937b48cec43918d322d15ed9ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotControllerCreator
+  parentGameObjectFactory: {fileID: 3969111670156030771}
+  gameObjectConverter: {fileID: 1721388254346058426}
+--- !u!114 &3969111670156030771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196731621950913469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1fcc95cbc6e374685a00cd95317e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParentGameObjectFactory
+--- !u!114 &1721388254346058426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196731621950913469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04a54c5a9013d149b8f6ec8f5b3b153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotControllerGameObjectConverter
+--- !u!1 &4890112610505071167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8008151601014899983}
+  - component: {fileID: 5514513490106633654}
+  m_Layer: 5
+  m_Name: InventoryGridSizeMaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8008151601014899983
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890112610505071167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3102823782926292560}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5514513490106633654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890112610505071167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d5a9583cecd5b43859560d5c31c436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryGridSizeMaker
+  spacing: 20
+  paddingLeft: 40
+  paddingRight: 40
 --- !u!1 &6664781114334080946
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,16 +591,6 @@ GameObject:
   m_Component:
   - component: {fileID: 911244898289097904}
   - component: {fileID: 8717277563300250271}
-  - component: {fileID: 7279652260353200563}
-  - component: {fileID: 5111612738875869741}
-  - component: {fileID: 774009306837687446}
-  - component: {fileID: 8310580390971598566}
-  - component: {fileID: 3926994561904232026}
-  - component: {fileID: 2125353434308185624}
-  - component: {fileID: 7932381390406410784}
-  - component: {fileID: 7756957846508548653}
-  - component: {fileID: 1917205982461257720}
-  - component: {fileID: 4096989163528489765}
   m_Layer: 5
   m_Name: WeaponPanelController
   m_TagString: Untagged
@@ -317,6 +610,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3102823782926292560}
   - {fileID: 8206539988189580491}
   m_Father: {fileID: 4355167941647352932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -337,145 +631,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a1ba7fab5581943b7561c70e2dfabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPanelController
-  gridController: {fileID: 7279652260353200563}
+  gridController: {fileID: 5677625250211467038}
   gridLayoutGroup: {fileID: 7791250796086671098}
   weaponPanel: {fileID: 8206539988189580491}
---- !u!114 &7279652260353200563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2a6bf7b6d8c534f87ba63d3660a2de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GridController
-  inventoryGridFiller: {fileID: 5111612738875869741}
-  weaponSlotRemover: {fileID: 2125353434308185624}
-  inventoryGridSizeMaker: {fileID: 7756957846508548653}
-  gridWeaponSelector: {fileID: 1917205982461257720}
-  columnSize: 5
---- !u!114 &5111612738875869741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5379418d2b4674ba4400f5e0c3aaa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryGridFiller
-  weaponSlotControllerCreator: {fileID: 774009306837687446}
-  slotPrefab: {fileID: 6764199976054687600, guid: 094041f46442e8e4c8b17fecf5119110, type: 3}
---- !u!114 &774009306837687446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40a6f45be7f8164fb77b053ae67c0e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InitWeaponSlotControllerCreator
-  weaponSlotControllerCreator: {fileID: 8310580390971598566}
---- !u!114 &8310580390971598566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b4b5937b48cec43918d322d15ed9ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotControllerCreator
-  parentObjectCreator: {fileID: 3926994561904232026}
---- !u!114 &3926994561904232026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1fcc95cbc6e374685a00cd95317e6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParentObjectCreator
---- !u!114 &2125353434308185624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00cb12a7af0de7d408fe61b3186ba33d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotRemover
-  gameObjectRemover: {fileID: 7932381390406410784}
---- !u!114 &7932381390406410784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba013a717e21b34da3d2720f1908e53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameObjectRemover
---- !u!114 &7756957846508548653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d5a9583cecd5b43859560d5c31c436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryGridSizeMaker
-  spacing: 20
-  paddingLeft: 40
-  paddingRight: 40
---- !u!114 &1917205982461257720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9a558e7272a03b4cbe4d45b5ab22f1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GridWeaponSelector
-  weaponSlotPainter: {fileID: 4096989163528489765}
---- !u!114 &4096989163528489765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773227239336806893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14f2ee72aea5d145907ec0f1964ef8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotPainter
-  defaultColour: {r: 0.5, g: 0.5, b: 0.5, a: 0}
-  selectedColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1001 &8810663803905367489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -563,6 +721,10 @@ PrefabInstance:
     - target: {fileID: 634797342352589806, guid: 3ad3ab9366ef5f04daec44b7289fb960, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499721454016275452, guid: 3ad3ab9366ef5f04daec44b7289fb960, type: 3}
+      propertyPath: m_fontSize
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6764199976054687600, guid: 3ad3ab9366ef5f04daec44b7289fb960, type: 3}
       propertyPath: m_Name

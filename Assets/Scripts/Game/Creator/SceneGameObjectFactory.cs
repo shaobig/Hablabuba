@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SceneObjectCreator : MonoBehaviour, Creator<GameObject>
+public class SceneGameObjectFactory : MonoBehaviour, GameObjectFactory<GameObject>
 {
     public GameObject Create(GameObject gameObject, Transform target)
     {

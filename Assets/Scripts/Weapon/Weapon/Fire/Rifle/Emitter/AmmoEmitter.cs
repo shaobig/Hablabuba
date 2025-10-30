@@ -3,7 +3,7 @@ using UnityEngine;
 public class AmmoEmitter : MonoBehaviour, Emitter
 {
     [SerializeField]
-    private InitAmmoControllerCreator initAmmoControllerCreator;
+    private InitAmmoControllerGameObjectFactory initAmmoControllerGameObjectFactory;
     private Transform emitPoint;
     private AmmoPrefab ammoPrefab;
     private OnAmmoShotListener onAmmoShotListener;
@@ -20,12 +20,12 @@ public class AmmoEmitter : MonoBehaviour, Emitter
         this.ammoPrefab = ammoPrefab;
         this.onAmmoShotListener = onAmmoShotListener;
 
-        initAmmoControllerCreator.Init(onAmmoCollideWithTerrainListener);
+        initAmmoControllerGameObjectFactory.Init(onAmmoCollideWithTerrainListener);
     }
 
     public void Emit()
     {
-        var ammo = initAmmoControllerCreator.Create(ammoPrefab.Prefab, emitPoint);
+        var ammo = initAmmoControllerGameObjectFactory.Create(ammoPrefab.Prefab, emitPoint);
         onAmmoShotListener.OnAmmoShot(ammo.transform);
 
         var rigidbody = ammo.GetComponent<Rigidbody>();

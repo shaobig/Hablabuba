@@ -7,7 +7,7 @@ public class DatabasePlayerRespawner : MonoBehaviour, Respawner
     [SerializeField]
     private PlayerPrefabDatabaseReader playerPrefabDatabaseReader;
     [SerializeField]
-    private InitPlayerControllerCreator initPlayerControllerCreator;
+    private InitPlayerControllerGameObjectFactory initPlayerControllerGameObjectFactory;
     [SerializeField]
     private List<Transform> respawnPointList;
 
@@ -19,8 +19,8 @@ public class DatabasePlayerRespawner : MonoBehaviour, Respawner
             .Take(respawnQueue.Count)
             .Select(playerPrefab =>
             {
-                initPlayerControllerCreator.Player = playerPrefab.Player;
-                return initPlayerControllerCreator.Create(playerPrefab.Prefab, respawnQueue.Dequeue());
+                initPlayerControllerGameObjectFactory.Player = playerPrefab.Player;
+                return initPlayerControllerGameObjectFactory.Create(playerPrefab.Prefab, respawnQueue.Dequeue());
             })
             .ToList();
     }

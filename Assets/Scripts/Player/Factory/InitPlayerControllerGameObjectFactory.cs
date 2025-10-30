@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class InitPlayerControllerCreator : MonoBehaviour, Creator<PlayerController>
+public class InitPlayerControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<PlayerController>
 {
     [SerializeField]
-    private PlayerControllerCreator playerControllerCreator;
+    private PlayerControllerGameObjectFactory playerControllerGameObjectFactory;
     private Player player;
 
     public PlayerController Create(GameObject prefab, Transform target)
     {
-        var playerController = playerControllerCreator.Create(prefab, target);
+        var playerController = playerControllerGameObjectFactory.Create(prefab, target);
         playerController.Player = player;
 
         return playerController;

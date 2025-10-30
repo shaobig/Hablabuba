@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ParentObjectCreator : MonoBehaviour, Creator<GameObject>
+public class ParentGameObjectFactory : MonoBehaviour, GameObjectFactory<GameObject>
 {
     public GameObject Create(GameObject gameObject, Transform target)
     {

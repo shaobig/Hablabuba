@@ -1152,12 +1152,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2163399347679753212}
   - component: {fileID: 5607070181755272649}
-  - component: {fileID: 3409582631830142148}
-  - component: {fileID: 1274697667053776952}
-  - component: {fileID: 6290155396030539117}
-  - component: {fileID: 5742446776927128338}
-  - component: {fileID: 3262557725529474328}
-  - component: {fileID: 7683807299782440261}
   - component: {fileID: 9030152361358702234}
   - component: {fileID: 7104335790388757582}
   m_Layer: 0
@@ -1180,6 +1174,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8400172153807138564}
   - {fileID: 2934795375268465257}
   m_Father: {fileID: 89441493827721468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1195,89 +1190,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb19ae69f0cac34ab51a22e0a0c12fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  fireControllerCreator: {fileID: 3409582631830142148}
+  fireControllerGameObjectFactory: {fileID: 8047581216649888302}
   gameObjectRemover: {fileID: 9030152361358702234}
   weaponTurner: {fileID: 7104335790388757582}
   holdPoint: {fileID: 4128739498188107601}
---- !u!114 &3409582631830142148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774864827296888889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73a2b437ea23f4c4e8547d50b573ef31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FireControllerCreator
-  bazookaFireControllerCreator: {fileID: 6290155396030539117}
-  rifleFireControllerCreator: {fileID: 1274697667053776952}
-  initGrenadeFireControllerCreator: {fileID: 5742446776927128338}
---- !u!114 &1274697667053776952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774864827296888889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57df06dfcfd719e40bb16856ed7d2a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RiffleFireControllerCreator
-  parentObjectCreator: {fileID: 7683807299782440261}
---- !u!114 &6290155396030539117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774864827296888889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a8cf4a0a63d3ea41be2d3b4cfbdac80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BazookaFireControllerCreator
-  parentObjectCreator: {fileID: 7683807299782440261}
---- !u!114 &5742446776927128338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774864827296888889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbb0478b007d9d042b462d229f8bb069, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InitGrenadeFireControllerCreator
-  grenadeFireControllerCreator: {fileID: 3262557725529474328}
---- !u!114 &3262557725529474328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774864827296888889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24bcb4743c3e2d04a9286e4f71c2d284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GrenadeFireControllerCreator
-  parentObjectCreator: {fileID: 7683807299782440261}
---- !u!114 &7683807299782440261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774864827296888889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1fcc95cbc6e374685a00cd95317e6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParentObjectCreator
 --- !u!114 &9030152361358702234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,6 +1219,122 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponTurner
   speed: 90
+--- !u!1 &7015506961155450284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8400172153807138564}
+  - component: {fileID: 8047581216649888302}
+  - component: {fileID: 3926635886131123319}
+  - component: {fileID: 3330735337214931228}
+  - component: {fileID: 5968994739059586694}
+  - component: {fileID: 8992131154796949263}
+  - component: {fileID: 7148043212117400797}
+  m_Layer: 0
+  m_Name: FireControllerCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8400172153807138564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015506961155450284}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2163399347679753212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8047581216649888302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015506961155450284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a2b437ea23f4c4e8547d50b573ef31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireControllerCreator
+  bazookaFireControllerGameObjectFactory: {fileID: 3926635886131123319}
+  rifleFireControllerGameObjectFactory: {fileID: 3330735337214931228}
+  initGrenadeFireControllerGameObjectFactory: {fileID: 5968994739059586694}
+--- !u!114 &3926635886131123319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015506961155450284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8cf4a0a63d3ea41be2d3b4cfbdac80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BazookaFireControllerCreator
+  parentGameObjectFactory: {fileID: 7148043212117400797}
+--- !u!114 &3330735337214931228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015506961155450284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57df06dfcfd719e40bb16856ed7d2a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RifleFireControllerCreator
+  parentGameObjectFactory: {fileID: 7148043212117400797}
+--- !u!114 &5968994739059586694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015506961155450284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb0478b007d9d042b462d229f8bb069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InitGrenadeFireControllerCreator
+  grenadeFireControllerGameObjectFactory: {fileID: 8992131154796949263}
+--- !u!114 &8992131154796949263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015506961155450284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bcb4743c3e2d04a9286e4f71c2d284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrenadeFireControllerCreator
+  parentGameObjectFactory: {fileID: 7148043212117400797}
+--- !u!114 &7148043212117400797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015506961155450284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1fcc95cbc6e374685a00cd95317e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParentGameObjectFactory
 --- !u!1 &7193757518748147730
 GameObject:
   m_ObjectHideFlags: 0

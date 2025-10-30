@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 234746122}
   - component: {fileID: 234746124}
   - component: {fileID: 234746125}
+  - component: {fileID: 234746127}
   - component: {fileID: 234746123}
   m_Layer: 0
   m_Name: WeaponProgressBarController
@@ -244,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a171c9a447d3ea64d9537caf091b2c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponProgressBarGameController
-  weaponProgressBarControllerCreator: {fileID: 234746124}
+  weaponProgressBarControllerGameObjectFactory: {fileID: 234746124}
   gameObjectRemover: {fileID: 234746123}
   progressBarPrefab: {fileID: 8229921556233608089, guid: f03e49ab87324204d958c274bb382665, type: 3}
 --- !u!114 &234746123
@@ -271,7 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2443f5e26bc67be498c800711de4862f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponProgressBarControllerCreator
-  parentObjectCreator: {fileID: 234746125}
+  parentGameObjectFactory: {fileID: 234746125}
+  gameObjectConverter: {fileID: 234746127}
 --- !u!114 &234746125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +301,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1647785424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234746127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234746121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59291f4845ae7d94ea128cd6e257b9eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponProgressBarControllerGameObjectConverter
 --- !u!1 &242261241
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +497,7 @@ GameObject:
   - component: {fileID: 337103707}
   - component: {fileID: 337103708}
   - component: {fileID: 337103709}
+  - component: {fileID: 337103711}
   m_Layer: 0
   m_Name: InventoryController
   m_TagString: Untagged
@@ -502,7 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21368c4469ec1fe4ebc8511b6ff52b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryInterfaceGameController
-  windowControllerCreator: {fileID: 337103708}
+  windowControllerGameObjectFactory: {fileID: 337103708}
   inventoryPrefab: {fileID: 377455990015306875, guid: ca36d43fcd4dcce4e90651a3399cdcfd, type: 3}
 --- !u!114 &337103708
 MonoBehaviour:
@@ -516,7 +531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ecfc98ef2af86448464cc591dea3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowControllerCreator
-  parentObjectCreator: {fileID: 337103709}
+  parentGameObjectFactory: {fileID: 337103709}
+  gameObjectConverter: {fileID: 337103711}
 --- !u!114 &337103709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +560,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1647785424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &337103711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337103706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ebe8b4a2fd33e4abfcc0e32cd1971d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindowControllerGameObjectConverter
 --- !u!1 &555278404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,9 +1372,10 @@ GameObject:
   - component: {fileID: 1655975634}
   - component: {fileID: 1655975635}
   - component: {fileID: 1655975637}
-  - component: {fileID: 1655975638}
-  - component: {fileID: 1655975640}
+  - component: {fileID: 1655975641}
   - component: {fileID: 1655975639}
+  - component: {fileID: 1655975642}
+  - component: {fileID: 1655975640}
   m_Layer: 0
   m_Name: RespawnController
   m_TagString: Untagged
@@ -1380,7 +1409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DatabasePlayerRespawner
   playerPrefabDatabaseReader: {fileID: 1655975640}
-  initPlayerControllerCreator: {fileID: 1655975637}
+  initPlayerControllerGameObjectFactory: {fileID: 1655975637}
   respawnPointList:
   - {fileID: 1256104260}
   - {fileID: 1969965487}
@@ -1421,20 +1450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f140a9cd92a40704fa695bfbdfe34f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InitPlayerControllerCreator
-  playerControllerCreator: {fileID: 1655975638}
---- !u!114 &1655975638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655975633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783d8fd6cc6788848bbaaa4043024e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerControllerCreator
-  sceneObjectCreator: {fileID: 1655975639}
+  playerControllerGameObjectFactory: {fileID: 1655975641}
 --- !u!114 &1655975639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,6 +1476,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPrefabDatabaseReader
   playerPrefabDatabase: {fileID: 11400000, guid: 9d5d226f2d0d5da45948e4c2845709ff, type: 2}
+--- !u!114 &1655975641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655975633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783d8fd6cc6788848bbaaa4043024e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControllerGameObjectFactory
+  sceneGameObjectFactory: {fileID: 1655975639}
+  gameObjectConverter: {fileID: 1655975642}
+--- !u!114 &1655975642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655975633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb40d8fdf7779047b188862d4c8c60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControllerGameObjectConverter
 --- !u!1 &1743457324
 GameObject:
   m_ObjectHideFlags: 0

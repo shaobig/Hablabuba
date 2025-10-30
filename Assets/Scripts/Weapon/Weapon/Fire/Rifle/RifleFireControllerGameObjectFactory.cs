@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class RifleFireControllerCreator : MonoBehaviour, Creator<RifleFireController>
+public class RifleFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<RifleFireController>
 {
     [SerializeField]
-    private ParentObjectCreator parentObjectCreator;
+    private ParentGameObjectFactory parentGameObjectFactory;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
     private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
@@ -23,7 +23,7 @@ public class RifleFireControllerCreator : MonoBehaviour, Creator<RifleFireContro
 
     public RifleFireController Create(GameObject prefab, Transform target)
     {
-        var rifleFireController = parentObjectCreator.Create(prefab, target).GetComponent<RifleFireController>();
+        var rifleFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<RifleFireController>();
         var collisionHandler = new RifleListenerCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new ContextRifleForceApplierFactory(), new CollisionHandlerRifleDamageCalculatorFactory()).Create();
         
         rifleFireController.Init(collisionHandler, onFireListener, onAmmoShotListener);

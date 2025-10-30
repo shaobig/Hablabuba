@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class BazookaFireControllerCreator : MonoBehaviour, Creator<BazookaFireController>
+public class InitGrenadeFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<GrenadeFireController>
 {
     [SerializeField]
-    private ParentObjectCreator parentObjectCreator;
+    private GrenadeFireControllerGameObjectFactory grenadeFireControllerGameObjectFactory;
+    private WeaponItem weaponItem;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
@@ -24,14 +25,17 @@ public class BazookaFireControllerCreator : MonoBehaviour, Creator<BazookaFireCo
         this.onAmmoCollideListener = onAmmoCollideListener;
     }
 
-    public BazookaFireController Create(GameObject prefab, Transform target)
+    public GrenadeFireController Create(GameObject prefab, Transform target)
     {
-        var bazookaFireController = parentObjectCreator.Create(prefab, target).GetComponent<BazookaFireController>();
-        var collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new ContextExplosionForceApplierFactory(), new ExplosionRadiusDamageCalculatorFactory());
-        
-        bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
+        var grenadeFireController = grenadeFireControllerGameObjectFactory.Create(prefab, target);
+        grenadeFireController.Init(weaponItem, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
 
-        return bazookaFireController;
+        return grenadeFireController;
+    }
+
+    public WeaponItem WeaponItem
+    {
+        set => weaponItem = value;
     }
 
 }

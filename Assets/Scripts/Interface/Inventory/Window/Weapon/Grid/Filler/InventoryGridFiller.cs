@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryGridFiller : MonoBehaviour, GridFiller
 {
     [SerializeField]
-    private InitWeaponSlotControllerCreator weaponSlotControllerCreator;
+    private InitWeaponSlotControllerGameObjectFactory weaponSlotControllerGameObjectFactory;
     [SerializeField]
     private GameObject slotPrefab;
     private RectTransform panel;
@@ -19,8 +19,8 @@ public class InventoryGridFiller : MonoBehaviour, GridFiller
     {
         return weaponList.Select(weapon =>
         {
-            weaponSlotControllerCreator.WeaponItem = weapon;
-            return weaponSlotControllerCreator.Create(slotPrefab, panel);
+            weaponSlotControllerGameObjectFactory.WeaponItem = weapon;
+            return weaponSlotControllerGameObjectFactory.Create(slotPrefab, panel);
         })
         .ToList();
     }
