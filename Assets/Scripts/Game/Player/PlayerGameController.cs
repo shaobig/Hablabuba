@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerGameController : MonoBehaviour, Mover, IndexSetter,
+public class PlayerGameController : MonoBehaviour, IndexSetter,
     OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnWeaponSelectKeyPressedListener,
     OnAmmoCollideListener, OnPlayerKilledListener
@@ -35,7 +35,7 @@ public class PlayerGameController : MonoBehaviour, Mover, IndexSetter,
         playerList.ForEach(player => player.Init(onSeleectWeaponListener, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener));
     }
 
-    public void Move()
+    public void SetNextStep()
     {
         currentIndex = (currentIndex + 1) % playerList.Count;
         currentPlayer = playerList[currentIndex];

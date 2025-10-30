@@ -1,4 +1,4 @@
 public interface Mover
 {
-    void Move();
+    void Move(float input);
 }

@@ -29,12 +29,11 @@ public class WeaponProgressBarController : MonoBehaviour, Activator, Deactivator
         gameObject.SetActive(false);
     }
 
-    public void OnWeaponProgressBarChangeValue(float value)
+    public void OnWeaponProgressBarChangeValue(float input)
     {
-        weaponProgressBarMover.SliderValue = value;
-        weaponProgressBarPainter.SliderValue = value;
+        weaponProgressBarMover.Move(input);
         
-        weaponProgressBarMover.Move();
+        weaponProgressBarPainter.SliderValue = input;
         weaponProgressBarPainter.Paint();
     }
 

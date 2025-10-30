@@ -6,7 +6,7 @@ public class MovementController : MonoBehaviour, Activator, Deactivator,
     [SerializeField]
     private PlayerMover playerMover;
     [SerializeField]
-    private PlayerTurner playerTurner;
+    private PlayerInputTurner playerTurner;
     private Vector2 moveInput;
 
     public void Init(Rigidbody rigidbody)
@@ -21,13 +21,11 @@ public class MovementController : MonoBehaviour, Activator, Deactivator,
     {
         if (playerMover.enabled)
         {
-            playerMover.MoveInput = moveInput.y;
-            playerMover.Move();
+            playerMover.Move(moveInput.y);
         }
         if (playerTurner.enabled)
         {
-            playerTurner.MoveInput = moveInput.x;
-            playerTurner.Turn();
+            playerTurner.Turn(moveInput.x);
         }
     }
 

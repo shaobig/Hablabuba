@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMover : MonoBehaviour, Activator, Deactivator
+public class PlayerMover : MonoBehaviour, Activator, Deactivator, Mover
 {
     [SerializeField]
     private float speed = 5f;
@@ -9,7 +9,6 @@ public class PlayerMover : MonoBehaviour, Activator, Deactivator
     [SerializeField]
     private float deadZone = 0.1f;
     private new Rigidbody rigidbody;
-    private float moveInput;
 
     public void Init(Rigidbody rigidbody)
     {
@@ -26,11 +25,11 @@ public class PlayerMover : MonoBehaviour, Activator, Deactivator
         enabled = false;
     }
 
-    public void Move()
+    public void Move(float input)
     {
-        if (Mathf.Abs(moveInput) > deadZone)
+        if (Mathf.Abs(input) > deadZone)
         {
-            Vector3 moveVelocity = moveInput * speed * transform.forward;
+            Vector3 moveVelocity = input * speed * transform.forward;
             Vector3 smoothVelocity = Vector3.Lerp(rigidbody.linearVelocity, moveVelocity, acceleration * Time.fixedDeltaTime);
             smoothVelocity.y = rigidbody.linearVelocity.y;
             rigidbody.linearVelocity = smoothVelocity;
@@ -41,12 +40,6 @@ public class PlayerMover : MonoBehaviour, Activator, Deactivator
             smoothVelocity.y = rigidbody.linearVelocity.y;
             rigidbody.linearVelocity = smoothVelocity;
         }
-    }
-
-    public float MoveInput
-    {
-        get => moveInput;
-        set => moveInput = value;
     }
 
 }

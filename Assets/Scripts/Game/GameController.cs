@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour, Mover,
+public class GameController : MonoBehaviour,
     OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener, OnWeaponSelectKeyPressedListener,
     OnSelectWeaponListener, OnFireListener, OnWeaponProgressBarChangeValueListener,
@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour, Mover,
 
     void Start()
     {
-        Move();
+        SetNextStep();
     }
 
     void Update()
@@ -40,9 +40,9 @@ public class GameController : MonoBehaviour, Mover,
         Time.timeScale = timeScale;
     }
 
-    public void Move()
+    public void SetNextStep()
     {
-        playerGameController.Move();
+        playerGameController.SetNextStep();
         cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
         interfaceGameController.FillWindow(playerGameController.CurrentPlayer.WeaponItemList);
     }
@@ -119,14 +119,14 @@ public class GameController : MonoBehaviour, Mover,
     {
         cameraGameController.OnSetCameraOnShotPlayerComplete();
         playerGameController.OnAmmoCollide();
-        Move();
+        SetNextStep();
     }
     
     public void OnAmmoCollide()
     {
         playerGameController.OnAmmoCollide();
         cameraGameController.OnAmmoCollide();
-        Move();
+        SetNextStep();
     }
 
     public void OnPlayerKilled(PlayerController player)
