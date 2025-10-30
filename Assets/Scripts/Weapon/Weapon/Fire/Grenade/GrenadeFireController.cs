@@ -23,18 +23,17 @@ public class GrenadeFireController : MonoBehaviour, FireController,
     private bool isGrenadeFlying;
 
     public void Init(
+        CollisionHandler<ExplosionCollisionContext> collisionHandler,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
-        OnAmmoShotListener onAmmoShotListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
-        OnAmmoCollideListener onAmmoCollideListener
+        OnAmmoShotListener onAmmoShotListener
         )
     {
+        this.collisionHandler = collisionHandler;
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
         this.onAmmoShotListener = onAmmoShotListener;
 
-        collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new ContextExplosionForceApplierFactory(), new ExplosionRadiusDamageCalculatorFactory());
         rigidbody = GetComponent<Rigidbody>();
 
         weaponTimer.Init(this, this);
