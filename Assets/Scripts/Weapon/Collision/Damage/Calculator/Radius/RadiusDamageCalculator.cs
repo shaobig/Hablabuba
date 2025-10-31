@@ -18,8 +18,7 @@ public class RadiusDamageCalculator : DamageCalculator
     public int CalculateDamage()
     {
         float distance = Vector3.Distance(point, target);
-        float fixedDamage = damage * (1 - (distance / radius));
-        return Mathf.RoundToInt(fixedDamage);
+        return Mathf.RoundToInt(damage * (1 - Mathf.Pow(distance / radius, 2)));
     }
     
 }

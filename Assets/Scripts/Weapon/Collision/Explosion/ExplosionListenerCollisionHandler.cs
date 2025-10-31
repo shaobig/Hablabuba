@@ -27,7 +27,12 @@ public class ExplosionListenerCollisionHandler : ListenerCollisionHandler<Explos
 
         if (hitPlayerList.Count > 0)
         {
-            hitPlayerList.ForEach(player => player.OnDamagePlayer(damageCalculatorFactory.Create(context, player.transform.position).CalculateDamage()));
+            hitPlayerList
+                .ForEach(player =>
+                {
+                    DamageCalculator damageCalculator = damageCalculatorFactory.Create(context, player.GetComponent<BoxCollider>().ClosestPoint(context.ExplosionPoint));
+                    player.OnDamagePlayer(damageCalculator.CalculateDamage());
+                });
             hitPlayerList.Select(player => player.GetComponent<Rigidbody>())
                 .ToList()
                 .ForEach(rigidbody => forceApplierFactory.Create(context, rigidbody.mass).ApplyForce(rigidbody));

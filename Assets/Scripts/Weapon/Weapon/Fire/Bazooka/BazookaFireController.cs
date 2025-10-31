@@ -14,6 +14,7 @@ public class BazookaFireController : MonoBehaviour, FireController,
     private CollisionHandler<ExplosionCollisionContext> collisionHandler;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
+    private ExplosionCollisionContext context;
 
     public void Init(
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
@@ -56,7 +57,17 @@ public class BazookaFireController : MonoBehaviour, FireController,
 
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, loaderAmmoEmitter.AmmoPrefab.Ammo.Damage).Create());
+        context = new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, loaderAmmoEmitter.AmmoPrefab.Ammo.Damage).Create();
+        collisionHandler.HandleCollision(context);
+    }
+
+    void OnDrawGizmos()
+    {
+        if (context != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(context.ExplosionPoint, context.Radius);
+        }
     }
 
 }
