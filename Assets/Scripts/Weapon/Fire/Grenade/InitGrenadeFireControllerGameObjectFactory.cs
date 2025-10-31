@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class BazookaFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<BazookaFireController>
+public class InitGrenadeFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<GrenadeFireController>
 {
     [SerializeField]
-    private ParentGameObjectFactory parentGameObjectFactory;
+    private GrenadeFireControllerGameObjectFactory grenadeFireControllerGameObjectFactory;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
@@ -24,14 +24,14 @@ public class BazookaFireControllerGameObjectFactory : MonoBehaviour, GameObjectF
         this.onAmmoCollideListener = onAmmoCollideListener;
     }
 
-    public BazookaFireController Create(GameObject prefab, Transform target)
+    public GrenadeFireController Create(GameObject prefab, Transform target)
     {
-        var bazookaFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<BazookaFireController>();
-        var collisionHandler = new ExplosionListenerCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new PlayerControllerRadiusObjectFinderFactory().Create(), new ContextExplosionForceApplierFactory(), new ExplosionRadiusDamageCalculatorFactory());
-        
-        bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
+        var grenadeFireController = grenadeFireControllerGameObjectFactory.Create(prefab, target);
+        var collisionHandler = new ExplosionCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener).Create();
 
-        return bazookaFireController;
+        grenadeFireController.Init(collisionHandler, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
+
+        return grenadeFireController;
     }
-
+    
 }
