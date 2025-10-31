@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class ExplosionListenerCollisionHandler : ListenerCollisionHandler<ExplosionCollisionContext>
 {
+    private ObjectFinder<ExplosionCollisionContext, PlayerController> objectFinder;
     private ForceApplierFactory<ExplosionCollisionContext> forceApplierFactory;
     private RadiusDamageCalculatorFactory damageCalculatorFactory;
 
     public ExplosionListenerCollisionHandler(
         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
         OnAmmoCollideListener onAmmoCollideListener,
+        ObjectFinder<ExplosionCollisionContext, PlayerController> objectFinder,
         ForceApplierFactory<ExplosionCollisionContext> forceApplierFactory,
         RadiusDamageCalculatorFactory damageCalculatorFactory) : base(onSetCameraOnShotPlayerListener, onAmmoCollideListener)
     {
+        this.objectFinder = objectFinder;
         this.forceApplierFactory = forceApplierFactory;
         this.damageCalculatorFactory = damageCalculatorFactory;
     }
 
     public override void HandleCollision(ExplosionCollisionContext context)
     {
-        List<PlayerController> hitPlayerList = Physics.OverlapSphere(context.ExplosionPoint, context.Radius)
-            .Select(collider => collider.gameObject)
-            .Select(gameObject => gameObject.GetComponent<PlayerController>())
-            .Where(playerController => playerController != null)
-            .ToList();
-
+        List<PlayerController> hitPlayerList = objectFinder.Find(context);
+        
         if (hitPlayerList.Count > 0)
         {
             hitPlayerList
