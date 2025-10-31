@@ -12,7 +12,7 @@ public class ExplosionCollisionHandlerFactory : CollisionHandlerFactory<Explosio
 
     public CollisionHandler<ExplosionCollisionContext> Create()
     {
-        return new ExplosionCollisionHandler(new PlayerControllerRadiusObjectFinderFactory().Create(), new PlayerControllerObjectCollisionHandler(new ContextExplosionForceApplierFactory(), new ListPlayerControllerDamageHandler(new PlayerControllerDamageHandler(new ExplosionRadiusDamageCalculatorFactory()))), onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        return new ExplosionCollisionHandler(new PlayerControllerRadiusObjectFinderFactory().Create(), new PlayerControllerObjectCollisionHandler(new ExplosionListPlayerControllerForceHandlerFactory().Create(), new ListPlayerControllerDamageHandler(new PlayerControllerDamageHandler(new ExplosionRadiusDamageCalculatorFactory()))), onSetCameraOnShotPlayerListener, onAmmoCollideListener);
     }
     
 }
