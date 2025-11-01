@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public interface ObjectFinder<C, O> where C: CollisionContext
+public interface ObjectFinder<C, E> where C: CollisionContext
 {
-    List<O> Find(C context);
+    List<E> Find(C context);
 }

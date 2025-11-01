@@ -27,9 +27,9 @@ public class InitGrenadeFireControllerGameObjectFactory : MonoBehaviour, GameObj
     public GrenadeFireController Create(GameObject prefab, Transform target)
     {
         var grenadeFireController = grenadeFireControllerGameObjectFactory.Create(prefab, target);
-        var collisionHandler = new ExplosionCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener).Create();
+        // var collisionHandler = new ExplosionContextCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener).Create();
 
-        grenadeFireController.Init(collisionHandler, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
+        // grenadeFireController.Init(collisionHandler, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
 
         return grenadeFireController;
     }

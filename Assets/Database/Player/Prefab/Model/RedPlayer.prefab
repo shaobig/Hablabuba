@@ -576,6 +576,7 @@ GameObject:
   - component: {fileID: 292322297162780021}
   - component: {fileID: 1142855897192249944}
   - component: {fileID: 5644629379642219300}
+  - component: {fileID: 9131951127595558629}
   m_Layer: 0
   m_Name: RedPlayer
   m_TagString: Player
@@ -670,6 +671,20 @@ MonoBehaviour:
   weaponController: {fileID: 5607070181755272649}
   healthController: {fileID: 5598905402118413326}
   bodyController: {fileID: 3423257802102585088}
+  healthTaker: {fileID: 9131951127595558629}
+--- !u!114 &9131951127595558629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3788321445585943614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8908d89632143f347ae19956f80a22d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthTaker
+  health: 1
 --- !u!1 &4211973461706066071
 GameObject:
   m_ObjectHideFlags: 0

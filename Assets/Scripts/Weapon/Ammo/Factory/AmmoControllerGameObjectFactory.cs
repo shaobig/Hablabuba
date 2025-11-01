@@ -6,11 +6,11 @@ public class AmmoControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<
     [SerializeField]
     private SceneGameObjectFactory sceneGameObjectFactory;
     [SerializeField]
-    private AmmoControllerGameObjectConverter gameObjectConverter;
+    private AmmoControllerGameObjectConverter GameObjectConverter;
 
     public AmmoController Create(GameObject prefab, Transform target)
     {
-        return gameObjectConverter.Convert(sceneGameObjectFactory.Create(prefab, target));
+        return GameObjectConverter.Convert(sceneGameObjectFactory.Create(prefab, target));
     }
 
 }

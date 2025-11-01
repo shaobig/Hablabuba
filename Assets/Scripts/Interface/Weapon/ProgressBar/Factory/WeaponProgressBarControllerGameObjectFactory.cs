@@ -5,11 +5,11 @@ public class WeaponProgressBarControllerGameObjectFactory : MonoBehaviour, GameO
     [SerializeField]
     private ParentGameObjectFactory parentGameObjectFactory;
     [SerializeField]
-    private WeaponProgressBarControllerGameObjectConverter gameObjectConverter;
+    private WeaponProgressBarControllerGameObjectConverter monoBehaviourCreator;
 
     public WeaponProgressBarController Create(GameObject prefab, Transform canvas)
     {
-        return gameObjectConverter.Convert(parentGameObjectFactory.Create(prefab, canvas));
+        return monoBehaviourCreator.Convert(parentGameObjectFactory.Create(prefab, canvas));
     }
 
 }

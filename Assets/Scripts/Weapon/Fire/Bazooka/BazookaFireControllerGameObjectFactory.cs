@@ -27,9 +27,9 @@ public class BazookaFireControllerGameObjectFactory : MonoBehaviour, GameObjectF
     public BazookaFireController Create(GameObject prefab, Transform target)
     {
         var bazookaFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<BazookaFireController>();
-        var collisionHandler = new ExplosionCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener).Create();
+        // var collisionHandler = new ExplosionContextCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener).Create();
         
-        bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
+        // bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
 
         return bazookaFireController;
     }

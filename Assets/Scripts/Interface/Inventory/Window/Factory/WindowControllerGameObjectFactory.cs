@@ -5,11 +5,11 @@ public class WindowControllerGameObjectFactory : MonoBehaviour, GameObjectFactor
     [SerializeField]
     private ParentGameObjectFactory parentGameObjectFactory;
     [SerializeField]
-    private WindowControllerGameObjectConverter gameObjectConverter;
+    private WindowControllerGameObjectConverter GameObjectConverter;
 
     public WindowController Create(GameObject gameObject, Transform canvasTransform)
     {
-        return gameObjectConverter.Convert(parentGameObjectFactory.Create(gameObject, canvasTransform));
+        return GameObjectConverter.Convert(parentGameObjectFactory.Create(gameObject, canvasTransform));
     }
 
 }

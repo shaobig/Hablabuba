@@ -5,11 +5,11 @@ public class WeaponSlotControllerGameObjectFactory : MonoBehaviour, GameObjectFa
     [SerializeField]
     private ParentGameObjectFactory parentGameObjectFactory;
     [SerializeField]
-    private WeaponSlotControllerGameObjectConverter gameObjectConverter;
+    private WeaponSlotControllerGameObjectConverter GameObjectConverter;
 
     public WeaponSlotController Create(GameObject prefab, Transform target)
     {
-        return gameObjectConverter.Convert(parentGameObjectFactory.Create(prefab, target));
+        return GameObjectConverter.Convert(parentGameObjectFactory.Create(prefab, target));
     }
 
 }
