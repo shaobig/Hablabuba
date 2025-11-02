@@ -5,7 +5,7 @@ public class WeaponTypeDictionaryAngleDefiner : MonoBehaviour, AngleDefiner
 {
     private Dictionary<WeaponType, int> weaponTypeAngleDictionary = new()
     {
-        { WeaponType.RIFLE, -15 },
+        { WeaponType.RIFLE, 0 },
         { WeaponType.BAZOOKA, -45 },
         { WeaponType.GRENADE, -45 },
     };

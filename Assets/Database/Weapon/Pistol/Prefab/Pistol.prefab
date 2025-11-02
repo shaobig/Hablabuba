@@ -466,4 +466,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiffleFireController
   loaderAmmoEmitter: {fileID: 5687639821049614236}
-  velocity: 25
+  velocity: 60
