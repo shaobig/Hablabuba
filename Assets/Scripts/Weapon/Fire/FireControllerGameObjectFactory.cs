@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<FireController>
@@ -15,11 +16,11 @@ public class FireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnAmmoCollideListener onAmmoCollideListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
+        OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener)
     {
-        rifleFireControllerGameObjectFactory.Init(onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
-        bazookaFireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
-        initGrenadeFireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnShotPlayerListener, onAmmoCollideListener);
+        rifleFireControllerGameObjectFactory.Init(onFireListener, onAmmoShotListener, onSetCameraOnObjectListener, onAmmoCollideListener);
+        bazookaFireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnObjectListener, onAmmoCollideListener);
+        initGrenadeFireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onSetCameraOnObjectListener, onAmmoCollideListener);
     }
 
     public FireController Create(GameObject weaponPrefab, Transform holdPoint)

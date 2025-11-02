@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RifleFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<RifleFireController>
@@ -6,25 +7,25 @@ public class RifleFireControllerGameObjectFactory : MonoBehaviour, GameObjectFac
     private ParentGameObjectFactory parentGameObjectFactory;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
-    private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
+    private OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener;
     private OnAmmoCollideListener onAmmoCollideListener;
 
     public void Init(
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
+        OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener,
         OnAmmoCollideListener onAmmoCollideListener)
     {
         this.onFireListener = onFireListener;
         this.onAmmoShotListener = onAmmoShotListener;
         this.onAmmoCollideListener = onAmmoCollideListener;
-        this.onSetCameraOnShotPlayerListener = onSetCameraOnShotPlayerListener;
+        this.onSetCameraOnObjectListener = onSetCameraOnObjectListener;
     }
 
     public RifleFireController Create(GameObject prefab, Transform target)
     {
         var rifleFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<RifleFireController>();
-        // var collisionHandler = new RifleListenerCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener, new ContextRifleForceApplierFactory(), new CollisionHandlerRifleDamageCalculatorFactory()).Create();
+        // var collisionHandler = new RifleListenerCollisionHandlerFactory(onSetCameraOnObjectListener, onAmmoCollideListener, new ContextRifleForceApplierFactory(), new CollisionHandlerRifleDamageCalculatorFactory()).Create();
         
         // rifleFireController.Init(collisionHandler, onFireListener, onAmmoShotListener);
 

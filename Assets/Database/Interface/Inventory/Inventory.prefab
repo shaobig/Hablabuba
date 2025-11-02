@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSlotControllerCreator
   parentGameObjectFactory: {fileID: 3969111670156030771}
-  gameObjectConverter: {fileID: 1721388254346058426}
+  GameObjectConverter: {fileID: 1721388254346058426}
 --- !u!114 &3969111670156030771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,7 +724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2499721454016275452, guid: 3ad3ab9366ef5f04daec44b7289fb960, type: 3}
       propertyPath: m_fontSize
-      value: 27
+      value: 26.9
       objectReference: {fileID: 0}
     - target: {fileID: 6764199976054687600, guid: 3ad3ab9366ef5f04daec44b7289fb960, type: 3}
       propertyPath: m_Name

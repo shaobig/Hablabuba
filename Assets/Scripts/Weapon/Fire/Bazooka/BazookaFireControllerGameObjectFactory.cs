@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BazookaFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<BazookaFireController>
@@ -7,29 +8,29 @@ public class BazookaFireControllerGameObjectFactory : MonoBehaviour, GameObjectF
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
-    private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
+    private OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener;
     private OnAmmoCollideListener onAmmoCollideListener;
 
     public void Init(
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
+        OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener,
         OnAmmoCollideListener onAmmoCollideListener)
     {
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;
         this.onAmmoShotListener = onAmmoShotListener;
-        this.onSetCameraOnShotPlayerListener = onSetCameraOnShotPlayerListener;
+        this.onSetCameraOnObjectListener = onSetCameraOnObjectListener;
         this.onAmmoCollideListener = onAmmoCollideListener;
     }
 
     public BazookaFireController Create(GameObject prefab, Transform target)
     {
         var bazookaFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<BazookaFireController>();
-        // var collisionHandler = new ExplosionContextCollisionHandlerFactory(onSetCameraOnShotPlayerListener, onAmmoCollideListener).Create();
+        var collisionHandler = new ExplosionCollisionContextMonoBehaviourCollisionHandlerFactory<PlayerController>(onSetCameraOnObjectListener, onAmmoCollideListener).Create();
         
-        // bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
+        bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
 
         return bazookaFireController;
     }

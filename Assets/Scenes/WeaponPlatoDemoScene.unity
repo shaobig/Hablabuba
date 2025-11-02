@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponProgressBarControllerCreator
   parentGameObjectFactory: {fileID: 234746125}
-  gameObjectConverter: {fileID: 234746127}
+  monoBehaviourCreator: {fileID: 234746127}
 --- !u!114 &234746125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowControllerCreator
   parentGameObjectFactory: {fileID: 337103709}
-  gameObjectConverter: {fileID: 337103711}
+  GameObjectConverter: {fileID: 337103711}
 --- !u!114 &337103709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 1001138148}
   - component: {fileID: 1001138150}
   m_Layer: 0
-  m_Name: ShotPlayerCamera
+  m_Name: ShotObjectCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -983,7 +983,7 @@ MonoBehaviour:
   mainCamera: {fileID: 2109255752}
   playerCamera: {fileID: 721758157}
   ammoCamera: {fileID: 555278407}
-  shotPlayerCamera: {fileID: 1001138148}
+  shotObjectCamera: {fileID: 1001138148}
 --- !u!4 &1206328737
 Transform:
   m_ObjectHideFlags: 0
@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControllerGameObjectFactory
   sceneGameObjectFactory: {fileID: 1655975639}
-  gameObjectConverter: {fileID: 1655975642}
+  GameObjectConverter: {fileID: 1655975642}
 --- !u!114 &1655975642
 MonoBehaviour:
   m_ObjectHideFlags: 0

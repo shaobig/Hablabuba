@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class MonoBehaviourCollisionHandler<C, E> : CollisionHandler<C> where C: CollisionContext
+public class MonoBehaviourCollisionHandlerFactory<C, E> : CollisionHandlerFactory<C> where C: CollisionContext
 {
     private ObjectFinder<C, E> objectFinder;
     private ObjectCollisionHandler<C, List<E>> objectCollisionHandler;
     private OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener;
     private OnAmmoCollideListener onAmmoCollideListener;
 
-    public MonoBehaviourCollisionHandler(
+    public MonoBehaviourCollisionHandlerFactory(
         ObjectFinder<C, E> objectFinder,
         ObjectCollisionHandler<C, List<E>> objectCollisionHandler,
         OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener,
@@ -20,19 +19,8 @@ public class MonoBehaviourCollisionHandler<C, E> : CollisionHandler<C> where C: 
         this.onAmmoCollideListener = onAmmoCollideListener;
     }
 
-    public void HandleCollision(C context)
+    public CollisionHandler<C> Create()
     {
-        List<E> entityList = objectFinder.Find(context);
-
-        if (entityList.Count > 0)
-        {
-            objectCollisionHandler.HandleCollision(context, entityList);
-            onSetCameraOnObjectListener.OnSetCameraOnObjectList(entityList);
-        }
-        else
-        {
-            onAmmoCollideListener.OnAmmoCollide();
-        }
+        return new MonoBehaviourCollisionHandler<C, E>(objectFinder, objectCollisionHandler, onSetCameraOnObjectListener, onAmmoCollideListener);
     }
-    
 }

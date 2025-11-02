@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, FireController,
@@ -20,9 +21,9 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnAmmoCollideListener onAmmoCollideListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
+        OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener)
     {
-        fireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener);
+        fireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener);
         weaponInputTurner.Init(holdPoint);
     }
 

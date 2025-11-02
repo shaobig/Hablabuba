@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     private HealthController healthController;
     [SerializeField]
     private BodyController bodyController;
-    [SerializeField]
-    private HealthTaker healthTaker;
     private Player player;
     private OnSelectWeaponListener onSeleectWeaponListener;
 
@@ -30,11 +28,11 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnAmmoCollideListener onAmmoCollideListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener)
+        OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener)
     {
         this.onSeleectWeaponListener = onSeleectWeaponListener;
 
-        displayController.Init(player.name, healthTaker.Health, bodyController.Renderer.material.color);
+        displayController.Init(player.name, healthController.MaxHealth, bodyController.Renderer.material.color);
         displayController.Paint();
 
         movementController.Init(GetComponent<Rigidbody>());
@@ -42,9 +40,9 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
         inventoryController.Init();
 
-        healthController.Init(healthTaker.Health);
+        weaponController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener);
 
-        weaponController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener);
+        healthController.Init();
     }
 
     public void Activate()
@@ -90,7 +88,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     public void TakeDamage(int damage)
     {
         healthController.TakeDamage(damage);
-        displayController.SetHealthText(healthController.Health);
+        displayController.SetHealthText(healthController.CurrentHealth);
     }
 
     public void OnMoveKeyPressed(Vector2 moveInput)
@@ -149,19 +147,19 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
     }
 
+    public bool IsDead => healthController.IsDead;
+
+    public List<WeaponItem> WeaponItemList => inventoryController.WeaponItemList;
+
+    public Player Player
+    {
+        set => player = value;
+    }
+
     public Transform Camera
     {
         set => displayController.Camera = value;
     }
-
-    public Player Player
-    {
-        get => player;
-        set => player = value;
-    }
-
-    public bool IsDead => healthController.IsDestroyed;
-    public List<WeaponItem> WeaponItemList => inventoryController.WeaponItemList;
 
     public OnSelectWeaponListener OnSeleectWeaponListener
     {

@@ -6,4 +6,5 @@ public class ExplosionCollisionContextListMonoBehaviourObjectFinderFactory<E> : 
     {
         return new ListMonoBehaviourObjectFinder<ExplosionCollisionContext, E>(new RadiusGameObjectFinder(), new ComponentGameObjectConverter<E>());
     }
+
 }

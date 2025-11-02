@@ -25,14 +25,14 @@ public class PlayerGameController : MonoBehaviour, IndexSetter,
         OnPlayerKilledListener onPlayerKilledListener,
         OnGameFinishedListener onGameFinishedListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
+        OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener,
         OnAmmoCollideListener onAmmoCollideListener)
     {
         this.playerList = playerList;
         this.onPlayerKilledListener = onPlayerKilledListener;
         this.onGameFinishedListener = onGameFinishedListener;
 
-        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnShotPlayerListener));
+        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener));
     }
 
     public void SetNextStep()

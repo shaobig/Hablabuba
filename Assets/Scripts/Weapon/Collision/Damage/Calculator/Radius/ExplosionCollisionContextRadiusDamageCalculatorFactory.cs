@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExplosionRadiusDamageCalculatorFactory : RadiusDamageCalculatorFactory
+public class ExplosionCollisionContextRadiusDamageCalculatorFactory : RadiusDamageCalculatorFactory
 {
     public DamageCalculator Create(ExplosionCollisionContext context, Vector3 playerPosition)
     {

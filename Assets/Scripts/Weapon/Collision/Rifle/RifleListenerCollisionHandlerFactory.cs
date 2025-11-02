@@ -1,17 +1,17 @@
 // public class RifleListenerCollisionHandlerFactory : Factory<CollisionHandler<RifleCollisionContext>>
 // {
-//     private OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener;
+//     private onSetCameraOnObjectListener onSetCameraOnObjectListener;
 //     private OnAmmoCollideListener onAmmoCollideListener;
 //     private ContextRifleForceApplierFactory forceApplierFactory;
 //     private RifleDamageCalculatorFactory damageCalculatorFactory;
 
 //     public RifleListenerCollisionHandlerFactory(
-//         OnSetCameraOnShotPlayerListener onSetCameraOnShotPlayerListener,
+//         onSetCameraOnObjectListener onSetCameraOnObjectListener,
 //         OnAmmoCollideListener onAmmoCollideListener,
 //         ContextRifleForceApplierFactory forceApplierFactory,
 //         RifleDamageCalculatorFactory damageCalculatorFactory)
 //     {
-//         this.onSetCameraOnShotPlayerListener = onSetCameraOnShotPlayerListener;
+//         this.onSetCameraOnObjectListener = onSetCameraOnObjectListener;
 //         this.onAmmoCollideListener = onAmmoCollideListener;
 //         this.forceApplierFactory = forceApplierFactory;
 //         this.damageCalculatorFactory = damageCalculatorFactory;
@@ -19,7 +19,7 @@
 
 //     public CollisionHandler<RifleCollisionContext> Create()
 //     {
-//         return new RifleCollisionHandler(onSetCameraOnShotPlayerListener, onAmmoCollideListener, forceApplierFactory, damageCalculatorFactory);
+//         return new RifleCollisionHandler(onSetCameraOnObjectListener, onAmmoCollideListener, forceApplierFactory, damageCalculatorFactory);
 //     }
 
 // }
