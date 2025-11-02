@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7e78563cc25cc448b31ea07ba4fa3a, type: 3}
+  m_Name: RifleAmmoPrefab
+  m_EditorClassIdentifier: Assembly-CSharp::AmmoPrefab
+  name: Rifle Bullet
+  ammo: {fileID: 11400000, guid: 891688bf496ee70488c9b0f649f8f593, type: 2}
+  prefab: {fileID: 3119375219372136179, guid: 981417b06dbd5ca4e9f0f698a46bf47e, type: 3}
