@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TagGameObjectFinder : ObjectFinder<RifleCollisionContext, GameObject>
 {
-    private string tag;
+    private readonly string tag;
 
     public TagGameObjectFinder(string tag)
     {

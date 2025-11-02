@@ -14,7 +14,7 @@ public class ExplosionCollisionContextMonoBehaviourCollisionHandlerFactory<E> : 
 
     public CollisionHandler<ExplosionCollisionContext> Create()
     {
-        return new MonoBehaviourCollisionHandlerFactory<ExplosionCollisionContext, E>(new ExplosionCollisionContextListMonoBehaviourObjectFinderFactory<E>().Create(), new ExplosionCollisionContextListMonoBehaviourObjectCollisionHandlerFactory<E>().Create(), onSetCameraOnObjectListener, onAmmoCollideListener).Create();
+        return new MonoBehaviourCollisionHandlerFactory<ExplosionCollisionContext, E>(new ExplosionCollisionContextMonoBehaviourObjectFinderFactory<E>().Create(), new ExplosionCollisionContextListMonoBehaviourObjectCollisionHandlerFactory<E>().Create(), onSetCameraOnObjectListener, onAmmoCollideListener).Create();
     }
 
 }

@@ -1,4 +1,4 @@
-public class ContextRifleForceApplierFactory : ForceApplierFactory<RifleCollisionContext>
+public class RifleCollisionContextForceApplierFactory : ForceApplierFactory<RifleCollisionContext>
 { 
     public ForceApplier Create(RifleCollisionContext context, float mass)
     {

@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoControllerGameObjectFactory
   sceneGameObjectFactory: {fileID: 8985613496073599831}
-  gameObjectConverter: {fileID: 3587337510791978886}
+  GameObjectConverter: {fileID: 3587337510791978886}
 --- !u!114 &8985613496073599831
 MonoBehaviour:
   m_ObjectHideFlags: 0

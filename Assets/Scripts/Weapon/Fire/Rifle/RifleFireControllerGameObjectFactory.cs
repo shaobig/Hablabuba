@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class RifleFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<RifleFireController>
 {
+    private const string PLAYER_TAG = "Player";
+
     [SerializeField]
     private ParentGameObjectFactory parentGameObjectFactory;
     private OnFireListener onFireListener;
@@ -25,9 +27,9 @@ public class RifleFireControllerGameObjectFactory : MonoBehaviour, GameObjectFac
     public RifleFireController Create(GameObject prefab, Transform target)
     {
         var rifleFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<RifleFireController>();
-        // var collisionHandler = new RifleListenerCollisionHandlerFactory(onSetCameraOnObjectListener, onAmmoCollideListener, new ContextRifleForceApplierFactory(), new CollisionHandlerRifleDamageCalculatorFactory()).Create();
+        var collisionHandler = new RifleCollisionContextMonoBehaviourCollisionHandlerFactory<PlayerController>(PLAYER_TAG, onSetCameraOnObjectListener, onAmmoCollideListener).Create();
         
-        // rifleFireController.Init(collisionHandler, onFireListener, onAmmoShotListener);
+        rifleFireController.Init(collisionHandler, onFireListener, onAmmoShotListener);
 
         return rifleFireController;
     }

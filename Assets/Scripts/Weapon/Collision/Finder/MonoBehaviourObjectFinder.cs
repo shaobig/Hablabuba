@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ListMonoBehaviourObjectFinder<C, E> : ObjectFinder<C, E> where C: CollisionContext where E: MonoBehaviour
+public class MonoBehaviourObjectFinder<C, E> : ObjectFinder<C, E> where C: CollisionContext where E: MonoBehaviour
 {
     private ObjectFinder<C, GameObject> objectFinder;
     private GameObjectConverter<E> gameObjectConverter;
 
-    public ListMonoBehaviourObjectFinder(ObjectFinder<C, GameObject> objectFinder, GameObjectConverter<E> gameObjectConverter)
+    public MonoBehaviourObjectFinder(ObjectFinder<C, GameObject> objectFinder, GameObjectConverter<E> gameObjectConverter)
     {
         this.objectFinder = objectFinder;
         this.gameObjectConverter = gameObjectConverter;

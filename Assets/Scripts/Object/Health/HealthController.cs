@@ -16,10 +16,7 @@ public class HealthController : MonoBehaviour, DamageTaker
 
     public void TakeDamage(int damage)
     {
-        Debug.Log(damage);
-        Debug.Log(currentHealth);
         currentHealth = Math.Max(DEATH_HEALTH, currentHealth - damage);
-        Debug.Log(currentHealth);
     }
 
     public int MaxHealth => maxHealth;
