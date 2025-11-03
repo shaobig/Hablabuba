@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class BazookaFireController : MonoBehaviour, FireController,
+public class BazookaShootController : MonoBehaviour, ShootController,
     OnTimerCountListener, OnTimerFinishListener, OnAmmoCollideWithTerrainListener
 {
     [SerializeField]
-    private LoaderAmmoEmitter loaderAmmoEmitter;
+    private AmmoShooterController loaderAmmoEmitter;
     [SerializeField]
     private WeaponTimer weaponTimer;
     [SerializeField]
@@ -30,13 +30,13 @@ public class BazookaFireController : MonoBehaviour, FireController,
         loaderAmmoEmitter.Init(onAmmoShotListener, this);
     }
 
-    public void Fire(FireAction fireAction)
+    public void Shoot(ShootAction action)
     {
-        if (FireAction.LONG_FIRE.Equals(fireAction))
+        if (ShootAction.LONG_FIRE.Equals(action))
         {
             weaponTimer.Activate();
         }
-        else if (FireAction.STOP.Equals(fireAction))
+        else if (ShootAction.STOP.Equals(action))
         {
             weaponTimer.Deactivate();
         }
@@ -59,15 +59,6 @@ public class BazookaFireController : MonoBehaviour, FireController,
     {
         context = new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, loaderAmmoEmitter.AmmoPrefab.Ammo.Damage).Create();
         collisionHandler.HandleCollision(context);
-    }
-
-    void OnDrawGizmos()
-    {
-        if (context != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(context.ExplosionPoint, context.Radius);
-        }
     }
 
 }

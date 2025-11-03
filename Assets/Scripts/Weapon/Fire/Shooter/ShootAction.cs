@@ -1,4 +1,4 @@
-public enum FireAction
+public enum ShootAction
 {
     FIRE,
     LONG_FIRE,

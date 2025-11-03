@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class RifleFireController : MonoBehaviour, FireController,
+public class RifleFireController : MonoBehaviour, AimShootController,
     OnAmmoCollideWithTerrainListener
 {
     [SerializeField]
-    private LoaderAmmoEmitter loaderAmmoEmitter;
+    private AmmoShooterController ammoFireController;
+    [SerializeField]
+    private AimController aimController;
     [SerializeField]
     private int velocity = 25;
     private CollisionHandler<RifleCollisionContext> collisionHandler;
@@ -12,28 +14,36 @@ public class RifleFireController : MonoBehaviour, FireController,
 
     public void Init(
         CollisionHandler<RifleCollisionContext> collisionHandler,
+        OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener)
     {
         this.collisionHandler = collisionHandler;
         this.onFireListener = onFireListener;
 
-        loaderAmmoEmitter.Init(onAmmoShotListener, this);
-        loaderAmmoEmitter.Velocity = velocity;
+        ammoFireController.Init(onAmmoShotListener, this);
+        ammoFireController.Velocity = velocity;
+
+        aimController.Init(onAimTakenListener);
     }
 
-    public void Fire(FireAction fireAction)
+    public void Shoot(ShootAction action)
     {
-        if (FireAction.FIRE.Equals(fireAction))
+        if (ShootAction.FIRE.Equals(action))
         {
-            loaderAmmoEmitter.Emit();
+            ammoFireController.Emit();
             onFireListener.OnFire(WeaponType.RIFLE);
         }
     }
 
+    public void TakeAim()
+    {
+        aimController.TakeAim();
+    }
+
     public void OnAmmoCollideWithTerrain(Collision collision)
     {
-        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, loaderAmmoEmitter.AmmoPrefab).Create());
+        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoFireController.AmmoPrefab).Create());
     }
 
 }

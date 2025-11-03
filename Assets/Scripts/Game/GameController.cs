@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour,
-    OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
+    OnMoveKeyPressedListener,
+    OnAimKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener, OnWeaponSelectKeyPressedListener,
-    OnSelectWeaponListener, OnFireListener, OnWeaponProgressBarChangeValueListener,
+    OnSelectWeaponListener, OnAimTakenListener, OnFireListener, OnWeaponProgressBarChangeValueListener,
     OnAmmoShotListener, OnSetCameraOnObjectListener<List<PlayerController>>, OnSetCameraOnObjectCompleteListener, OnPlayerKilledListener, OnAmmoCollideListener, OnGameFinishedListener
 {
     [SerializeField]
@@ -24,9 +25,9 @@ public class GameController : MonoBehaviour,
     {
         var playerList = respawnGameController.Respawn();
         
-        playerGameController.Init(playerList, this, this, this, this, this, this, this, this);
+        playerGameController.Init(playerList, this, this, this, this, this, this, this, this, this);
         cameraGameController.Init(playerList, this);
-        inputGameController.Init(this, this, this, this, this, this, this, this);
+        inputGameController.Init(this, this, this, this, this, this, this, this, this);
         interfaceGameController.Init();
     }
 
@@ -50,6 +51,11 @@ public class GameController : MonoBehaviour,
     public void OnMoveKeyPressed(Vector2 moveInput)
     {
         playerGameController.OnMoveKeyPressed(moveInput);
+    }
+
+    public void OnAimKeyPressed()
+    {
+        playerGameController.OnAimKeyPressed();
     }
 
     public void OnInventoryOpenKeyPressed()
@@ -97,6 +103,11 @@ public class GameController : MonoBehaviour,
     public void OnStopFireKeyPressed()
     {
         playerGameController.OnStopFireKeyPressed();
+    }
+
+    public void OnAimTaken(Transform aimPoint)
+    {
+        cameraGameController.OnAimTaken(aimPoint);
     }
 
     public void OnFire(WeaponType weaponType)

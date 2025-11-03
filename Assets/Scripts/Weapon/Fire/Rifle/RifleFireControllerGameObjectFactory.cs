@@ -1,37 +1,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RifleFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<RifleFireController>
+public class RifleFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<AimShootController>
 {
     private const string PLAYER_TAG = "Player";
 
     [SerializeField]
     private ParentGameObjectFactory parentGameObjectFactory;
+    private OnAimTakenListener onAimTakenListener;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
     private OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener;
     private OnAmmoCollideListener onAmmoCollideListener;
 
     public void Init(
+        OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener,
         OnAmmoCollideListener onAmmoCollideListener)
     {
+        this.onAimTakenListener = onAimTakenListener;
         this.onFireListener = onFireListener;
         this.onAmmoShotListener = onAmmoShotListener;
         this.onAmmoCollideListener = onAmmoCollideListener;
         this.onSetCameraOnObjectListener = onSetCameraOnObjectListener;
     }
 
-    public RifleFireController Create(GameObject prefab, Transform target)
+    public AimShootController Create(GameObject prefab, Transform target)
     {
-        var rifleFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<RifleFireController>();
+        var rifleShooter = parentGameObjectFactory.Create(prefab, target).GetComponent<RifleFireController>();
         var collisionHandler = new RifleCollisionContextMonoBehaviourCollisionHandlerFactory<PlayerController>(PLAYER_TAG, onSetCameraOnObjectListener, onAmmoCollideListener).Create();
         
-        rifleFireController.Init(collisionHandler, onFireListener, onAmmoShotListener);
+        rifleShooter.Init(collisionHandler, onAimTakenListener, onFireListener, onAmmoShotListener);
 
-        return rifleFireController;
+        return rifleShooter;
     }
 
 }

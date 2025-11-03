@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class LoaderAmmoEmitter : MonoBehaviour, Emitter
+public class AmmoShooterController : MonoBehaviour, Emitter
 {
     [SerializeField]
     private VelocityAmmoEmitter velocityAmmoEmitter;
     [SerializeField]
-    private FireControllerAmmoLoader fireControllerAmmoLoader;
+    private LoadController ShooterAmmoLoader;
     private AmmoPrefab ammoPrefab;
 
     public void Init(
         OnAmmoShotListener onAmmoShotListener,
         OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener)
     {
-        ammoPrefab = fireControllerAmmoLoader.LoadAmmo();
+        ammoPrefab = ShooterAmmoLoader.LoadAmmo();
 
         velocityAmmoEmitter.Init(ammoPrefab, onAmmoShotListener, onAmmoCollideWithTerrainListener);
     }

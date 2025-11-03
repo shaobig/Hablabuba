@@ -4,8 +4,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRefresher,
     WeaponHolder, WeaponHider, IndexSetter,
     DamageTaker,
-    OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
-    OnWeaponSelectKeyPressedListener
+    OnMoveKeyPressedListener,
+    OnWeaponSelectKeyPressedListener,
+    OnAimKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener
 {
     [SerializeField]
     private DisplayController displayController;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     public void Init(
         OnSelectWeaponListener onSeleectWeaponListener,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnAmmoCollideListener onAmmoCollideListener,
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
 
         inventoryController.Init();
 
-        weaponController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener);
+        weaponController.Init(onWeaponProgressBarChangeValueListener, onAimTakenListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener);
 
         healthController.Init();
     }
@@ -105,6 +107,14 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         }
     }
 
+    public void OnAimKeyPressed()
+    {
+        if (weaponController.IsWeaponHeld)
+        {
+            weaponController.TakeAim();
+        }
+    }
+
     public void OnWeaponSelectKeyPressed()
     {
         if (weaponController.IsWeaponHeld)
@@ -123,7 +133,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     {
         if (weaponController.IsWeaponHeld)
         {
-            weaponController.Fire(FireAction.FIRE);
+            weaponController.Shoot(ShootAction.FIRE);
         }
     }
 
@@ -131,7 +141,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     {
         if (weaponController.IsWeaponHeld)
         {
-            weaponController.Fire(FireAction.LONG_FIRE);
+            weaponController.Shoot(ShootAction.LONG_FIRE);
         }
     }
 
@@ -139,7 +149,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
     {
         if (weaponController.IsWeaponHeld)
         {
-            weaponController.Fire(FireAction.STOP);
+            weaponController.Shoot(ShootAction.STOP);
 
             movementController.Deactivate();
             weaponController.Deactivate();

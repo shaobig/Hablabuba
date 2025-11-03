@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb19ae69f0cac34ab51a22e0a0c12fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  fireControllerGameObjectFactory: {fileID: 8047581216649888302}
+  shooterGameObjectFactory: {fileID: 8047581216649888302}
   gameObjectRemover: {fileID: 9030152361358702234}
   weaponInputTurner: {fileID: 5255589755435938239}
   holdPoint: {fileID: 4128739498188107601}
@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 8992131154796949263}
   - component: {fileID: 7148043212117400797}
   m_Layer: 0
-  m_Name: FireControllerCreator
+  m_Name: ShootControllerCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,9 +1297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a2b437ea23f4c4e8547d50b573ef31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireControllerCreator
-  bazookaFireControllerGameObjectFactory: {fileID: 3926635886131123319}
-  rifleFireControllerGameObjectFactory: {fileID: 3330735337214931228}
-  initGrenadeFireControllerGameObjectFactory: {fileID: 5968994739059586694}
+  bazookaShooterGameObjectFactory: {fileID: 3926635886131123319}
+  rifleShooterGameObjectFactory: {fileID: 3330735337214931228}
+  initGrenadeShooterGameObjectFactory: {fileID: 5968994739059586694}
 --- !u!114 &3926635886131123319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1338,7 +1338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb0478b007d9d042b462d229f8bb069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InitGrenadeFireControllerCreator
-  grenadeFireControllerGameObjectFactory: {fileID: 8992131154796949263}
+  grenadeShooterGameObjectFactory: {fileID: 8992131154796949263}
 --- !u!114 &8992131154796949263
 MonoBehaviour:
   m_ObjectHideFlags: 0

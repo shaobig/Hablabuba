@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BazookaFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<BazookaFireController>
+public class BazookaShootControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<ShootController>
 {
     [SerializeField]
     private ParentGameObjectFactory parentGameObjectFactory;
@@ -25,14 +25,14 @@ public class BazookaFireControllerGameObjectFactory : MonoBehaviour, GameObjectF
         this.onAmmoCollideListener = onAmmoCollideListener;
     }
 
-    public BazookaFireController Create(GameObject prefab, Transform target)
+    public ShootController Create(GameObject prefab, Transform target)
     {
-        var bazookaFireController = parentGameObjectFactory.Create(prefab, target).GetComponent<BazookaFireController>();
+        var bazookaShooter = parentGameObjectFactory.Create(prefab, target).GetComponent<BazookaShootController>();
         var collisionHandler = new ExplosionCollisionContextMonoBehaviourCollisionHandlerFactory<PlayerController>(onSetCameraOnObjectListener, onAmmoCollideListener).Create();
         
-        bazookaFireController.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
+        bazookaShooter.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, collisionHandler);
 
-        return bazookaFireController;
+        return bazookaShooter;
     }
 
 }

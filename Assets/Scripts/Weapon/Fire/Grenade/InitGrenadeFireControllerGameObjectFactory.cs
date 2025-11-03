@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InitGrenadeFireControllerGameObjectFactory : MonoBehaviour, GameObjectFactory<GrenadeFireController>
+public class InitGrenadeShooterGameObjectFactory : MonoBehaviour, GameObjectFactory<GrenadeShootController>
 {
     [SerializeField]
-    private GrenadeFireControllerGameObjectFactory grenadeFireControllerGameObjectFactory;
+    private GrenadeShooterGameObjectFactory grenadeShooterGameObjectFactory;
     private OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener;
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
@@ -25,14 +25,14 @@ public class InitGrenadeFireControllerGameObjectFactory : MonoBehaviour, GameObj
         this.onAmmoCollideListener = onAmmoCollideListener;
     }
 
-    public GrenadeFireController Create(GameObject prefab, Transform target)
+    public GrenadeShootController Create(GameObject prefab, Transform target)
     {
-        var grenadeFireController = grenadeFireControllerGameObjectFactory.Create(prefab, target);
+        var grenadeShooter = grenadeShooterGameObjectFactory.Create(prefab, target);
         var collisionHandler = new ExplosionCollisionContextMonoBehaviourCollisionHandlerFactory<PlayerController>(onSetCameraOnObjectListener, onAmmoCollideListener).Create();
 
-        grenadeFireController.Init(collisionHandler, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
+        grenadeShooter.Init(collisionHandler, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener);
         
-        return grenadeFireController;
+        return grenadeShooter;
     }
     
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GrenadeFireController : MonoBehaviour, FireController,
+public class GrenadeShootController : MonoBehaviour, ShootController,
     OnTimerCountListener, OnTimerFinishListener, OnGrenadeDestroyListener
 {
     [SerializeField]
@@ -53,13 +53,13 @@ public class GrenadeFireController : MonoBehaviour, FireController,
         isGrenadeFlying = false;
     }
 
-    public void Fire(FireAction fireAction)
+    public void Shoot(ShootAction action)
     {
-        if (FireAction.LONG_FIRE.Equals(fireAction))
+        if (ShootAction.LONG_FIRE.Equals(action))
         {
             weaponTimer.Activate();
         }
-        if (FireAction.STOP.Equals(fireAction))
+        if (ShootAction.STOP.Equals(action))
         {
             weaponTimer.Deactivate();
             onFireListener.OnFire(WeaponType.GRENADE);

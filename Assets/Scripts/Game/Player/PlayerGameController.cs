@@ -3,7 +3,8 @@ using System.Linq;
 using UnityEngine;
 
 public class PlayerGameController : MonoBehaviour, IndexSetter,
-    OnMoveKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
+    OnMoveKeyPressedListener,
+    OnWeaponChangeAngleKeyPressedListener, OnAimKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnWeaponSelectKeyPressedListener,
     OnAmmoCollideListener, OnPlayerKilledListener
 {
@@ -19,7 +20,8 @@ public class PlayerGameController : MonoBehaviour, IndexSetter,
 
     public void Init(
         List<PlayerController> playerList,
-        OnSelectWeaponListener onSeleectWeaponListener,
+        OnSelectWeaponListener onSelectWeaponListener,
+        OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnPlayerKilledListener onPlayerKilledListener,
@@ -32,7 +34,7 @@ public class PlayerGameController : MonoBehaviour, IndexSetter,
         this.onPlayerKilledListener = onPlayerKilledListener;
         this.onGameFinishedListener = onGameFinishedListener;
 
-        playerList.ForEach(player => player.Init(onSeleectWeaponListener, onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener));
+        playerList.ForEach(player => player.Init(onSelectWeaponListener, onWeaponProgressBarChangeValueListener, onAimTakenListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener));
     }
 
     public void SetNextStep()
@@ -46,6 +48,11 @@ public class PlayerGameController : MonoBehaviour, IndexSetter,
     public void OnMoveKeyPressed(Vector2 moveInput)
     {
         currentPlayer.OnMoveKeyPressed(moveInput);
+    }
+
+    public void OnAimKeyPressed()
+    {
+        currentPlayer.OnAimKeyPressed();
     }
 
     public void OnWeaponSelectKeyPressed()

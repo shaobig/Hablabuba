@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireControllerAmmoLoader : MonoBehaviour, AmmoLoader
+public class LoadController : MonoBehaviour, AmmoLoader
 {
     [SerializeField]
     private AmmoPrefab ammoPrefab;

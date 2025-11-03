@@ -1,29 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, FireController,
+public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHolder, WeaponHider, ShootController, AimTaker,
     OnWeaponChangeAngleKeyPressedListener
 {
     [SerializeField]
-    private FireControllerGameObjectFactory fireControllerGameObjectFactory;
+    private ShootControllerGameObjectFactory shooterGameObjectFactory;
     [SerializeField]
     private GameObjectRemover gameObjectRemover;
     [SerializeField]
     private AngleDefinerWeaponInputTurner weaponInputTurner;
     [SerializeField]
     private Transform holdPoint;
-    private FireController fireController;
+    private AimShootController shootController;
     private WeaponItem weaponItem;
     private bool isWeaponHeld;
 
     public void Init(
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
+        OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnAmmoCollideListener onAmmoCollideListener,
         OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener)
     {
-        fireControllerGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener);
+        shooterGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onAimTakenListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener);
         weaponInputTurner.Init(holdPoint);
     }
 
@@ -39,7 +40,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
 
     public void HoldWeapon()
     {
-        fireController = fireControllerGameObjectFactory.Create(weaponItem.Prefab, holdPoint);
+        shootController = shooterGameObjectFactory.Create(weaponItem.Prefab, holdPoint);
         weaponInputTurner.Activate();
 
         isWeaponHeld = true;
@@ -51,12 +52,17 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         isWeaponHeld = false;
     }
 
-    public void Fire(FireAction fireAction)
+    public void Shoot(ShootAction fireAction)
     {
         if (enabled)
         {
-            fireController.Fire(fireAction);
+            shootController.Shoot(fireAction);
         }
+    }
+
+    public void TakeAim()
+    {
+        shootController.TakeAim();
     }
 
     public void OnWeaponChangeAngleKeyPressed(float scrollInput)
@@ -69,7 +75,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         set
         {
             weaponItem = value;
-            fireControllerGameObjectFactory.WeaponType = value.Weapon.Type;
+            shooterGameObjectFactory.WeaponType = value.Weapon.Type;
             weaponInputTurner.WeaponType = value.Weapon.Type;
         }
     }

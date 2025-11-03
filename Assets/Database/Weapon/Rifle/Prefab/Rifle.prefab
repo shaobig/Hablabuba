@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &178571116598540581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2625378092852446773}
+  - component: {fileID: 4559900960815287436}
+  m_Layer: 0
+  m_Name: AimController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2625378092852446773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178571116598540581}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8299454887635705765}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4559900960815287436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178571116598540581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2192c8f520e56594dbb069f347457c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AimController
+  aimPoint: {fileID: 7800637423677824680}
 --- !u!1 &1068136021854264874
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +76,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 313883687155345624}
+  - {fileID: 2625378092852446773}
   - {fileID: 7010986697260045600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,7 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc30a96dde769bf42b63fdafddaf6de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RifleFireController
-  loaderAmmoEmitter: {fileID: 2623817127937174228}
+  ammoFireController: {fileID: 2623817127937174228}
+  aimController: {fileID: 4559900960815287436}
   velocity: 120
 --- !u!1 &1104441964803728494
 GameObject:
@@ -79,6 +126,37 @@ Transform:
   m_Children:
   - {fileID: 158694181984812012}
   - {fileID: 4308418340747450386}
+  m_Father: {fileID: 7010986697260045600}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1844576198592272307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7800637423677824680}
+  m_Layer: 0
+  m_Name: AimPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7800637423677824680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844576198592272307}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 7010986697260045600}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987599950014571833
@@ -181,7 +259,7 @@ GameObject:
   - component: {fileID: 7653277493864140137}
   - component: {fileID: 4531085547304619251}
   m_Layer: 0
-  m_Name: AmmoLoader
+  m_Name: LoadController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +324,7 @@ Transform:
   m_Children:
   - {fileID: 1325486673520549474}
   - {fileID: 7016039179160211115}
+  - {fileID: 7800637423677824680}
   m_Father: {fileID: 8299454887635705765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5629564107915231764
@@ -444,7 +523,7 @@ GameObject:
   - component: {fileID: 8711199500483921182}
   - component: {fileID: 899543673230730997}
   m_Layer: 0
-  m_Name: FireControllerEmitter
+  m_Name: AmmoShootController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoaderAmmoEmitter
   velocityAmmoEmitter: {fileID: 7448383495617176712}
-  fireControllerAmmoLoader: {fileID: 4531085547304619251}
+  ShooterAmmoLoader: {fileID: 4531085547304619251}
 --- !u!114 &7448383495617176712
 MonoBehaviour:
   m_ObjectHideFlags: 0

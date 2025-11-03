@@ -14,24 +14,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "8d889294-852c-44d0-9f29-1ae765ed7eaa",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ChangeWeaponAngle",
-                    "type": "Value",
-                    "id": "65dc860d-6632-4056-b37f-e6f9cd997ce4",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -89,10 +71,78 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Weapon",
+            "id": "0b94c681-872a-434a-aca0-3c33e2bdc9f5",
+            "actions": [
+                {
+                    "name": "ChangeAngle",
+                    "type": "Value",
+                    "id": "eeb96af8-c6db-44d6-b7f7-3ebb72b77a35",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "cd0479fd-275a-425c-bce7-653e4b95508d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "ed4c5060-90c0-4725-93a6-3c2cfb4d8a55",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "00d79386-fbb7-465f-889f-d1f21495b6e4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeAngle",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f1d4a847-ec3e-4f06-9b13-df32b1296c4e",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeAngle",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9b32da2b-5378-4c5f-ac9a-88733d3a21ee",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeAngle",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "9a626d13-a215-49b9-abb0-d1fb49adb24d",
+                    "id": "956cc422-751e-47bf-8fe1-fba0c63b8eea",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press,Hold",
                     "processors": "",
@@ -102,37 +152,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "858b6ff8-23b2-42ec-9dba-b651d499943a",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "eb5d518c-596c-4705-82b3-0ca5a4c2b715",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeWeaponAngle",
-                    "isComposite": true,
+                    "action": "Aim",
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "3144708e-3574-4757-b4f8-d5555d19b0d5",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeWeaponAngle",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "b91ea36c-3639-4b27-900b-5174337fcced",
-                    "path": "<Mouse>/scroll/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeWeaponAngle",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },
