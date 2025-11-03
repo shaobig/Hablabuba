@@ -18,6 +18,7 @@ public class InputGameController : MonoBehaviour
         OnWeaponSwitchKeyPressedListener onWeaponSwitchKeyPressedListener,
         OnWeaponChangeAngleKeyPressedListener onWeaponChangeAngleKeyPressedListener,
         OnAimKeyPressedListener onAimKeyPressedListener,
+        OnAimKeyReleasedListener onAimKeyReleasedListener,
         OnWeaponSelectKeyPressedListener onWeaponSelectKeyPressedListener,
         OnFireKeyPressedListener onFireKeyPressedListener,
         OnLongFireKeyPressedListener onLongFireKeyPressedListener,
@@ -25,7 +26,7 @@ public class InputGameController : MonoBehaviour
     {
         playerInputGameController.Init(inputActionAsset, onMoveKeyPressedListener);
         interfaceInputController.Init(inputActionAsset, onInventoryOpenKeyPressedListener, onWeaponSwitchKeyPressedListener, onWeaponSelectKeyPressedListener);
-        weaponInputController.Init(inputActionAsset, onWeaponChangeAngleKeyPressedListener, onAimKeyPressedListener, onFireKeyPressedListener, onLongFireKeyPressedListener, onStopFireKeyPressedListener);
+        weaponInputController.Init(inputActionAsset, onWeaponChangeAngleKeyPressedListener, onAimKeyPressedListener, onAimKeyReleasedListener, onFireKeyPressedListener, onLongFireKeyPressedListener, onStopFireKeyPressedListener);
     }
 
 }

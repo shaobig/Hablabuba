@@ -10,6 +10,7 @@ public class WeaponInputController : MonoBehaviour
         InputActionAsset inputActionAsset,
         OnWeaponChangeAngleKeyPressedListener onWeaponChangeAngleKeyPressedListener,
         OnAimKeyPressedListener onAimKeyPressedListener,
+        OnAimKeyReleasedListener onAimKeyReleasedListener,
         OnFireKeyPressedListener onFireKeyPressedListener,
         OnLongFireKeyPressedListener onLongFireKeyPressedListener,
         OnStopFireKeyPressedListener onStopFireKeyPressedListener)
@@ -18,6 +19,7 @@ public class WeaponInputController : MonoBehaviour
 
         weaponInputAction.ChangeAngleAction.performed += context => onWeaponChangeAngleKeyPressedListener.OnWeaponChangeAngleKeyPressed(context.ReadValue<float>());
         weaponInputAction.AimAction.performed += context => onAimKeyPressedListener.OnAimKeyPressed();
+        weaponInputAction.AimAction.canceled += context => onAimKeyReleasedListener.OnAimKeyReleased();
 
         weaponInputAction.FireAction.started += context => onFireKeyPressedListener.OnFireKeyPressed();
         weaponInputAction.FireAction.performed += context => onLongFireKeyPressedListener.OnLongFireKeyPressed();

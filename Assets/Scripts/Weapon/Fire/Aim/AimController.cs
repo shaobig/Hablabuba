@@ -13,7 +13,6 @@ public class AimController : MonoBehaviour, AimTaker
 
     public void TakeAim()
     {
-        Debug.Log("Allo, I'm here!");
         onAimTakenListener.OnAimTaken(aimPoint);
     }
     

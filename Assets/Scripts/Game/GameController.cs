@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour,
     OnMoveKeyPressedListener,
-    OnAimKeyPressedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
+    OnAimKeyPressedListener, OnAimKeyReleasedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener, OnWeaponSelectKeyPressedListener,
     OnSelectWeaponListener, OnAimTakenListener, OnFireListener, OnWeaponProgressBarChangeValueListener,
     OnAmmoShotListener, OnSetCameraOnObjectListener<List<PlayerController>>, OnSetCameraOnObjectCompleteListener, OnPlayerKilledListener, OnAmmoCollideListener, OnGameFinishedListener
@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour,
         
         playerGameController.Init(playerList, this, this, this, this, this, this, this, this, this);
         cameraGameController.Init(playerList, this);
-        inputGameController.Init(this, this, this, this, this, this, this, this, this);
+        inputGameController.Init(this, this, this, this, this, this, this, this, this, this);
         interfaceGameController.Init();
     }
 
@@ -56,6 +56,11 @@ public class GameController : MonoBehaviour,
     public void OnAimKeyPressed()
     {
         playerGameController.OnAimKeyPressed();
+    }
+
+    public void OnAimKeyReleased()
+    {
+        cameraGameController.OnAimKeyReleased();
     }
 
     public void OnInventoryOpenKeyPressed()
