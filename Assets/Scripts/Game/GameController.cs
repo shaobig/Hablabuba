@@ -131,9 +131,9 @@ public class GameController : MonoBehaviour,
         cameraGameController.OnSetCameraOnObjectList(playerList);
     }
 
-    public void OnSetCameraOnObjectComplete()
+    public void OnSetCameraOnObjectCompleted()
     {
-        cameraGameController.OnSetCameraOnObjectComplete();
+        cameraGameController.OnSetCameraOnObjectCompleted();
         playerGameController.OnAmmoCollide();
         SetNextStep();
     }

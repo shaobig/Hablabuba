@@ -1,5 +1,5 @@
 
 public interface OnSetCameraOnObjectCompleteListener
 {
-    void OnSetCameraOnObjectComplete();
+    void OnSetCameraOnObjectCompleted();
 }

@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
 
-public class GameCameraActivator : CameraActivator
+public class CinemachineCameraActivator : CameraActivator
 {
     private const int INACTIVE_CAMERA_PRIORITY = 0;
     private const int ACTIVE_CAMERA_PRIORITY = 1;
 
-    private Dictionary<CameraType, CinemachineCamera> cameraDictionary;
+    private readonly Dictionary<CameraType, CinemachineCamera> cameraDictionary;
     private CinemachineCamera activeCamera;
 
-    public GameCameraActivator(Dictionary<CameraType, CinemachineCamera> cameraDictionary, CinemachineCamera activeCamera)
+    public CinemachineCameraActivator(Dictionary<CameraType, CinemachineCamera> cameraDictionary, CinemachineCamera activeCamera)
     {
         this.cameraDictionary = cameraDictionary;
         this.activeCamera = activeCamera;

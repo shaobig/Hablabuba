@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
 
-public class GameCameraActivatorFactory : CameraActivatorFactory
+public class CinemachineCameraActivatorFactory : CameraActivatorFactory
 {
     private readonly Dictionary<CameraType, CinemachineCamera> cameraDictionary;
     private readonly CinemachineCamera activeCamera;
 
-    public GameCameraActivatorFactory(Dictionary<CameraType, CinemachineCamera> cameraDictionary, CinemachineCamera activeCamera)
+    public CinemachineCameraActivatorFactory(Dictionary<CameraType, CinemachineCamera> cameraDictionary, CinemachineCamera activeCamera)
     {
         this.cameraDictionary = cameraDictionary;
         this.activeCamera = activeCamera;
@@ -14,7 +14,7 @@ public class GameCameraActivatorFactory : CameraActivatorFactory
 
     public CameraActivator Create()
     {
-        return new GameCameraActivator(cameraDictionary, activeCamera);
+        return new CinemachineCameraActivator(cameraDictionary, activeCamera);
     }
 
 }

@@ -62,7 +62,10 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
 
     public void TakeAim()
     {
-        shootController.TakeAim();
+        if (enabled)
+        {
+            shootController.TakeAim();
+        }
     }
 
     public void OnWeaponChangeAngleKeyPressed(float scrollInput)

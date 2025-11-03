@@ -11,7 +11,7 @@ public class CameraGameController : MonoBehaviour,
     [SerializeField]
     private AmmoCameraController ammoCameraController;
     [SerializeField]
-    private ShotObjectCameraController shotPlayerCameraController;
+    private ShotCameraController shotPlayerCameraController;
     [SerializeField]
     private AimCameraController aimCameraController;
     [SerializeField]
@@ -35,7 +35,7 @@ public class CameraGameController : MonoBehaviour,
         shotPlayerCameraController.Init(shotCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
         aimCameraController.Init(aimCamera);
 
-        cameraActivator = new ListGameCameraActivatorFactory(new() {playerCamera, ammoCamera, shotCamera, aimCamera}, playerCamera).Create();
+        cameraActivator = new ListBlockCameraActivatorFactory(new() {playerCamera, ammoCamera, shotCamera, aimCamera}).Create();
     }
 
     public void Follow(Transform target)
@@ -56,9 +56,10 @@ public class CameraGameController : MonoBehaviour,
         shotPlayerCameraController.OnSetCameraOnObjectList(playerList);
     }
 
-    public void OnSetCameraOnObjectComplete()
+    public void OnSetCameraOnObjectCompleted()
     {
         cameraActivator.ActivateCamera(CameraType.PLAYER);
+        ammoCameraController.OnSetCameraOnObjectCompleted();
     }
 
     public void OnAmmoCollide()
@@ -74,6 +75,10 @@ public class CameraGameController : MonoBehaviour,
     
     public void OnAimKeyReleased()
     {
+        if (ammoCameraController.IsAmmoFlown)
+        {
+            return;
+        }
         cameraActivator.ActivateCamera(CameraType.PLAYER);
     }
 
