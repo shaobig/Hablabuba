@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraGameController
   playerCameraController: {fileID: 61945001}
   ammoCameraController: {fileID: 1070529996}
-  shotPlayerCameraController: {fileID: 731900300}
+  shotCameraController: {fileID: 731900300}
   aimCameraController: {fileID: 118012522}
   activatorController: {fileID: 1613761064}
   mainCamera: {fileID: 2109255752}
@@ -1527,7 +1527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac8ea0eb0e1caf4b86c445768ca8182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActivatorController
-  cameraTypes: 01000000
 --- !u!4 &1613761065
 Transform:
   m_ObjectHideFlags: 0
