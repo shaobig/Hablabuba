@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActivatorController : MonoBehaviour, CameraActivator,
-    OnAmmoCollideListener, OnSetCameraOnObjectCompletedListener
+    OnNextStepPreparedListener
 {
     private HashSet<CameraType> cameraTypeSet;
     private CameraActivator cameraActivator;
@@ -28,12 +28,7 @@ public class ActivatorController : MonoBehaviour, CameraActivator,
         cameraActivator.ActivateCamera(cameraType);
     }
 
-    public void OnAmmoCollide()
-    {
-        isBlocked = false;
-    }
-
-    public void OnSetCameraOnObjectCompleted()
+    public void OnNextStepPrepared()
     {
         isBlocked = false;
     }

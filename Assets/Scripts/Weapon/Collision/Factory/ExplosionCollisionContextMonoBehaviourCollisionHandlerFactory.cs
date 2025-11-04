@@ -4,9 +4,9 @@ using UnityEngine;
 public class ExplosionCollisionContextMonoBehaviourCollisionHandlerFactory<E> : CollisionHandlerFactory<ExplosionCollisionContext> where E: MonoBehaviour
 {
     private OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener;
-    private OnAmmoCollideListener onAmmoCollideListener;
+    private OnNextStepPreparedListener onAmmoCollideListener;
 
-    public ExplosionCollisionContextMonoBehaviourCollisionHandlerFactory(OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener, OnAmmoCollideListener onAmmoCollideListener)
+    public ExplosionCollisionContextMonoBehaviourCollisionHandlerFactory(OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener, OnNextStepPreparedListener onAmmoCollideListener)
     {
         this.onSetCameraOnObjectListener = onSetCameraOnObjectListener;
         this.onAmmoCollideListener = onAmmoCollideListener;

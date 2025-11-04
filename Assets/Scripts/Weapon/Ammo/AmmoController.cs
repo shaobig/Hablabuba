@@ -7,11 +7,11 @@ public class AmmoController : MonoBehaviour
     [SerializeField]
     private GameObjectRemover gameObjectRemover;
     private new Rigidbody rigidbody;
-    private OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener;
+    private OnAmmoCollideListener onAmmoCollideListener;
 
-    public void Init(OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener)
+    public void Init(OnAmmoCollideListener onAmmoCollideListener)
     {
-        this.onAmmoCollideWithTerrainListener = onAmmoCollideWithTerrainListener;
+        this.onAmmoCollideListener = onAmmoCollideListener;
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -22,7 +22,7 @@ public class AmmoController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        onAmmoCollideWithTerrainListener.OnAmmoCollideWithTerrain(collision);
+        onAmmoCollideListener.OnAmmoCollide(collision);
         gameObjectRemover.Remove(gameObject);
     }
     

@@ -5,12 +5,12 @@ public class RifleCollisionContextMonoBehaviourCollisionHandlerFactory<E> : Coll
 {
     private string tag;
     private OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener;
-    private OnAmmoCollideListener onAmmoCollideListener;
+    private OnNextStepPreparedListener onAmmoCollideListener;
 
     public RifleCollisionContextMonoBehaviourCollisionHandlerFactory(
         string tag,
         OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener,
-        OnAmmoCollideListener onAmmoCollideListener)
+        OnNextStepPreparedListener onAmmoCollideListener)
     {
         this.tag = tag;
         this.onSetCameraOnObjectListener = onSetCameraOnObjectListener;

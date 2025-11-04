@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, Activator, Deactivator, DisplayRe
         OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnAmmoCollideListener onAmmoCollideListener,
+        OnNextStepPreparedListener onAmmoCollideListener,
         OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener)
     {
         this.onSeleectWeaponListener = onSeleectWeaponListener;

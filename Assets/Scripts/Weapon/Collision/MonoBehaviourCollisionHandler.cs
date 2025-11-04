@@ -6,13 +6,13 @@ public class MonoBehaviourCollisionHandler<C, E> : CollisionHandler<C> where C: 
     private ObjectFinder<C, E> objectFinder;
     private ObjectCollisionHandler<C, List<E>> objectCollisionHandler;
     private OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener;
-    private OnAmmoCollideListener onAmmoCollideListener;
+    private OnNextStepPreparedListener onAmmoCollideListener;
 
     public MonoBehaviourCollisionHandler(
         ObjectFinder<C, E> objectFinder,
         ObjectCollisionHandler<C, List<E>> objectCollisionHandler,
         OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener,
-        OnAmmoCollideListener onAmmoCollideListener)
+        OnNextStepPreparedListener onAmmoCollideListener)
     {
         this.objectFinder = objectFinder;
         this.objectCollisionHandler = objectCollisionHandler;
@@ -31,7 +31,7 @@ public class MonoBehaviourCollisionHandler<C, E> : CollisionHandler<C> where C: 
         }
         else
         {
-            onAmmoCollideListener.OnAmmoCollide();
+            onAmmoCollideListener.OnNextStepPrepared();
         }
     }
     

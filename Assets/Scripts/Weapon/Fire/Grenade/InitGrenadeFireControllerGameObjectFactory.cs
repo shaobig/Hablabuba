@@ -9,14 +9,14 @@ public class InitGrenadeShooterGameObjectFactory : MonoBehaviour, GameObjectFact
     private OnFireListener onFireListener;
     private OnAmmoShotListener onAmmoShotListener;
     private OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener;
-    private OnAmmoCollideListener onAmmoCollideListener;
+    private OnNextStepPreparedListener onAmmoCollideListener;
 
     public void Init(
         OnWeaponProgressBarChangeValueListener onWeaponProgressBarChangeValueListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
         OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener,
-        OnAmmoCollideListener onAmmoCollideListener)
+        OnNextStepPreparedListener onAmmoCollideListener)
     {
         this.onWeaponProgressBarChangeValueListener = onWeaponProgressBarChangeValueListener;
         this.onFireListener = onFireListener;

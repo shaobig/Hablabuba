@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BazookaShootController : MonoBehaviour, ShootController,
-    OnTimerCountListener, OnTimerFinishListener, OnAmmoCollideWithTerrainListener
+    OnTimerCountListener, OnTimerFinishListener, OnAmmoCollideListener
 {
     [SerializeField]
     private AmmoShooterController loaderAmmoEmitter;
@@ -55,7 +55,7 @@ public class BazookaShootController : MonoBehaviour, ShootController,
         onFireListener.OnFire(WeaponType.BAZOOKA);
     }
 
-    public void OnAmmoCollideWithTerrain(Collision collision)
+    public void OnAmmoCollide(Collision collision)
     {
         context = new ExplosionCollisionContextFactory(collision.GetContact(0).point, radius, loaderAmmoEmitter.AmmoPrefab.Ammo.Damage).Create();
         collisionHandler.HandleCollision(context);

@@ -12,16 +12,16 @@ public class ShotCameraController : MonoBehaviour,
     private float maxFocusTime = 5f;
     private CinemachineCamera shotCamera;
     private List<PlayerController> playerList;
-    private OnSetCameraOnObjectCompletedListener onSetCameraOnObjectListenerCompleteListener;
+    private OnNextStepPreparedListener onNextStepPreparedListener;
 
     public void Init(
         CinemachineCamera shotCamera,
         List<PlayerController> playerList,
-        OnSetCameraOnObjectCompletedListener onSetCameraOnObjectListenerCompleteListener)
+        OnNextStepPreparedListener onNextStepPreparedListener)
     {
         this.shotCamera = shotCamera;
         this.playerList = playerList;
-        this.onSetCameraOnObjectListenerCompleteListener = onSetCameraOnObjectListenerCompleteListener;
+        this.onNextStepPreparedListener = onNextStepPreparedListener;
     }
 
     public void OnSetCameraOnObjectList(List<PlayerController> shotPlayerList)
@@ -42,8 +42,8 @@ public class ShotCameraController : MonoBehaviour,
             playerList.ForEach(player => player.RefreshDisplay());
             yield return new WaitForSeconds(Mathf.Clamp(maxFocusTime / shotPlayerList.Count, minFocusTime, maxFocusTime));
         }
-        
-        onSetCameraOnObjectListenerCompleteListener.OnSetCameraOnObjectCompleted();
+
+        onNextStepPreparedListener.OnNextStepPrepared();
     }
 
 }

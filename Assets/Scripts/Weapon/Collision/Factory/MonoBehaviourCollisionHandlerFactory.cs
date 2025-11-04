@@ -5,13 +5,13 @@ public class MonoBehaviourCollisionHandlerFactory<C, E> : CollisionHandlerFactor
     private ObjectFinder<C, E> objectFinder;
     private ObjectCollisionHandler<C, List<E>> objectCollisionHandler;
     private OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener;
-    private OnAmmoCollideListener onAmmoCollideListener;
+    private OnNextStepPreparedListener onAmmoCollideListener;
 
     public MonoBehaviourCollisionHandlerFactory(
         ObjectFinder<C, E> objectFinder,
         ObjectCollisionHandler<C, List<E>> objectCollisionHandler,
         OnSetCameraOnObjectListener<List<E>> onSetCameraOnObjectListener,
-        OnAmmoCollideListener onAmmoCollideListener)
+        OnNextStepPreparedListener onAmmoCollideListener)
     {
         this.objectFinder = objectFinder;
         this.objectCollisionHandler = objectCollisionHandler;

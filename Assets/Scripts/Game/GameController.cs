@@ -6,7 +6,8 @@ public class GameController : MonoBehaviour,
     OnAimKeyPressedListener, OnAimKeyReleasedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener, OnWeaponSelectKeyPressedListener,
     OnSelectWeaponListener, OnAimTakenListener, OnFireListener, OnWeaponProgressBarChangeValueListener,
-    OnAmmoShotListener, OnSetCameraOnObjectListener<List<PlayerController>>, OnSetCameraOnObjectCompletedListener, OnPlayerKilledListener, OnAmmoCollideListener, OnGameFinishedListener
+    OnAmmoShotListener, OnSetCameraOnObjectListener<List<PlayerController>>, OnPlayerKilledListener,
+    OnNextStepPreparedListener, OnNextStepSwitchedListener, OnGameFinishedListener
 {
     [SerializeField]
     private RespawnGameController respawnGameController;
@@ -33,19 +34,12 @@ public class GameController : MonoBehaviour,
 
     void Start()
     {
-        SetNextStep();
+        OnNextStepSwitched();
     }
 
     void Update()
     {
         Time.timeScale = timeScale;
-    }
-
-    public void SetNextStep()
-    {
-        playerGameController.SetNextStep();
-        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
-        interfaceGameController.FillWindow(playerGameController.CurrentPlayer.WeaponItemList);
     }
 
     public void OnMoveKeyPressed(Vector2 moveInput)
@@ -130,24 +124,24 @@ public class GameController : MonoBehaviour,
     {
         cameraGameController.OnSetCameraOnObjectList(playerList);
     }
-
-    public void OnSetCameraOnObjectCompleted()
-    {
-        cameraGameController.OnAmmoCollide();
-        playerGameController.OnAmmoCollide();
-        SetNextStep();
-    }
     
-    public void OnAmmoCollide()
+    public void OnNextStepPrepared()
     {
-        playerGameController.OnAmmoCollide();
-        cameraGameController.OnAmmoCollide();
-        SetNextStep();
+        playerGameController.OnNextStepPrepared();
+        cameraGameController.OnNextStepPrepared();
+        OnNextStepSwitched();
     }
 
     public void OnPlayerKilled(PlayerController player)
     {
         playerGameController.OnPlayerKilled(player);
+    }
+
+    public void OnNextStepSwitched()
+    {
+        playerGameController.OnNextStepSwitched();
+        cameraGameController.Follow(playerGameController.CurrentPlayer.transform);
+        interfaceGameController.FillWindow(playerGameController.CurrentPlayer.WeaponItemList);
     }
 
     public void OnGameFinished()

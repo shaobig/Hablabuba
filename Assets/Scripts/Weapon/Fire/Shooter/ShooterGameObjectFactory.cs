@@ -16,7 +16,7 @@ public class ShootControllerGameObjectFactory : MonoBehaviour, GameObjectFactory
         OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnAmmoCollideListener onAmmoCollideListener,
+        OnNextStepPreparedListener onAmmoCollideListener,
         OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener)
     {
         rifleShooterGameObjectFactory.Init(onAimTakenListener, onFireListener, onAmmoShotListener, onSetCameraOnObjectListener, onAmmoCollideListener);

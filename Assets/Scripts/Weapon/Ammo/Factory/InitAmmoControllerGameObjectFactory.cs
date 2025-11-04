@@ -4,17 +4,17 @@ public class InitAmmoControllerGameObjectFactory : MonoBehaviour, GameObjectFact
 {
     [SerializeField]
     private AmmoControllerGameObjectFactory ammoControllerGameObjectFactory;
-    private OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener;
+    private OnAmmoCollideListener onAmmoCollideListener;
 
-    public void Init(OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener)
+    public void Init(OnAmmoCollideListener onAmmoCollideListener)
     {
-        this.onAmmoCollideWithTerrainListener = onAmmoCollideWithTerrainListener;
+        this.onAmmoCollideListener = onAmmoCollideListener;
     }
 
     public AmmoController Create(GameObject ammoPrefab, Transform emitPoint)
     {
         var ammoController = ammoControllerGameObjectFactory.Create(ammoPrefab, emitPoint);
-        ammoController.Init(onAmmoCollideWithTerrainListener);
+        ammoController.Init(onAmmoCollideListener);
 
         return ammoController;
     }

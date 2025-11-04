@@ -10,9 +10,9 @@ public class VelocityAmmoEmitter : MonoBehaviour, Emitter
     public void Init(
         AmmoPrefab ammoPrefab,
         OnAmmoShotListener onAmmoShotListener,
-        OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener)
+        OnAmmoCollideListener onAmmoCollideListener)
     {
-        ammoEmitter.Init(emitPoint, ammoPrefab, onAmmoShotListener, onAmmoCollideWithTerrainListener);
+        ammoEmitter.Init(emitPoint, ammoPrefab, onAmmoShotListener, onAmmoCollideListener);
     }
 
     public void Emit()

@@ -10,11 +10,11 @@ public class AmmoShooterController : MonoBehaviour, Emitter
 
     public void Init(
         OnAmmoShotListener onAmmoShotListener,
-        OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener)
+        OnAmmoCollideListener onAmmoCollideListener)
     {
         ammoPrefab = ShooterAmmoLoader.LoadAmmo();
 
-        velocityAmmoEmitter.Init(ammoPrefab, onAmmoShotListener, onAmmoCollideWithTerrainListener);
+        velocityAmmoEmitter.Init(ammoPrefab, onAmmoShotListener, onAmmoCollideListener);
     }
 
     public void Emit()

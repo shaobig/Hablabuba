@@ -13,14 +13,14 @@ public class AmmoEmitter : MonoBehaviour, Emitter
         Transform emitPoint,
         AmmoPrefab ammoPrefab,
         OnAmmoShotListener onAmmoShotListener,
-        OnAmmoCollideWithTerrainListener onAmmoCollideWithTerrainListener
+        OnAmmoCollideListener onAmmoCollideListener
         )
     {
         this.emitPoint = emitPoint;
         this.ammoPrefab = ammoPrefab;
         this.onAmmoShotListener = onAmmoShotListener;
 
-        initAmmoControllerGameObjectFactory.Init(onAmmoCollideWithTerrainListener);
+        initAmmoControllerGameObjectFactory.Init(onAmmoCollideListener);
     }
 
     public void Emit()

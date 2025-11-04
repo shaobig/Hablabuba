@@ -6,7 +6,7 @@ public class PlayerGameController : MonoBehaviour, IndexSetter,
     OnMoveKeyPressedListener,
     OnWeaponChangeAngleKeyPressedListener, OnAimKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnWeaponSelectKeyPressedListener,
-    OnAmmoCollideListener, OnPlayerKilledListener
+    OnNextStepPreparedListener, OnNextStepSwitchedListener, OnPlayerKilledListener
 {
     private const int GAME_OVER_PLAYER_COUNT = 1;
 
@@ -28,21 +28,13 @@ public class PlayerGameController : MonoBehaviour, IndexSetter,
         OnGameFinishedListener onGameFinishedListener,
         OnAmmoShotListener onAmmoShotListener,
         OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener,
-        OnAmmoCollideListener onAmmoCollideListener)
+        OnNextStepPreparedListener onAmmoCollideListener)
     {
         this.playerList = playerList;
         this.onPlayerKilledListener = onPlayerKilledListener;
         this.onGameFinishedListener = onGameFinishedListener;
 
         playerList.ForEach(player => player.Init(onSelectWeaponListener, onWeaponProgressBarChangeValueListener, onAimTakenListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener));
-    }
-
-    public void SetNextStep()
-    {
-        currentIndex = (currentIndex + 1) % playerList.Count;
-        currentPlayer = playerList[currentIndex];
-
-        currentPlayer.Activate();
     }
 
     public void OnMoveKeyPressed(Vector2 moveInput)
@@ -80,13 +72,21 @@ public class PlayerGameController : MonoBehaviour, IndexSetter,
         currentPlayer.OnStopFireKeyPressed();
     }
 
-    public void OnAmmoCollide()
+    public void OnNextStepPrepared()
     {
         currentPlayer.HideWeapon();
 
         playerList.Where(player => player.IsDead)
             .ToList()
             .ForEach(player => onPlayerKilledListener.OnPlayerKilled(player));
+    }
+
+    public void OnNextStepSwitched()
+    {
+        currentIndex = (currentIndex + 1) % playerList.Count;
+        currentPlayer = playerList[currentIndex];
+
+        currentPlayer.Activate();
     }
 
     public void OnPlayerKilled(PlayerController player)

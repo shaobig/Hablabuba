@@ -21,7 +21,7 @@ public class WeaponController : MonoBehaviour, Activator, Deactivator, WeaponHol
         OnAimTakenListener onAimTakenListener,
         OnFireListener onFireListener,
         OnAmmoShotListener onAmmoShotListener,
-        OnAmmoCollideListener onAmmoCollideListener,
+        OnNextStepPreparedListener onAmmoCollideListener,
         OnSetCameraOnObjectListener<List<PlayerController>> onSetCameraOnObjectListener)
     {
         shooterGameObjectFactory.Init(onWeaponProgressBarChangeValueListener, onAimTakenListener, onFireListener, onAmmoShotListener, onAmmoCollideListener, onSetCameraOnObjectListener);

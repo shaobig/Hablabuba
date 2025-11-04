@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class RifleFireController : MonoBehaviour, AimShootController,
-    OnAmmoCollideWithTerrainListener
+    OnAmmoCollideListener
 {
     [SerializeField]
     private AmmoShooterController ammoFireController;
@@ -41,7 +41,7 @@ public class RifleFireController : MonoBehaviour, AimShootController,
         aimController.TakeAim();
     }
 
-    public void OnAmmoCollideWithTerrain(Collision collision)
+    public void OnAmmoCollide(Collision collision)
     {
         collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoFireController.AmmoPrefab).Create());
     }

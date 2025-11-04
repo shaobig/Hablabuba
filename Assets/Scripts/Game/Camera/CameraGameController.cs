@@ -3,15 +3,15 @@ using Unity.Cinemachine;
 using UnityEngine;
 
 public class CameraGameController : MonoBehaviour,
-    OnAimTakenListener, OnAmmoShotListener, OnAmmoCollideListener, OnSetCameraOnObjectListener<List<PlayerController>>,
-    OnAimKeyReleasedListener, OnSetCameraOnObjectCompletedListener
+    OnAimTakenListener, OnAmmoShotListener, OnNextStepPreparedListener, OnSetCameraOnObjectListener<List<PlayerController>>,
+    OnAimKeyReleasedListener
 {
     [SerializeField]
     private PlayerCameraController playerCameraController;
     [SerializeField]
     private AmmoCameraController ammoCameraController;
     [SerializeField]
-    private ShotCameraController shotPlayerCameraController;
+    private ShotCameraController shotCameraController;
     [SerializeField]
     private AimCameraController aimCameraController;
     [SerializeField]
@@ -29,11 +29,11 @@ public class CameraGameController : MonoBehaviour,
 
     public void Init(
         List<PlayerController> playerList,
-        OnSetCameraOnObjectCompletedListener onSetCameraOnShotPlayerCompleteListener)
+        OnNextStepPreparedListener onNextStepPreparedListener)
     {
         playerCameraController.Init(playerCamera, playerList);
         ammoCameraController.Init(ammoCamera);
-        shotPlayerCameraController.Init(shotCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
+        shotCameraController.Init(shotCamera, playerList, onNextStepPreparedListener);
         aimCameraController.Init(aimCamera);
 
         activatorController.Init(new ListBlockCameraActivatorFactory(new() {playerCamera, ammoCamera, shotCamera, aimCamera}).Create());
@@ -54,18 +54,12 @@ public class CameraGameController : MonoBehaviour,
     public void OnSetCameraOnObjectList(List<PlayerController> playerList)
     {
         activatorController.ActivateCamera(CameraType.SHOT);
-        shotPlayerCameraController.OnSetCameraOnObjectList(playerList);
+        shotCameraController.OnSetCameraOnObjectList(playerList);
     }
 
-    public void OnSetCameraOnObjectCompleted()
+    public void OnNextStepPrepared()
     {
-        activatorController.OnSetCameraOnObjectCompleted();
-        activatorController.ActivateCamera(CameraType.PLAYER);
-    }
-
-    public void OnAmmoCollide()
-    {
-        activatorController.OnAmmoCollide();
+        activatorController.OnNextStepPrepared();
         activatorController.ActivateCamera(CameraType.PLAYER);
     }
 
