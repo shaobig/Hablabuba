@@ -5,14 +5,14 @@ public class AmmoShooterController : MonoBehaviour, Emitter
     [SerializeField]
     private VelocityAmmoEmitter velocityAmmoEmitter;
     [SerializeField]
-    private LoadController ShooterAmmoLoader;
+    private LoadController loadController;
     private AmmoPrefab ammoPrefab;
 
     public void Init(
         OnAmmoShotListener onAmmoShotListener,
         OnAmmoCollideListener onAmmoCollideListener)
     {
-        ammoPrefab = ShooterAmmoLoader.LoadAmmo();
+        ammoPrefab = loadController.LoadAmmo();
 
         velocityAmmoEmitter.Init(ammoPrefab, onAmmoShotListener, onAmmoCollideListener);
     }

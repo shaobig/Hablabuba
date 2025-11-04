@@ -4,7 +4,7 @@ public class RifleFireController : MonoBehaviour, AimShootController,
     OnAmmoCollideListener
 {
     [SerializeField]
-    private AmmoShooterController ammoFireController;
+    private AmmoShooterController ammoShooterController;
     [SerializeField]
     private AimController aimController;
     [SerializeField]
@@ -21,8 +21,8 @@ public class RifleFireController : MonoBehaviour, AimShootController,
         this.collisionHandler = collisionHandler;
         this.onFireListener = onFireListener;
 
-        ammoFireController.Init(onAmmoShotListener, this);
-        ammoFireController.Velocity = velocity;
+        ammoShooterController.Init(onAmmoShotListener, this);
+        ammoShooterController.Velocity = velocity;
 
         aimController.Init(onAimTakenListener);
     }
@@ -31,7 +31,7 @@ public class RifleFireController : MonoBehaviour, AimShootController,
     {
         if (ShootAction.FIRE.Equals(action))
         {
-            ammoFireController.Emit();
+            ammoShooterController.Emit();
             onFireListener.OnFire(WeaponType.RIFLE);
         }
     }
@@ -43,7 +43,7 @@ public class RifleFireController : MonoBehaviour, AimShootController,
 
     public void OnAmmoCollide(Collision collision)
     {
-        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoFireController.AmmoPrefab).Create());
+        collisionHandler.HandleCollision(new RifleCollisionContextFactory(collision, ammoShooterController.AmmoPrefab).Create());
     }
 
 }
