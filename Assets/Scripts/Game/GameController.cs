@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour,
     OnAimKeyPressedListener, OnAimKeyReleasedListener, OnWeaponChangeAngleKeyPressedListener, OnFireKeyPressedListener, OnLongFireKeyPressedListener, OnStopFireKeyPressedListener,
     OnInventoryOpenKeyPressedListener, OnWeaponSwitchKeyPressedListener, OnWeaponSelectKeyPressedListener,
     OnSelectWeaponListener, OnAimTakenListener, OnFireListener, OnWeaponProgressBarChangeValueListener,
-    OnAmmoShotListener, OnSetCameraOnObjectListener<List<PlayerController>>, OnSetCameraOnObjectCompleteListener, OnPlayerKilledListener, OnAmmoCollideListener, OnGameFinishedListener
+    OnAmmoShotListener, OnSetCameraOnObjectListener<List<PlayerController>>, OnSetCameraOnObjectCompletedListener, OnPlayerKilledListener, OnAmmoCollideListener, OnGameFinishedListener
 {
     [SerializeField]
     private RespawnGameController respawnGameController;
@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour,
 
     public void OnSetCameraOnObjectCompleted()
     {
-        cameraGameController.OnSetCameraOnObjectCompleted();
+        cameraGameController.OnAmmoCollide();
         playerGameController.OnAmmoCollide();
         SetNextStep();
     }

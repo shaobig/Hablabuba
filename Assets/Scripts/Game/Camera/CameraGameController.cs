@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraGameController : MonoBehaviour,
     OnAimTakenListener, OnAmmoShotListener, OnAmmoCollideListener, OnSetCameraOnObjectListener<List<PlayerController>>,
-    OnAimKeyReleasedListener, OnSetCameraOnObjectCompleteListener
+    OnAimKeyReleasedListener, OnSetCameraOnObjectCompletedListener
 {
     [SerializeField]
     private PlayerCameraController playerCameraController;
@@ -15,6 +15,8 @@ public class CameraGameController : MonoBehaviour,
     [SerializeField]
     private AimCameraController aimCameraController;
     [SerializeField]
+    private ActivatorController activatorController;
+    [SerializeField]
     private CinemachineBrain mainCamera;
     [SerializeField]
     private CinemachineCamera playerCamera;
@@ -24,62 +26,58 @@ public class CameraGameController : MonoBehaviour,
     private CinemachineCamera shotCamera;
     [SerializeField]
     private CinemachineCamera aimCamera;
-    private CameraActivator cameraActivator;
 
     public void Init(
         List<PlayerController> playerList,
-        OnSetCameraOnObjectCompleteListener onSetCameraOnShotPlayerCompleteListener)
+        OnSetCameraOnObjectCompletedListener onSetCameraOnShotPlayerCompleteListener)
     {
         playerCameraController.Init(playerCamera, playerList);
         ammoCameraController.Init(ammoCamera);
         shotPlayerCameraController.Init(shotCamera, playerList, onSetCameraOnShotPlayerCompleteListener);
         aimCameraController.Init(aimCamera);
 
-        cameraActivator = new ListBlockCameraActivatorFactory(new() {playerCamera, ammoCamera, shotCamera, aimCamera}).Create();
+        activatorController.Init(new ListBlockCameraActivatorFactory(new() {playerCamera, ammoCamera, shotCamera, aimCamera}).Create());
     }
 
     public void Follow(Transform target)
     {
-        cameraActivator.ActivateCamera(CameraType.PLAYER);
+        activatorController.ActivateCamera(CameraType.PLAYER);
         playerCameraController.Follow(target);
     }
 
     public void OnAmmoShot(Transform ammo)
     {
-        cameraActivator.ActivateCamera(CameraType.AMMO);
+        activatorController.ActivateCamera(CameraType.AMMO);
         ammoCameraController.OnAmmoShot(ammo);
     }
 
     public void OnSetCameraOnObjectList(List<PlayerController> playerList)
     {
-        cameraActivator.ActivateCamera(CameraType.SHOT);
+        activatorController.ActivateCamera(CameraType.SHOT);
         shotPlayerCameraController.OnSetCameraOnObjectList(playerList);
     }
 
     public void OnSetCameraOnObjectCompleted()
     {
-        cameraActivator.ActivateCamera(CameraType.PLAYER);
-        ammoCameraController.OnSetCameraOnObjectCompleted();
+        activatorController.OnSetCameraOnObjectCompleted();
+        activatorController.ActivateCamera(CameraType.PLAYER);
     }
 
     public void OnAmmoCollide()
     {
-        cameraActivator.ActivateCamera(CameraType.PLAYER);
+        activatorController.OnAmmoCollide();
+        activatorController.ActivateCamera(CameraType.PLAYER);
     }
 
     public void OnAimTaken(Transform aimPoint)
     {
-        cameraActivator.ActivateCamera(CameraType.AIM);
+        activatorController.ActivateCamera(CameraType.AIM);
         aimCameraController.OnAimTaken(aimPoint);
     }
     
     public void OnAimKeyReleased()
     {
-        if (ammoCameraController.IsAmmoFlown)
-        {
-            return;
-        }
-        cameraActivator.ActivateCamera(CameraType.PLAYER);
+        activatorController.ActivateCamera(CameraType.PLAYER);
     }
 
 }

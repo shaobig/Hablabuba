@@ -12,12 +12,12 @@ public class ShotCameraController : MonoBehaviour,
     private float maxFocusTime = 5f;
     private CinemachineCamera shotCamera;
     private List<PlayerController> playerList;
-    private OnSetCameraOnObjectCompleteListener onSetCameraOnObjectListenerCompleteListener;
+    private OnSetCameraOnObjectCompletedListener onSetCameraOnObjectListenerCompleteListener;
 
     public void Init(
         CinemachineCamera shotCamera,
         List<PlayerController> playerList,
-        OnSetCameraOnObjectCompleteListener onSetCameraOnObjectListenerCompleteListener)
+        OnSetCameraOnObjectCompletedListener onSetCameraOnObjectListenerCompleteListener)
     {
         this.shotCamera = shotCamera;
         this.playerList = playerList;
